@@ -17,8 +17,6 @@ NON PREVENUTO
 #### Struttura:
 - [Codice](src/)
 
-- [Documentazione](Documenti/Documentazione_Progetto_Drone.md)
-
-- [Gantt preventivo](/Documenti/Gantt/GANTT_Preventivo.mpp)
+- [Documentazione](Documenti/)
 
 - [Diari di lavoro](Diari/)
