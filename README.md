@@ -17,8 +17,6 @@ NON PREVENUTO
 #### Struttura:
 - [Codice](src/)
 
-- [Documentazione](Documenti/
-
-- [Gantt preventivo](/Documenti/Gantt/GANTT_Preventivo.mpp)
+- [Documentazione](Documenti/)
 
 - [Diari di lavoro](Diari/)
