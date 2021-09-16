@@ -8,7 +8,7 @@
 ## Info
 **Inizio:** 09.09.2021
 
-**Consegna:** undefined
+**Consegna:** 23.12.2021 (Fase di test intensiva fino a Espo Professioni)
 
 ## Descrizione
 
