@@ -37,8 +37,8 @@ NOMENCLATURA CLASSI
 	MainFrame
 	-command
 		CommandPanel
-		CommandSequence
-		CommandRecord
+		Sequence
+		Record
 	-tool
 		Live
 		Emergency
