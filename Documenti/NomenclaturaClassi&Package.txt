@@ -1,0 +1,47 @@
+NOMENCLATURA CLASSI
+
+-drone
+	Live
+	CommandPanel
+	CommandSequence
+	CommandRecord
+	@Drone
+	MainFrame
+	Emergency
+	ToolPanel
+	LeapMotion
+	Log
+	Status
+	
+-graphics
+	MainFrame
+	Model
+	AltimeterPanel
+	FrontPanel
+	SidePanel
+	UpPanel
+	
+------------------------------------------------
+
+-graphics
+	Model
+	MainFrame
+	AltimeterPanel
+	FrontPanel
+	SidePanel
+	UpPanel
+	
+-drone
+	Drone
+	LeapMotion
+	MainFrame
+	-command
+		CommandPanel
+		CommandSequence
+		CommandRecord
+	-tool
+		Live
+		Emergency
+		Log
+		Status
+		ToolPanel
