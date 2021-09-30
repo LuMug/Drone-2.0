@@ -68,8 +68,6 @@
 
   -
 ### Analisi e specifica dei requisiti
-# Modulo 306
-## Requisti bozza
 
 
 |               |**ID: Req-001**|
@@ -189,5 +187,5 @@ Per la pianificazione alleghiamo il Gantt preventivo da noi stabilito:
 
 #### Interfaccia
 Abbiamo preso la vecchia interfaccia e abbiamo cambiato tutto quello che non ci convinceva e abbiamo cercato di renderla più user friendly e più accattivante:
-![Progettazione](../Documenti/Progettazione/UI/GUI/Drone2.0GUI.png)
+![Progettazione](../Documenti/Progettazione/UI/GUI/Drone2.0_GUI.png)
 > Interfaccia drone
