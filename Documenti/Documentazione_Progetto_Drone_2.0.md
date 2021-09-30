@@ -46,14 +46,9 @@
 
 ### Abstract
 
-  > *Nowadays, technology around us is costantly evolving, even becoming vital. Thanks
-  to computer system, the way we entertain ourselves has changed in recent times,
-  technology enternains us. Recently, aumented reality devices such as VR devices,
-  hands and arms sensors, and more. These things have become increasingly common in the
-  market. In this project we managed to implement piloting a drone with our hands, thanks
-  to the help of a device called Leap Motion. With little money now you can buy
-  a Leap Motion and a Drone to be able to enjoy driving the DJI Tello using only
-  your hands in a very intuitive and simple way.*
+  > *Drones are more and  more common in our society. Today we see drone operating everywhere, in every sector. We see drone used in the military, in construction site, Amazon and other companies use drone to ship packet of merch to the people, in some cases drone even deliver the post. For this reason, we want to improve our drone control system, we will make a radical refactor of our old structure, adding new graphics, improving communications, and so on. Thanks to this project piloting a DJI Tello drone will become easy and fun. As the od project we will use, in addition to our drone, a Leap Motion sensor to track movements, the drone will be fully controllable with this sensor and even with the keyboard. 
+Our project will be even more secure, we will enable and create some safety feature so that anyone can use our product without hurting someone or themselves.*
+
 
 ### Scopo
 
@@ -66,9 +61,12 @@
 ## Analisi
 ### Analisi del dominio
 
-  -
-### Analisi e specifica dei requisiti
+È stato richiesto di correggere e migliorare l'interfaccia di controllo drone da noi creata un anno fa. Il programma da noi creato presentava infatti molte imperfezioni ed elementi che non funzionavano. Per questo approfitteremo della presenza di 3 membri del gruppo su 4 per riprendere il progetto, correggerlo, e magari aggiungere nuove funzionalità. 
+Alla fine verrà prodotta un interfaccia di controllo per un drone DJI tello, fortemente basata sulla nostra prima versione ma migliorata nell'aspetto grafico, nelle dinamiche di controllo, nella struttura del codice e anche, in maniera minore, negli obbiettivi.
 
+
+### Analisi e specifica dei requisiti
+ 
 
 |               |**ID: Req-001**|
 |--------------|----------------|
