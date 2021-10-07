@@ -53,7 +53,7 @@ public class UpPanel extends Model {
         }
 
         if (imageBig != null) {
-            image = resize(imageBig, panelW - 95, panelH - 95);
+            image = resize(imageBig, panelW, panelH);
             int x = (this.getWidth() - image.getWidth()) / 2;
             int y = (this.getHeight() - image.getHeight()) / 2;
 

@@ -71,8 +71,14 @@ public class Model extends JPanel {
         }
         int w = img.getWidth();
         int h = img.getHeight();
-        System.out.println(img.getWidth()+" | "+img.getHeight());
-        System.out.println(newW+" | "+newH);
+        
+        if(newW<0){
+            newW=10;
+        }
+        if(newH<0){
+            newH=10;
+        }
+
         BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
         Graphics2D g = dimg.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -161,6 +167,7 @@ public class Model extends JPanel {
 
             image = rotate(image, rotDeg);
             if (rotDeg > 0) {
+                
                 g.drawImage(image, x, y - rotDeg, this);
             } else {
                 g.drawImage(image, x, y + rotDeg, this);
