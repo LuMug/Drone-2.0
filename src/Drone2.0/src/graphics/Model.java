@@ -71,6 +71,8 @@ public class Model extends JPanel {
         }
         int w = img.getWidth();
         int h = img.getHeight();
+        System.out.println(img.getWidth()+" | "+img.getHeight());
+        System.out.println(newW+" | "+newH);
         BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
         Graphics2D g = dimg.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -144,13 +146,15 @@ public class Model extends JPanel {
 
         g.clearRect(0, 0, panelW, panelH);
 
-        panelH = (int) (panelW / 1.5);
+        panelH = (int) (panelW / 4);
 
         g.setColor(Color.black);
         int x, y = 0;
 
         if (imageBig != null) {
-            image = resize(imageBig, panelW - 75, panelH - 75);
+            int resizeW=40;
+ 
+            image = resize(imageBig, panelW-resizeW, (int)panelH-resizeW/4);
 
             x = (this.getWidth() - image.getWidth()) / 2;
             y = (this.getHeight() - image.getHeight()) / 2;
