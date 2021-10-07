@@ -3,3 +3,5 @@
 **/.DS_Store
 
 /src/Drone2.0/nbproject/private/
+/src/Drone2.0/dist/
+/src/Drone2.0/build/
