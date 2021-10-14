@@ -146,31 +146,43 @@ public class Model extends JPanel {
      *
      * @param g è il parametro di default per la grafica.
      */
+    @Override
     public void paintComponent(Graphics g) {
         panelH = getHeight();
         panelW = getWidth();
-
+        
+        int droneW;
+        int droneH;
+        
+        droneW=panelW-panelW/2;
+        droneH=droneW/4;
+        if(droneH>=panelH){
+            droneH=panelH;
+            droneW=droneH*4;
+        }
+        
+        
         g.clearRect(0, 0, panelW, panelH);
-
-        panelH = (int) (panelW / 4);
+        g.drawRect(0, 0, panelW, panelH);
 
         g.setColor(Color.black);
         int x, y = 0;
-
+        rotDeg=40;
         if (imageBig != null) {
-            int resizeW=40;
  
-            image = resize(imageBig, panelW-resizeW, (int)panelH-resizeW/4);
+            image = resize(imageBig, droneW, droneH);
 
             x = (this.getWidth() - image.getWidth()) / 2;
             y = (this.getHeight() - image.getHeight()) / 2;
-
+            
             image = rotate(image, rotDeg);
             if (rotDeg > 0) {
-                
-                g.drawImage(image, x, y - rotDeg, this);
-            } else {
-                g.drawImage(image, x, y + rotDeg, this);
+                g.drawImage(image, x-image.getWidth()/5, y - (int)(image.getHeight()/3.4), this);
+            } else if (rotDeg < 0){
+                g.drawImage(image, x+image.getWidth()/5, y - (int)(image.getHeight()/3.4), this);
+            }else{
+                g.drawImage(image, x, y, this);
+
             }
         }
 

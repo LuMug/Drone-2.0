@@ -44,7 +44,7 @@ public class FrontPanel extends Model{
             if (rotate <= MAXDEG) {
                 rotDeg = -1 * rotate;
                 validate();
-                repaint();
+                repaint();                
             }
         }
     }

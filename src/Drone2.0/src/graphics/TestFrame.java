@@ -72,6 +72,9 @@ public class TestFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TestFrame().setVisible(true);
+                Runnable runnable = new MainFrame();
+                Thread thread = new Thread(runnable);
+                thread.start();
             }
         });
     }
