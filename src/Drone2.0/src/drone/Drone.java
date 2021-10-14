@@ -18,7 +18,7 @@ public class Drone {
     /**
      * The ip address of the drone.
      */
-    public static final String DRONE_IP = "192.168.10.1";
+    private static final String DRONE_IP = "192.168.10.1";
 
     /**
      * The listening port of the drone commands.
@@ -29,6 +29,11 @@ public class Drone {
      * The socket for the communication of the drone commands
      */
     private DatagramSocket socket;
+    
+    /**
+     * The last command sent to the done.
+     */
+    protected String sentCommand;
     
         
     /**
@@ -50,12 +55,17 @@ public class Drone {
      */
     public void sendCommand(String messageToSend) {
         try {
+            sentCommand = messageToSend;
+            
             byte[] data = messageToSend.getBytes();
             DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
             socket.send(packet);
             
             DatagramPacket receivePacket = new DatagramPacket(new byte[256], new byte[256].length);
             socket.receive(receivePacket);
+            
+            String responseSentence = new String(receivePacket.getData());
+            System.out.println(responseSentence);
         } catch (SocketException ex) {
             System.out.println("ERRORE: " + ex.getMessage());
         } catch (IOException ex) {
@@ -68,9 +78,8 @@ public class Drone {
         Drone tello = new Drone();
         
         tello.sendCommand("command");
-        tello.sendCommand("takeoff");
-        Thread.sleep(5000);
-        tello.sendCommand("land");
+        tello.sendCommand("dsfd");
+        
         tello.socket.close();
     }
 }
