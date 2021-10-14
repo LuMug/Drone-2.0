@@ -71,20 +71,20 @@ public class Model extends JPanel {
         }
         int w = img.getWidth();
         int h = img.getHeight();
-        
-        if(newW<0){
-            newW=10;
-        }
-        if(newH<0){
-            newH=10;
-        }
 
-        BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
+        BufferedImage dimg;
+        if (newW > 5 && newH > 5) {
+
+            dimg = new BufferedImage(newW, newH, img.getType());
+        } else {
+            dimg = new BufferedImage(10, 10, img.getType());
+        }
         Graphics2D g = dimg.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);
         g.dispose();
+
         return dimg;
     }
 
@@ -121,8 +121,9 @@ public class Model extends JPanel {
     }
 
     /**
-     * Metodo utile per convertire un immagine di tipo Image in
-     * una BufferedImage.
+     * Metodo utile per convertire un immagine di tipo Image in una
+     * BufferedImage.
+     *
      * @param img l'immagine di tipo Image
      * @return l'immagine di tipo BufferedImage
      */
@@ -130,7 +131,7 @@ public class Model extends JPanel {
         if (img instanceof BufferedImage) {
             return (BufferedImage) img;
         }
-        BufferedImage bimage = new BufferedImage(img.getWidth(null), 
+        BufferedImage bimage = new BufferedImage(img.getWidth(null),
                 img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D bGr = bimage.createGraphics();
@@ -150,40 +151,38 @@ public class Model extends JPanel {
     public void paintComponent(Graphics g) {
         panelH = getHeight();
         panelW = getWidth();
-        
+
         int droneW;
         int droneH;
-        droneW=panelW-panelW/2;
-        droneH=droneW/4;
-        
-        
-        int droneHypo=(int) Math.sqrt(Math.pow(droneW, 2)+Math.pow(droneH, 2));
-        if(droneHypo>=panelH){
-           
-            droneW=panelH;
-            droneH=droneW/4;
+        droneW = panelW - panelW / 2;
+        droneH = droneW / 4;
+
+        int droneHypo = (int) Math.sqrt(Math.pow(droneW, 2) + Math.pow(droneH, 2));
+        if (droneHypo >= panelH) {
+
+            droneW = panelH;
+            droneH = droneW / 4;
         }
-        
-        
+
         g.clearRect(0, 0, panelW, panelH);
         g.drawRect(0, 0, panelW, panelH);
 
         g.setColor(Color.black);
         int x, y = 0;
-        
+
         if (imageBig != null) {
- 
+
             image = resize(imageBig, droneW, droneH);
 
             x = (this.getWidth() - image.getWidth()) / 2;
             y = (this.getHeight() - image.getHeight()) / 2;
-            
+
             image = rotate(image, rotDeg);
             if (rotDeg > 0) {
-                g.drawImage(image, x-image.getWidth()/5, y - (int)(image.getHeight()/3.4), this);
-            } else if (rotDeg < 0){
-                g.drawImage(image, x+image.getWidth()/5, y - (int)(image.getHeight()/3.4), this);
-            }else{
+                g.drawImage(image, x - image.getWidth() / 5, y - (int) (image.getHeight() / 3.4), this);
+            } else if (rotDeg < 0) {
+                g.drawImage(image, x + image.getWidth() / 5, y - (int) (image.getHeight() / 3.4), this);
+            } else {
                 g.drawImage(image, x, y, this);
 
             }
@@ -191,4 +190,3 @@ public class Model extends JPanel {
 
     }
 }
-
