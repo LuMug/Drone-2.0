@@ -123,8 +123,9 @@ public class MainFrame extends JPanel implements Runnable{
      * predisposti per il movimento passando il valore adeguato.
      */
     public void run() {
+        
         while(true){
-            frontPanel.moving(roll);
+             frontPanel.moving(20);
             sidePanel.moving(pitch);
             //imagePanelAlt.setAltitude(alt);
             upPanel.deg = yaw;
