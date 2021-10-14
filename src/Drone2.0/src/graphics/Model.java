@@ -153,7 +153,6 @@ public class Model extends JPanel {
         
         int droneW;
         int droneH;
-        
         droneW=panelW-panelW/2;
         droneH=droneW/4;
         
@@ -171,7 +170,7 @@ public class Model extends JPanel {
 
         g.setColor(Color.black);
         int x, y = 0;
-        rotDeg=-40;
+        
         if (imageBig != null) {
  
             image = resize(imageBig, droneW, droneH);
