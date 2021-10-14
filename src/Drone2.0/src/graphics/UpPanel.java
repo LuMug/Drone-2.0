@@ -49,6 +49,7 @@ public class UpPanel extends Model {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.BLACK);
+        g.drawRect(0, 0, getWidth(), getHeight());
 
         panelH = getHeight();
         panelW = getWidth();
@@ -67,8 +68,7 @@ public class UpPanel extends Model {
         poi ridimensionare il drone di conseguenza.
          */
         droneS = droneS - (droneHypo - droneS);
-
-        deg = -45;
+        
         if (imageBig != null) {
             image = resize(imageBig, droneS, droneS);
 
