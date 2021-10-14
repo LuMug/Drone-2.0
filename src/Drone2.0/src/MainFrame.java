@@ -1,3 +1,9 @@
+
+import drone.Drone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+
 /**
  *
  * @author Alessandro Aloise
@@ -16,18 +22,20 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         commandPanel = new drone.command.CommandPanel();
-        mainFrame1 = new graphics.MainFrame();
+        mainFrame = new graphics.MainFrame();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        commandPanel.setMinimumSize(new java.awt.Dimension(500, 137));
+        commandPanel.setVerifyInputWhenFocusTarget(false);
         getContentPane().add(commandPanel, java.awt.BorderLayout.WEST);
-        getContentPane().add(mainFrame1, java.awt.BorderLayout.CENTER);
+
+        mainFrame.setMinimumSize(new java.awt.Dimension(200, 200));
+        getContentPane().add(mainFrame, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -55,13 +63,19 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                try {
+                    new MainFrame().setVisible(true);
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
+                    System.out.println("Error:" + e);
+                }
             }
-        });
+        }
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private drone.command.CommandPanel commandPanel;
-    private graphics.MainFrame mainFrame1;
+    private graphics.MainFrame mainFrame;
     // End of variables declaration//GEN-END:variables
 }
