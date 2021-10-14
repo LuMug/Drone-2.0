@@ -1,5 +1,6 @@
 package drone;
 
+import drone.command.CommandPanel;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -31,9 +32,9 @@ public class Drone {
     private DatagramSocket socket;
     
     /**
-     * The last command sent to the done.
+     * Instance of CommandPanel.
      */
-    protected String sentCommand;
+    private CommandPanel pannello = new CommandPanel();
     
         
     /**
@@ -55,8 +56,6 @@ public class Drone {
      */
     public void sendCommand(String messageToSend) {
         try {
-            sentCommand = messageToSend;
-            
             byte[] data = messageToSend.getBytes();
             DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
             socket.send(packet);
@@ -66,6 +65,8 @@ public class Drone {
             
             String responseSentence = new String(receivePacket.getData());
             System.out.println(responseSentence);
+            
+            pannello.refreshCommands(messageToSend);
         } catch (SocketException ex) {
             System.out.println("ERRORE: " + ex.getMessage());
         } catch (IOException ex) {
