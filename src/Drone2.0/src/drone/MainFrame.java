@@ -1,4 +1,5 @@
 package drone;
+
 import javax.swing.UIManager;
 
 /**
@@ -63,6 +64,13 @@ public class MainFrame extends javax.swing.JFrame {
                 try {
                     new MainFrame().setVisible(true);
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    Drone tello = new Drone();
+
+                    tello.sendCommand("command");
+                    tello.sendCommand("takeoff");
+                    tello.sendCommand("land");
+
+                    tello.socket.close();
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
                     System.out.println("Error:" + e);
                 }

@@ -3,6 +3,9 @@ package drone.command;
 import drone.Drone;
 import java.awt.Color;
 import java.io.File;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
@@ -14,28 +17,31 @@ import javax.swing.text.DefaultCaret;
 public class CommandPanel extends javax.swing.JPanel {
 
     /**
-     * It contains the instance of the drone.
-     */
-    protected Drone drone;
-    
-    
-    /**
      * Contains the class to run the sequence.
      */
     private Sequence SequenceRun;
-    
-    
+
     /**
      * Defines whether a sequence is started or not.
      */
     private boolean started = false;
-    
+
     /**
-     * It serves to select either the recording or the execution of the sequence.
+     * It serves to select either the recording or the execution of the
+     * sequence.
      */
-    private boolean selecStatus =false;
-    
-    
+    private boolean selecStatus = false;
+
+    private boolean flagRec = false;
+
+    private Record record = new Record();
+
+    List listCommand = new ArrayList();
+    private String lastCommand;
+
+    private File directory = new File("SequenceDrone");
+    private Path name;
+
     /**
      * Creates new form CommandPanel.
      */
@@ -44,17 +50,17 @@ public class CommandPanel extends javax.swing.JPanel {
         DefaultCaret caret = (DefaultCaret) commandsText.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     }
-    
+
     /**
      * Serve ad aggiornare comandi Panel.
      *
      * @param command da scrivere
      */
     public void refreshCommands(String command) {
-        
+        lastCommand = command;
         commandsText.append(commandConversion(command));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,8 +107,19 @@ public class CommandPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void recButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recButtunActionPerformed
-        keyColor();
-        
+        if (!flagRec) {
+            flagRec = !flagRec;
+            recButtun.setText("STOP");
+            listCommand.add(lastCommand);
+
+        } else {
+            flagRec = !flagRec;
+            saveFile();
+            record.sequenceWriter(listCommand, name);
+            recButtun.setText("REC");
+        }
+        //keyColor();
+
     }//GEN-LAST:event_recButtunActionPerformed
 
     private void executeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeButtonActionPerformed
@@ -120,34 +137,39 @@ public class CommandPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private String commandConversion(String command) {
-        String infoCommand="";
+        String infoCommand;
         String[] str = command.split(" ");
-        if (Integer.parseInt(str[0]) < 0) {
-            infoCommand = "Sinistra";
-        }else{
-             infoCommand = "Destra";
+        switch (str[0]) {
+            case "RC":
+                if (Integer.parseInt(str[1]) < 0) {
+                    infoCommand = "Sinistra";
+                } else {
+                    infoCommand = "Destra";
+                }
+                if (Integer.parseInt(str[2]) < 0) {
+                    infoCommand += " Indetro ";
+                } else {
+                    infoCommand += " Avanti ";
+                }
+                if (Integer.parseInt(str[3]) < 0) {
+                    infoCommand += " Su ";
+                } else {
+                    infoCommand += " Giù ";
+                }
+                if (Integer.parseInt(str[4]) < 0) {
+                    infoCommand += " Bardata sinistra ";
+                } else {
+                    infoCommand += " Bardata destra ";
+                }
+                break;
+            default:
+                infoCommand = command;
         }
-        if(Integer.parseInt(str[1]) < 0){
-            infoCommand += " Indetro ";
-        }else{
-             infoCommand += " Avanti ";
-        }
-        if(Integer.parseInt(str[2]) < 0){
-            infoCommand += " Su ";
-        }else{
-             infoCommand += " Giù ";
-        }
-        if(Integer.parseInt(str[3]) < 0){
-            infoCommand += "Bardata sinistra ";
-        }else{
-             infoCommand += "Bardata destra";
-        }
-        return infoCommand;
-    }
+    return infoCommand ;
+}
 
-    private void chooseSequence() {
+private void chooseSequence() {
         JFileChooser open = new JFileChooser();
-        File directory = new File("SequenceDrone");
         if (!directory.exists()) {
             directory.mkdirs();
         }
@@ -158,24 +180,35 @@ public class CommandPanel extends javax.swing.JPanel {
         try {
             String fileName = open.getSelectedFile().getName();
             if (!started) {
-            SequenceRun = new Sequence(fileName, drone);
-            SequenceRun.start();
-            started = true;
-        }
+                SequenceRun = new Sequence(fileName);
+                SequenceRun.start();
+                started = true;
+            }
         } catch (NullPointerException e) {
-            System.out.println("error:"+ e);
         }
     }
-    
-    private void keyColor(){
+
+    private void keyColor() {
         if (selecStatus) {
             executeButton.setBackground(Color.GRAY);
             recButtun.setBackground(Color.WHITE);
-        }else{
+        } else {
             executeButton.setBackground(Color.WHITE);
             recButtun.setBackground(Color.GRAY);
         }
         selecStatus = !selecStatus;
     }
-    
+
+    private void saveFile() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(directory);
+        FileNameExtensionFilter drn = new FileNameExtensionFilter("Sequence file (*.sequence)", "sequence");
+        fileChooser.setDialogTitle("Specify a file to save");
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+        }
+    }
 }

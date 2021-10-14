@@ -37,9 +37,8 @@ public class Sequence extends Thread {
      */
     protected Drone drone;
 
-    public Sequence(String file, Drone drone) {
+    public Sequence(String file) {
         this.file = Paths.get(ROOT + "/" + file + ".sequence");
-        this.drone = drone;
     }
     
     

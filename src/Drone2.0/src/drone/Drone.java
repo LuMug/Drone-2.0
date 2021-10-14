@@ -29,7 +29,7 @@ public class Drone {
     /**
      * The socket for the communication of the drone commands
      */
-    private DatagramSocket socket;
+    protected DatagramSocket socket;
     
     /**
      * Instance of CommandPanel.
@@ -72,15 +72,5 @@ public class Drone {
         } catch (IOException ex) {
             System.out.println("ERRORE: " + ex.getMessage());
         }
-    }
-
-    
-    public static void main(String[] args) throws InterruptedException, UnknownHostException{
-        Drone tello = new Drone();
-        
-        tello.sendCommand("command");
-        tello.sendCommand("dsfd");
-        
-        tello.socket.close();
     }
 }
