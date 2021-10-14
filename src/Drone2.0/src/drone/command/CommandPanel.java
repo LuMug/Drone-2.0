@@ -1,6 +1,10 @@
 package drone.command;
 
 import drone.Drone;
+import java.awt.Color;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
 
 /**
@@ -10,9 +14,26 @@ import javax.swing.text.DefaultCaret;
 public class CommandPanel extends javax.swing.JPanel {
 
     /**
-     * Contiene l'istanza del drone.
+     * It contains the instance of the drone.
      */
     protected Drone drone;
+    
+    
+    /**
+     * Contains the class to run the sequence.
+     */
+    private Sequence SequenceRun;
+    
+    
+    /**
+     * Defines whether a sequence is started or not.
+     */
+    private boolean started = false;
+    
+    /**
+     * It serves to select either the recording or the execution of the sequence.
+     */
+    private boolean selecStatus =false;
     
     
     /**
@@ -56,7 +77,7 @@ public class CommandPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        buttonPanel.setLayout(new java.awt.GridLayout());
+        buttonPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         recButtun.setBackground(new java.awt.Color(255, 255, 255));
         recButtun.setText("REC");
@@ -67,6 +88,7 @@ public class CommandPanel extends javax.swing.JPanel {
         });
         buttonPanel.add(recButtun);
 
+        executeButton.setBackground(new java.awt.Color(255, 255, 255));
         executeButton.setText("EXECUTE");
         executeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,11 +101,13 @@ public class CommandPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void recButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recButtunActionPerformed
-        // TODO add your handling code here:
+        keyColor();
+        
     }//GEN-LAST:event_recButtunActionPerformed
 
     private void executeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeButtonActionPerformed
-        // TODO add your handling code here:
+        keyColor();
+        chooseSequence();
     }//GEN-LAST:event_executeButtonActionPerformed
 
 
@@ -96,11 +120,62 @@ public class CommandPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private String commandConversion(String command) {
-         String[] str = command.split(" ");
-        if (str[0].equals("0")) {
-            return "avanti";
+        String infoCommand="";
+        String[] str = command.split(" ");
+        if (Integer.parseInt(str[0]) < 0) {
+            infoCommand = "Sinistra";
         }else{
-            return "...";
+             infoCommand = "Destra";
+        }
+        if(Integer.parseInt(str[1]) < 0){
+            infoCommand += " Indetro ";
+        }else{
+             infoCommand += " Avanti ";
+        }
+        if(Integer.parseInt(str[2]) < 0){
+            infoCommand += " Su ";
+        }else{
+             infoCommand += " Giù ";
+        }
+        if(Integer.parseInt(str[3]) < 0){
+            infoCommand += "Bardata sinistra ";
+        }else{
+             infoCommand += "Bardata destra";
+        }
+        return infoCommand;
+    }
+
+    private void chooseSequence() {
+        JFileChooser open = new JFileChooser();
+        File directory = new File("SequenceDrone");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        open.setCurrentDirectory(directory);
+        FileNameExtensionFilter drn = new FileNameExtensionFilter("Sequence file (*.sequence)", "sequence");
+        open.setFileFilter(drn);
+        open.showDialog(null, "Esegui");
+        try {
+            String fileName = open.getSelectedFile().getName();
+            if (!started) {
+            SequenceRun = new Sequence(fileName, drone);
+            SequenceRun.start();
+            started = true;
+        }
+        } catch (NullPointerException e) {
+            System.out.println("error:"+ e);
         }
     }
+    
+    private void keyColor(){
+        if (selecStatus) {
+            executeButton.setBackground(Color.GRAY);
+            recButtun.setBackground(Color.WHITE);
+        }else{
+            executeButton.setBackground(Color.WHITE);
+            recButtun.setBackground(Color.GRAY);
+        }
+        selecStatus = !selecStatus;
+    }
+    
 }

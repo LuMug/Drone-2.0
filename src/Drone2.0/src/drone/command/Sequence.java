@@ -18,7 +18,7 @@ public class Sequence extends Thread {
     /**
      * Constant for the file path.
      */
-    protected static final String ROOT = "SequencesRecorded";
+    protected static final String ROOT = "SequenceDrone";
     
     
      /**
@@ -37,8 +37,8 @@ public class Sequence extends Thread {
      */
     protected Drone drone;
 
-    public Sequence(Path file, Drone drone) {
-        this.file = Paths.get(ROOT + "/" + file + ".txt");
+    public Sequence(String file, Drone drone) {
+        this.file = Paths.get(ROOT + "/" + file + ".sequence");
         this.drone = drone;
     }
     
