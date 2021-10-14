@@ -1,7 +1,4 @@
-
-import drone.Drone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package drone;
 import javax.swing.UIManager;
 
 /**
