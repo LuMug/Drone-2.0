@@ -23,12 +23,14 @@ molte dinamiche nella classe model e `main frame`. Il problema più grande è st
 Ho quindi sviluppato un metodo per il movimento dell'immagine: Ho la dimensione in lunghezza massima del drone  e la sua diagonale, trovata con Pitagora. Sottraendo la lunghezza dell'immagine alla diagonale (diag-dim) ottengo "di quanto l'immagine straborderebbe". Prendo quindi questo ultimo valore e lo sottraggo alla dimensione effettiva dell'immagine. ne risulta un immagine sempre centrata e mai strabordante.
 3. Per la vista superiore ho sviluppato una logica simile a quella descritta sopra.
 4. Nello sviluppare l'altimetro ho avuto difficoltà nel posizionare in maniera dinamica il `Label` con l'altezza. Non ho infatti ancora trovato un modo di metterlo sempre sopra all'etichetta "altezza" presente sull'immagine.
+5. Quando si ridimensionava la finestra, facendo sparire le immagini, il metodo `resize` restituiva un errore, in quanto cercava di dare a delle `BufferdImage` una dimensione negativa. Ho risolto ponendo un controllo sul ridimensionamento delle stesse.
 
 Ecco quindi le soluzioni riassunte:
 
 >1. Modifica manuale inclinazione.
 >2. Implementazione logica delle diagonali
->4. Soluzione non ancora trovata.
+>3. Soluzione non ancora trovata.
+>4. Posto controllo sul ridimensionamento.
 ##  Punto della situazione rispetto alla pianificazione
 Siamo al passo con i tempi
 
