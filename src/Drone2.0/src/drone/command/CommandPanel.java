@@ -1,6 +1,6 @@
 package drone.command;
 
-import drone.Drone;
+import drone.DroneAction;
 import java.awt.Color;
 import java.io.File;
 import java.nio.file.Path;

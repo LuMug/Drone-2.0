@@ -1,12 +1,12 @@
 package drone;
 
-import drone.command.CommandPanel;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.util.Queue;
+
 
 /**
  *The drone class represents the abstract class of a drone
@@ -15,7 +15,7 @@ import java.net.UnknownHostException;
  * @author Alessandro Aloise, Gianni Grasso
  * @version 07.10.2021
  */
-public class Drone {
+public class DroneAction {
     /**
      * The ip address of the drone.
      */
@@ -31,16 +31,12 @@ public class Drone {
      */
     protected DatagramSocket socket;
     
-    /**
-     * Instance of CommandPanel.
-     */
-    private CommandPanel pannello = new CommandPanel();
-    
-        
+         
     /**
      * Constructor method without parameters.
+     * @param commandsBuffer 
      */
-    public Drone() {
+    public DroneAction() {
         try {
             socket = new DatagramSocket();
         } catch (SocketException ex) {
@@ -52,11 +48,10 @@ public class Drone {
     /**
      * Send a command to the drone.
      * 
-     * @param messageToSend the command to send to the drone
      */
-    public void sendCommand(String messageToSend) {
+    public void sendCommand(String command) {
         try {
-            byte[] data = messageToSend.getBytes();
+            byte[] data = command.getBytes();
             DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
             socket.send(packet);
             
@@ -65,8 +60,6 @@ public class Drone {
             
             //String responseSentence = new String(receivePacket.getData());
             //System.out.println(responseSentence);
-            
-            pannello.refreshCommands(messageToSend);
         } catch (SocketException ex) {
             System.out.println("ERRORE: " + ex.getMessage());
         } catch (IOException ex) {

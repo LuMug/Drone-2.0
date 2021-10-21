@@ -1,6 +1,6 @@
 package drone.command;
 
-import drone.Drone;
+import drone.DroneAction;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,9 +33,9 @@ public class Sequence extends Thread {
     
     
     /**
-     * Drone Class Instance.
+     * DroneAction Class Instance.
      */
-    protected Drone drone;
+    protected DroneAction drone;
 
     public Sequence(String file) {
         this.file = Paths.get(ROOT + "/" + file + ".sequence");

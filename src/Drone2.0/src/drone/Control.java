@@ -12,8 +12,20 @@ import javax.swing.WindowConstants;
  *
  * @author Alessandro Aloise
  */
-public class Control {
+public class Control extends Thread{
 
+    private final Queue<String> commandsBuffer;
+
+    public Control(Queue<String> commandsBuffer) {
+       this.commandsBuffer = commandsBuffer;
+    }
+   
+    public void run() {
+       String command =commandsBuffer.remove();
+       
+    }
+
+    
     public static void main(String[] args) {
         try {
              UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -31,12 +43,12 @@ public class Control {
             
             //Coda degli imput.
             Queue<String> commandsBuffer = new ArrayDeque<>();
-            
-            Drone tello = new Drone();
-
-            tello.sendCommand("command");
-            tello.sendCommand("takeoff");
-            tello.sendCommand("land");
+            Control control = new Control(commandsBuffer);
+            DroneAction tello = new DroneAction();
+             
+            commandsBuffer.add("command");
+            commandsBuffer.add("takeoff");
+            commandsBuffer.add("land");
 
             tello.socket.close();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
