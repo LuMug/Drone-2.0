@@ -8,6 +8,8 @@
 |Orario        |Lavoro svolto                                                   |Eseguito da         |
 |--------------|----------------------------------------------------------------|--------------------|
 |10:50 - 11:35 | Refactor genarle del package grafica                           | Michea             |
+|10:50 - 15:45 | Refactor della classe Drone                                    | Gianni             |
+|15:45 - 16:30 | Test sulla classe Drone e risoluzione di alcuni accorgimenti   | Gianni             |
 |11:35 - 14:45 | Refactor e implementazione vista laterale e frontale drone     | Michea             |
 |15:00 - 16:00 | Refactor e implementazione vista superiore drone + altimetro   | Michea             |
 |16:00 - 16:30 | Diario personale                                               | Michea             |
@@ -24,6 +26,8 @@ Ho quindi sviluppato un metodo per il movimento dell'immagine: Ho la dimensione 
 3. Per la vista superiore ho sviluppato una logica simile a quella descritta sopra.
 4. Nello sviluppare l'altimetro ho avuto difficoltà nel posizionare in maniera dinamica il `Label` con l'altezza. Non ho infatti ancora trovato un modo di metterlo sempre sopra all'etichetta "altezza" presente sull'immagine.
 5. Quando si ridimensionava la finestra, facendo sparire le immagini, il metodo `resize` restituiva un errore, in quanto cercava di dare a delle `BufferdImage` una dimensione negativa. Ho risolto ponendo un controllo sul ridimensionamento delle stesse.
+6. Non riuscivo a fare comunicare il client con il drone, questo a causa di un comando scritto in modo errato nella SDK di riferimento, dopo alcuni tentativi il problema
+è emerso da solo.
 
 Ecco quindi le soluzioni riassunte:
 
