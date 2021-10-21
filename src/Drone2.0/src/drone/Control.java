@@ -17,7 +17,6 @@ public class Control {
     public static void main(String[] args) {
         try {
              UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
              
             // Istanziamento grafico .
             JFrame mainFrame = new JFrame();
@@ -31,7 +30,7 @@ public class Control {
             mainFrame.setVisible(true);
             
             //Coda degli imput.
-            Queue<String> q = new ArrayDeque<String>();
+            Queue<String> commandsBuffer = new ArrayDeque<>();
             
             Drone tello = new Drone();
 
