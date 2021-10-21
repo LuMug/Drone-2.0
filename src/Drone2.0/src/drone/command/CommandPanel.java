@@ -32,6 +32,9 @@ public class CommandPanel extends javax.swing.JPanel {
      */
     private boolean selecStatus = false;
 
+    /**
+     * 
+     */
     private boolean flagRec = false;
 
     private Record record = new Record();
@@ -115,8 +118,9 @@ public class CommandPanel extends javax.swing.JPanel {
         } else {
             flagRec = !flagRec;
             saveFile();
-            record.sequenceWriter(listCommand, name);
             recButtun.setText("REC");
+            record.sequenceWriter(listCommand, name);
+            
         }
         //keyColor();
 
@@ -137,38 +141,35 @@ public class CommandPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private String commandConversion(String command) {
-        String infoCommand;
+        String infoCommand = "";
         String[] str = command.split(" ");
         switch (str[0]) {
             case "RC":
                 if (Integer.parseInt(str[1]) < 0) {
                     infoCommand = "Sinistra";
-                } else {
+                } else if (Integer.parseInt(str[1]) > 0) {
                     infoCommand = "Destra";
                 }
                 if (Integer.parseInt(str[2]) < 0) {
                     infoCommand += " Indetro ";
-                } else {
+                } else if (Integer.parseInt(str[2]) > 0) {
                     infoCommand += " Avanti ";
                 }
                 if (Integer.parseInt(str[3]) < 0) {
                     infoCommand += " Su ";
-                } else {
+                } else if (Integer.parseInt(str[3]) > 0) {
+
                     infoCommand += " Giù ";
-                }
-                if (Integer.parseInt(str[4]) < 0) {
-                    infoCommand += " Bardata sinistra ";
-                } else {
-                    infoCommand += " Bardata destra ";
                 }
                 break;
             default:
                 infoCommand = command;
         }
-    return infoCommand ;
-}
+        System.out.println(infoCommand.trim());
+        return infoCommand.trim();
+    }
 
-private void chooseSequence() {
+    private void chooseSequence() {
         JFileChooser open = new JFileChooser();
         if (!directory.exists()) {
             directory.mkdirs();
@@ -200,15 +201,20 @@ private void chooseSequence() {
     }
 
     private void saveFile() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(directory);
-        FileNameExtensionFilter drn = new FileNameExtensionFilter("Sequence file (*.sequence)", "sequence");
-        fileChooser.setDialogTitle("Specify a file to save");
-        int userSelection = fileChooser.showSaveDialog(this);
+        try {
 
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File fileToSave = fileChooser.getSelectedFile();
-            System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(directory);
+            FileNameExtensionFilter drn = new FileNameExtensionFilter("Sequence file (*.sequence)", "sequence");
+            fileChooser.setDialogTitle("Specify a file to save");
+            int userSelection = fileChooser.showSaveDialog(this);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+            }
+        } catch (NullPointerException e) {
+            
         }
     }
 }
