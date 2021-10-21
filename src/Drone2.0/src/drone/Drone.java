@@ -61,10 +61,10 @@ public class Drone {
             socket.send(packet);
             
             DatagramPacket receivePacket = new DatagramPacket(new byte[256], new byte[256].length);
-            socket.receive(receivePacket);
+            //socket.receive(receivePacket);
             
-            String responseSentence = new String(receivePacket.getData());
-            System.out.println(responseSentence);
+            //String responseSentence = new String(receivePacket.getData());
+            //System.out.println(responseSentence);
             
             pannello.refreshCommands(messageToSend);
         } catch (SocketException ex) {
