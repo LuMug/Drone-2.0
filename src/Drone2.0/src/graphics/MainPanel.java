@@ -8,7 +8,7 @@ import javax.swing.JPanel;
  * @author Michea Colautti
  * @version 07.10.2021
  */
-public class MainFrame extends JPanel implements Runnable{
+public class MainPanel extends JPanel implements Runnable{
   
     
     /**
@@ -59,7 +59,7 @@ public class MainFrame extends JPanel implements Runnable{
     /**
      * Metodo costruttore.
      */
-    public MainFrame() {
+    public MainPanel() {
         initComponents();
     }
 

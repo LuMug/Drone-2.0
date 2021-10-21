@@ -20,7 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         commandPanel = new drone.command.CommandPanel();
-        mainFrame = new graphics.MainFrame();
+        mainPanel = new graphics.MainPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -28,8 +28,8 @@ public class MainFrame extends javax.swing.JFrame {
         commandPanel.setVerifyInputWhenFocusTarget(false);
         getContentPane().add(commandPanel, java.awt.BorderLayout.WEST);
 
-        mainFrame.setMinimumSize(new java.awt.Dimension(200, 200));
-        getContentPane().add(mainFrame, java.awt.BorderLayout.CENTER);
+        mainPanel.setMinimumSize(new java.awt.Dimension(200, 200));
+        getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -81,6 +81,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private drone.command.CommandPanel commandPanel;
-    private graphics.MainFrame mainFrame;
+    private graphics.MainPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }
