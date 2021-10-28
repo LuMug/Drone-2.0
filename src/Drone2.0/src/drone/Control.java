@@ -21,11 +21,17 @@ public class Control extends Thread {
         this.commandsBufferOutputGraphics = commandsBufferOutputGraphics;
     }
 
+    @Override
     public void run() {
         try {
-            String command = commandsBuffer.remove();
-            commandsBufferOutputDrone.add(command);
-            commandsBufferOutputGraphics.add(command);
+            while (true) {
+                if (commandsBuffer.size() > 0) {
+                    System.out.println("ciao");
+                    String command = commandsBuffer.remove();
+                    commandsBufferOutputDrone.add(command);
+                    commandsBufferOutputGraphics.add(command);
+                }
+            }
         } catch (NoSuchElementException e) {
         }
 
@@ -52,7 +58,7 @@ public class Control extends Thread {
 
             //star Thread
             control.start();
-            action.start();
+            //action.start();
             Thread threadCommandPanel = new Thread(mainFrame.commandPanel);
             threadCommandPanel.start();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
