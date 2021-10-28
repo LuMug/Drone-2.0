@@ -3,8 +3,10 @@ package graphics;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -20,7 +22,6 @@ public class AltimeterPanel extends Model {
      * Label contenente l'altitudine e l'unità di misura.
      */
     public JLabel alt;
-   
 
     /**
      * Valore contenente l'altitudine.
@@ -33,8 +34,8 @@ public class AltimeterPanel extends Model {
      * BufferdImage con la lancetta
      */
     private BufferedImage handImageBuff;
-    
-    private static final int PAD=40;
+
+    private static final int PAD = 40;
 
     /**
      * Costruttore della classe. Permette di istanziare le due immagini e
@@ -76,10 +77,10 @@ public class AltimeterPanel extends Model {
 
         int imageSize;
         if (panelW >= panelH) {
-            imageSize = panelH-PAD;
+            imageSize = panelH - PAD;
 
         } else {
-            imageSize = panelW-PAD;
+            imageSize = panelW - PAD;
         }
 
         //Get the point where the image start
@@ -110,15 +111,57 @@ public class AltimeterPanel extends Model {
                 getClass().getClassLoader().getResource("Lancetta.png")));
         Image handImage = handIcon.getImage();
         handImageBuff = toBufferedImage(handImage);
-        int handW=getHeight() - imgStartY * 2 - 
-                (imageSize - (imageSize / 3))+15;
-        int handH=handW/5;
-        handImageBuff = resize(handImageBuff,handH, handW);
-        handImageBuff=rotate(handImageBuff, 180);
-        
-        g.drawImage(handImageBuff, panelW / 2 -handH/2, panelH / 2-handH/4, this);
-        
+
+        int handH = getHeight() - imgStartY * 2
+                - (imageSize - (imageSize / 3)) + 15;
+        int handW = handH / 5;
+
+        handImageBuff = resize(handImageBuff, handW, handH);
+
+        int angle=90;
+        handImageBuff = rotate(handImageBuff, angle);
+        int[] newDims=getDims(handImageBuff, angle);
+        g.drawImage(handImageBuff,
+                getWidth()/2,
+                getHeight()/2,
+                this);
     }
+    
+    
+   public int[] getDims(BufferedImage img, double angle) {
+
+        double rads = Math.toRadians(angle);
+        double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
+        int w = img.getWidth();
+        int h = img.getHeight();
+        int newWidth = (int) Math.floor(w * cos + h * sin);
+        int newHeight = (int) Math.floor(h * cos + w * sin);
+        int[] newDims={newWidth-1, newHeight-1};
+        return newDims;
+    }
+
+    /**
+     * Metodo utile per convertire un immagine di tipo Image in una
+     * BufferedImage.
+     *
+     * @param img l'immagine di tipo Image
+     * @return l'immagine di tipo BufferedImage
+     */
+    public static BufferedImage toBufferedImage(Image img) {
+        if (img instanceof BufferedImage) {
+            return (BufferedImage) img;
+        }
+        BufferedImage bimage = new BufferedImage(img.getWidth(null),
+                img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D bGr = bimage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+        return bimage;
+    }
+
+
+  
 
     /**
      * Metodo setter dell'altitudine. Similmente ai setter presenti in
@@ -128,7 +171,7 @@ public class AltimeterPanel extends Model {
      * @param newAlt è il nuovo valore dell'altitudine.
      */
     public void setAltitude(double newAlt) {
-        altitude = newAlt/100;
+        altitude = newAlt / 100;
         repaint();
     }
 }
