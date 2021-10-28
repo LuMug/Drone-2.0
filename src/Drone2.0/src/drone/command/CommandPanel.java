@@ -70,10 +70,17 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         commandsText.append(commandConversion(command));
     }
 
+    @Override
     public void run() {
         try {
-            String command = commandsBufferOutputGraphics.remove();
-            refreshCommands(command);
+            while (true) {
+                if (commandsBufferOutputGraphics.size() > 0) {
+                    System.out.println("ciao");
+                    String command = commandsBufferOutputGraphics.element();
+                    commandsBufferOutputGraphics.remove();
+                    refreshCommands(command);
+                }
+            }
         } catch (NoSuchElementException e) {
         }
     }

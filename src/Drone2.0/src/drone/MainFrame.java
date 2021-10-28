@@ -5,25 +5,34 @@
  */
 package drone;
 
+import java.awt.Dimension;
+import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Queue;
 
 /**
  *
  * @author alesa
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame implements KeyListener {
+
     Queue<String> commandBufferInput;
 
     public void setCommandBufferInput(Queue<String> commandBufferInput) {
         this.commandBufferInput = commandBufferInput;
     }
-    
-    
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        this.setMinimumSize(new Dimension(800, 400));
+
+        this.requestFocus();
+        this.setFocusable(true);
+        this.addKeyListener(this);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,27 +45,26 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("Drone2.0");
         setBackground(new java.awt.Color(255, 255, 255));
         setName("Drone 2.0"); // NOI18N
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                formKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                formKeyTyped(evt);
-            }
-        });
         getContentPane().add(commandPanel, java.awt.BorderLayout.WEST);
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public drone.command.CommandPanel commandPanel;
+    private graphics.MainPanel mainPanel;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent evt) {
         if (evt.getExtendedKeyCode() == 87) {
-            System.out.println("w");
             commandBufferInput.add("rc 0 70 0 0");
+            System.out.println("w");
         }
         if (evt.getExtendedKeyCode() == 65) {
             commandBufferInput.add("rc -70 0 0 0");
@@ -64,9 +72,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         if (evt.getExtendedKeyCode() == 83) {
             commandBufferInput.add("rc 0 -70 0 0");
+            System.out.println("s");
         }
         if (evt.getExtendedKeyCode() == 68) {
             commandBufferInput.add("rc 70 0 0 0");
+            System.out.println("d");
         }
         if (evt.getExtendedKeyCode() == 37) {
             commandBufferInput.add("rc 0 0 0 -70");
@@ -92,18 +102,10 @@ public class MainFrame extends javax.swing.JFrame {
         if (evt.getExtendedKeyCode() == 13) {
             commandBufferInput.add("emergency");
         }
-    }//GEN-LAST:event_formKeyPressed
+    }
 
-    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+    @Override
+    public void keyReleased(KeyEvent e) {
         commandBufferInput.add("rc 0 0 0 0");
-    }//GEN-LAST:event_formKeyReleased
-
-    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
-       
-    }//GEN-LAST:event_formKeyTyped
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    public drone.command.CommandPanel commandPanel;
-    private graphics.MainPanel mainPanel;
-    // End of variables declaration//GEN-END:variables
+    }
 }
