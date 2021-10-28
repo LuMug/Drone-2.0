@@ -127,7 +127,7 @@ public class MainPanel extends JPanel implements Runnable{
         while(true){
              frontPanel.moving(20);
             sidePanel.moving(pitch);
-            //imagePanelAlt.setAltitude(alt);
+            altimeterPanel.setAltitude(alt);
             upPanel.deg = yaw;
             upPanel.validate();
             upPanel.repaint(); 
