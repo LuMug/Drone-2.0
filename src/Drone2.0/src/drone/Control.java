@@ -1,56 +1,60 @@
 package drone;
 
-import drone.command.CommandPanel;
-import graphics.MainPanel;
 import java.util.ArrayDeque;
+import java.util.NoSuchElementException;
 import java.util.Queue;
-import javax.swing.JFrame;
 import javax.swing.UIManager;
-import javax.swing.WindowConstants;
 
 /**
  *
  * @author Alessandro Aloise
  */
-public class Control extends Thread{
+public class Control extends Thread {
 
-    private final Queue<String> commandsBuffer;
+    private Queue<String> commandsBuffer;
+    private Queue<String> commandsBufferOutputDrone;
+    private Queue<String> commandsBufferOutputGraphics;
 
-    public Control(Queue<String> commandsBuffer) {
-       this.commandsBuffer = commandsBuffer;
+    public Control(Queue<String> commandsBuffer, Queue<String> commandsBufferOutputDrone, Queue<String> commandsBufferOutputGraphics) {
+        this.commandsBuffer = commandsBuffer;
+        this.commandsBufferOutputDrone = commandsBufferOutputDrone;
+        this.commandsBufferOutputGraphics = commandsBufferOutputGraphics;
     }
-   
+
     public void run() {
-       String command =commandsBuffer.remove();
-       
+        try {
+            String command = commandsBuffer.remove();
+            commandsBufferOutputDrone.add(command);
+            commandsBufferOutputGraphics.add(command);
+        } catch (NoSuchElementException e) {
+        }
+
     }
 
-    
     public static void main(String[] args) {
         try {
-             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-             
-            // Istanziamento grafico .
-            JFrame mainFrame = new JFrame();
-            mainFrame.setTitle("Drone2.0");
-            mainFrame.setSize(512, 256);
-            mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            MainPanel mainFrameGraphics = new MainPanel();
-            CommandPanel commandPanel = new CommandPanel();
-            mainFrame.getContentPane().add(commandPanel, java.awt.BorderLayout.WEST);
-            mainFrame.getContentPane().add(mainFrameGraphics, java.awt.BorderLayout.CENTER);
-            mainFrame.setVisible(true);
-            
-            //Coda degli imput.
-            Queue<String> commandsBuffer = new ArrayDeque<>();
-            Control control = new Control(commandsBuffer);
-            DroneAction tello = new DroneAction();
-             
-            commandsBuffer.add("command");
-            commandsBuffer.add("takeoff");
-            commandsBuffer.add("land");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-            tello.socket.close();
+            //Creazione delle code
+            Queue<String> commandsBufferInput = new ArrayDeque<>();
+            Queue<String> commandsBufferOutputDrone = new ArrayDeque<>();
+            Queue<String> commandsBufferOutputGraphics = new ArrayDeque<>();
+            MainFrame mainFrame = new MainFrame();
+            mainFrame.setVisible(true);
+
+            //Coda degli imput.
+            Control control = new Control(commandsBufferInput, commandsBufferOutputDrone, commandsBufferOutputGraphics);
+            mainFrame.setCommandBufferInput(commandsBufferInput);
+
+            //coda degli output
+            mainFrame.commandPanel.setCommandsBufferOutputGraphics(commandsBufferOutputGraphics);
+            DroneAction action = new DroneAction(commandsBufferOutputDrone);
+
+            //star Thread
+            control.start();
+            action.start();
+            Thread threadCommandPanel = new Thread(mainFrame.commandPanel);
+            threadCommandPanel.start();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
             System.out.println("Error:" + e);
         }

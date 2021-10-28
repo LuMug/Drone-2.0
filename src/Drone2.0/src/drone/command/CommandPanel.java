@@ -5,6 +5,8 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Queue;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
@@ -13,7 +15,7 @@ import javax.swing.text.DefaultCaret;
  *
  * @author alesa
  */
-public class CommandPanel extends javax.swing.JPanel {
+public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
     /**
      * Contains the class to run the sequence.
@@ -32,7 +34,7 @@ public class CommandPanel extends javax.swing.JPanel {
     private boolean selecStatus = false;
 
     /**
-     * 
+     *
      */
     private boolean flagRec = false;
 
@@ -43,6 +45,11 @@ public class CommandPanel extends javax.swing.JPanel {
 
     private File directory = new File("SequenceDrone");
     private Path name;
+    private Queue<String> commandsBufferOutputGraphics;
+
+    public void setCommandsBufferOutputGraphics(Queue<String> commandsBufferOutputGraphics) {
+        this.commandsBufferOutputGraphics = commandsBufferOutputGraphics;
+    }
 
     /**
      * Creates new form CommandPanel.
@@ -61,6 +68,14 @@ public class CommandPanel extends javax.swing.JPanel {
     public void refreshCommands(String command) {
         lastCommand = command;
         commandsText.append(commandConversion(command));
+    }
+
+    public void run() {
+        try {
+            String command = commandsBufferOutputGraphics.remove();
+            refreshCommands(command);
+        } catch (NoSuchElementException e) {
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -119,7 +134,7 @@ public class CommandPanel extends javax.swing.JPanel {
             saveFile();
             recButtun.setText("REC");
             record.sequenceWriter(listCommand, name);
-            
+
         }
         //keyColor();
 
@@ -213,7 +228,7 @@ public class CommandPanel extends javax.swing.JPanel {
                 System.out.println("Save as file: " + fileToSave.getAbsolutePath());
             }
         } catch (NullPointerException e) {
-            
+
         }
     }
 }
