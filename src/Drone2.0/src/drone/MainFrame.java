@@ -30,7 +30,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         commandPanel = new drone.command.CommandPanel();
-        statusPanel = new graphics.MainPanel();
+        mainPanel = new graphics.MainPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Drone2.0");
@@ -43,19 +43,24 @@ public class MainFrame extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
         });
         getContentPane().add(commandPanel, java.awt.BorderLayout.WEST);
-        getContentPane().add(statusPanel, java.awt.BorderLayout.CENTER);
+        getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if (evt.getExtendedKeyCode() == 87) {
+            System.out.println("w");
             commandBufferInput.add("rc 0 70 0 0");
         }
         if (evt.getExtendedKeyCode() == 65) {
             commandBufferInput.add("rc -70 0 0 0");
+            System.out.println("a");
         }
         if (evt.getExtendedKeyCode() == 83) {
             commandBufferInput.add("rc 0 -70 0 0");
@@ -90,11 +95,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-        // TODO add your handling code here:
+        commandBufferInput.add("rc 0 0 0 0");
     }//GEN-LAST:event_formKeyReleased
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+       
+    }//GEN-LAST:event_formKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public drone.command.CommandPanel commandPanel;
-    private graphics.MainPanel statusPanel;
+    private graphics.MainPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

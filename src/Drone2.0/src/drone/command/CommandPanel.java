@@ -5,6 +5,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -33,7 +34,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     private boolean selecStatus = false;
 
     /**
-     * 
+     *
      */
     private boolean flagRec = false;
 
@@ -50,7 +51,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         this.commandsBufferOutputGraphics = commandsBufferOutputGraphics;
     }
 
-    
     /**
      * Creates new form CommandPanel.
      */
@@ -59,7 +59,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         DefaultCaret caret = (DefaultCaret) commandsText.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     }
-    
+
     /**
      * Serve ad aggiornare comandi Panel.
      *
@@ -70,11 +70,14 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         commandsText.append(commandConversion(command));
     }
 
-    
-    public void run(){
-        String command = commandsBufferOutputGraphics.remove();
-        refreshCommands(command);
+    public void run() {
+        try {
+            String command = commandsBufferOutputGraphics.remove();
+            refreshCommands(command);
+        } catch (NoSuchElementException e) {
+        }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -131,7 +134,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
             saveFile();
             recButtun.setText("REC");
             record.sequenceWriter(listCommand, name);
-            
+
         }
         //keyColor();
 
@@ -225,7 +228,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                 System.out.println("Save as file: " + fileToSave.getAbsolutePath());
             }
         } catch (NullPointerException e) {
-            
+
         }
     }
 }

@@ -1,6 +1,7 @@
 package drone;
 
 import java.util.ArrayDeque;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import javax.swing.UIManager;
 
@@ -21,27 +22,33 @@ public class Control extends Thread {
     }
 
     public void run() {
-        String command = commandsBuffer.remove();
-        commandsBufferOutputDrone.add(command);
-        commandsBufferOutputGraphics.add(command);
+        try {
+            String command = commandsBuffer.remove();
+            commandsBufferOutputDrone.add(command);
+            commandsBufferOutputGraphics.add(command);
+        } catch (NoSuchElementException e) {
+        }
 
     }
 
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
+
             //Creazione delle code
             Queue<String> commandsBufferInput = new ArrayDeque<>();
             Queue<String> commandsBufferOutputDrone = new ArrayDeque<>();
             Queue<String> commandsBufferOutputGraphics = new ArrayDeque<>();
-            MainFrame mainFrame= new MainFrame();
+            MainFrame mainFrame = new MainFrame();
             mainFrame.setVisible(true);
 
             //Coda degli imput.
             Control control = new Control(commandsBufferInput, commandsBufferOutputDrone, commandsBufferOutputGraphics);
-            DroneAction action = new DroneAction(commandsBufferOutputDrone);
+            mainFrame.setCommandBufferInput(commandsBufferInput);
+
+            //coda degli output
             mainFrame.commandPanel.setCommandsBufferOutputGraphics(commandsBufferOutputGraphics);
+            DroneAction action = new DroneAction(commandsBufferOutputDrone);
 
             //star Thread
             control.start();
