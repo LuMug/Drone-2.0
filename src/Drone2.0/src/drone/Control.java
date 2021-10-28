@@ -1,13 +1,8 @@
 package drone;
 
-import drone.command.CommandPanel;
-import drone.input.Keyboard;
-import graphics.MainPanel;
 import java.util.ArrayDeque;
 import java.util.Queue;
-import javax.swing.JFrame;
 import javax.swing.UIManager;
-import javax.swing.WindowConstants;
 
 /**
  *
