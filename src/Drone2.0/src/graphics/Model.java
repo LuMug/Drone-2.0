@@ -112,7 +112,8 @@ public class Model extends JPanel {
 
         int x = w / 2;
         int y = h / 2;
-
+        g2d.setColor(Color.RED);
+        g2d.drawRect(0, 0, newWidth-1, newHeight-1);
         at.rotate(rads, x, y);
         g2d.setTransform(at);
         g2d.drawImage(img, 0, 0, this);
