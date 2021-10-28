@@ -86,7 +86,7 @@ public class UpPanel extends Model {
                         this
                 );
             }else{
-                g.drawImage(rotatedImage,x,y,this);
+                g.drawImage(image,x,y,this);
             }
 
         }
