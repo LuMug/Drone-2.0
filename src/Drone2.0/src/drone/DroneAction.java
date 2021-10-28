@@ -5,7 +5,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.util.NoSuchElementException;
 import java.util.Queue;
 
 /**
@@ -51,11 +50,14 @@ public class DroneAction extends Thread {
      * The run method of the.
      */
     public void run() {
-        try {
-            String command = commandsBufferOutputDrone.remove();
-            sendCommand(command);
-        } catch (NoSuchElementException e) {
-        }
+             try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+            }
+            String command = commandsBufferOutputDrone.poll();
+            if (command != null) {
+                sendCommand(command);
+            }
     }
 
     /**

@@ -1,11 +1,9 @@
 package drone.command;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.List;
+import java.util.Queue;
 
 /**
  * Class that records the command sequences in a file.
@@ -20,26 +18,54 @@ public class Record {
      */
     public static final String ROOT = "SequenceDrone";
 
+    Queue<String> sequence;
+
+    /**
+     * Variabile per scrivere sul file.
+     */
+    public static FileWriter fw;
+
+    /**
+     * Variabile per creare il file.
+     */
+    public static File file;
+
     /**
      * Method that deals with recording the sequence of commands.
      *
+     * @param sequence
      */
-    public Record() {
+    public Record(Queue<String> sequence) {
+        this.sequence = sequence;
     }
 
     /**
      * Method that deals with writing the sequence.
      *
-     * @param sequence sequence to be written to the file.
+     * @param nomeFile
      */
-    public void sequenceWriter(List sequence, Path name) {
-        for (int i = 0; i < sequence.size(); i++) {
-            try {
-                Files.write(name, ((sequence.get(i) + "\r\n")).getBytes(), StandardOpenOption.APPEND);
-            } catch (IOException e) {
-                System.out.println("Error:" + e);
+    public void sequenceWriter(String nomeFile) {
+        creationFile(nomeFile);
+        try {
+            for (int i = 0; i < sequence.size(); i++) {
+                if (sequence.size() > 0) {
+                    String command = sequence.remove() + "\r\n";
+                    fw.write(command);
+                }
             }
+            fw.close();
+        } catch (IOException ex) {
+            System.out.println("Error file già esistente");
+        }
+    }
 
+    public void creationFile(String nome) {
+        try {
+            String path = ROOT + "/" + nome + ".sequence";
+            file = new File(path);
+            file.createNewFile();
+            fw = new FileWriter(file);
+        } catch (IOException ex) {
         }
     }
 }

@@ -1,7 +1,6 @@
 package drone;
 
 import java.util.ArrayDeque;
-import java.util.NoSuchElementException;
 import java.util.Queue;
 import javax.swing.UIManager;
 
@@ -15,6 +14,8 @@ public class Control extends Thread {
     private Queue<String> commandsBufferOutputDrone;
     private Queue<String> commandsBufferOutputGraphics;
 
+    private boolean runFlag = true;
+
     public Control(Queue<String> commandsBuffer, Queue<String> commandsBufferOutputDrone, Queue<String> commandsBufferOutputGraphics) {
         this.commandsBuffer = commandsBuffer;
         this.commandsBufferOutputDrone = commandsBufferOutputDrone;
@@ -23,17 +24,19 @@ public class Control extends Thread {
 
     @Override
     public void run() {
-        try {
-            while (true) {
-                if (commandsBuffer.size() > 0) {
-                    System.out.println("ciao");
-                    String command = commandsBuffer.remove();
-                    commandsBufferOutputDrone.add(command);
-                    commandsBufferOutputGraphics.add(command);
-                }
+        while (runFlag) {
+            try {            
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                System.out.println("Ex"+ ex);
             }
-        } catch (NoSuchElementException e) {
+            String command = commandsBuffer.poll();
+            if (command != null) {
+                commandsBufferOutputDrone.add(command);
+                commandsBufferOutputGraphics.add(command);
+            }
         }
+
 
     }
 
@@ -57,10 +60,10 @@ public class Control extends Thread {
             DroneAction action = new DroneAction(commandsBufferOutputDrone);
 
             //star Thread
-            control.start();
-            //action.start();
+            action.start();
             Thread threadCommandPanel = new Thread(mainFrame.commandPanel);
             threadCommandPanel.start();
+            control.start();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
             System.out.println("Error:" + e);
         }

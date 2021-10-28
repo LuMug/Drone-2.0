@@ -2,10 +2,9 @@ package drone.command;
 
 import java.awt.Color;
 import java.io.File;
-import java.nio.file.Path;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Queue;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -38,14 +37,11 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     private boolean flagRec = false;
 
-    private Record record = new Record();
-
-    List listCommand = new ArrayList();
-    private String lastCommand;
-
     private File directory = new File("SequenceDrone");
-    private Path name;
+    private String name;
     private Queue<String> commandsBufferOutputGraphics;
+    private Queue<String> sequence = new ArrayDeque<>();
+    private Record record = new Record(sequence);
 
     public void setCommandsBufferOutputGraphics(Queue<String> commandsBufferOutputGraphics) {
         this.commandsBufferOutputGraphics = commandsBufferOutputGraphics;
@@ -66,22 +62,21 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      * @param command da scrivere
      */
     public void refreshCommands(String command) {
-        lastCommand = command;
-        commandsText.append(commandConversion(command));
+        commandsText.append(commandConversion(command) + "\n");
     }
 
     @Override
     public void run() {
-        try {
-            while (true) {
-                if (commandsBufferOutputGraphics.size() > 0) {
-                    System.out.println("ciao");
-                    String command = commandsBufferOutputGraphics.element();
-                    commandsBufferOutputGraphics.remove();
-                    refreshCommands(command);
-                }
+        while (true) {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
             }
-        } catch (NoSuchElementException e) {
+            String command = commandsBufferOutputGraphics.poll();
+            if (command != null) {
+                refreshCommands(command);
+                sequence.add(command);
+            }
         }
     }
 
@@ -132,15 +127,15 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
     private void recButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recButtunActionPerformed
         if (!flagRec) {
+            sequence.clear();
             flagRec = !flagRec;
             recButtun.setText("STOP");
-            listCommand.add(lastCommand);
 
         } else {
             flagRec = !flagRec;
             saveFile();
             recButtun.setText("REC");
-            record.sequenceWriter(listCommand, name);
+            record.sequenceWriter(name);
 
         }
         //keyColor();
@@ -165,11 +160,11 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         String infoCommand = "";
         String[] str = command.split(" ");
         switch (str[0]) {
-            case "RC":
+            case "rc":
                 if (Integer.parseInt(str[1]) < 0) {
-                    infoCommand = "Sinistra";
+                    infoCommand = "Sinistra ";
                 } else if (Integer.parseInt(str[1]) > 0) {
-                    infoCommand = "Destra";
+                    infoCommand = "Destra ";
                 }
                 if (Integer.parseInt(str[2]) < 0) {
                     infoCommand += " Indetro ";
@@ -186,7 +181,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
             default:
                 infoCommand = command;
         }
-        System.out.println(infoCommand.trim());
         return infoCommand.trim();
     }
 

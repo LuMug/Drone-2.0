@@ -6,7 +6,6 @@
 package drone;
 
 import java.awt.Dimension;
-import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Queue;
@@ -19,10 +18,6 @@ public class MainFrame extends javax.swing.JFrame implements KeyListener {
 
     Queue<String> commandBufferInput;
 
-    public void setCommandBufferInput(Queue<String> commandBufferInput) {
-        this.commandBufferInput = commandBufferInput;
-    }
-
     /**
      * Creates new form MainFrame
      */
@@ -33,6 +28,10 @@ public class MainFrame extends javax.swing.JFrame implements KeyListener {
         this.requestFocus();
         this.setFocusable(true);
         this.addKeyListener(this);
+    }
+
+    public void setCommandBufferInput(Queue<String> commandBufferInput) {
+        this.commandBufferInput = commandBufferInput;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -64,19 +63,15 @@ public class MainFrame extends javax.swing.JFrame implements KeyListener {
     public void keyPressed(KeyEvent evt) {
         if (evt.getExtendedKeyCode() == 87) {
             commandBufferInput.add("rc 0 70 0 0");
-            System.out.println("w");
         }
         if (evt.getExtendedKeyCode() == 65) {
             commandBufferInput.add("rc -70 0 0 0");
-            System.out.println("a");
         }
         if (evt.getExtendedKeyCode() == 83) {
             commandBufferInput.add("rc 0 -70 0 0");
-            System.out.println("s");
         }
         if (evt.getExtendedKeyCode() == 68) {
             commandBufferInput.add("rc 70 0 0 0");
-            System.out.println("d");
         }
         if (evt.getExtendedKeyCode() == 37) {
             commandBufferInput.add("rc 0 0 0 -70");
