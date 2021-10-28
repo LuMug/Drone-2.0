@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.Queue;
 
 
 /**
@@ -14,7 +15,7 @@ import java.net.SocketException;
  * @author Alessandro Aloise, Gianni Grasso
  * @version 07.10.2021
  */
-public class DroneAction {
+public class DroneAction extends Thread {
     /**
      * The ip address of the drone.
      */
@@ -29,18 +30,24 @@ public class DroneAction {
      * The socket for the communication of the drone commands
      */
     protected DatagramSocket socket;
-    
+        private Queue<String> commandsBufferOutputDrone;
          
     /**
-     * Constructor method without parameters.
-     * @param commandsBuffer 
+     * 
+     * @param commandsBufferOutputDrone 
      */
-    public DroneAction() {
+    public DroneAction(Queue<String> commandsBufferOutputDrone) {
         try {
+            this.commandsBufferOutputDrone = commandsBufferOutputDrone;
             socket = new DatagramSocket();
         } catch (SocketException ex) {
             System.out.println("ERRORE: " + ex.getMessage());
         }
+    }
+    
+    public void run(){
+        String command = commandsBufferOutputDrone.remove();
+        sendCommand(command);
     }
     
     

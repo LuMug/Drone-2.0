@@ -5,6 +5,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
@@ -13,7 +14,7 @@ import javax.swing.text.DefaultCaret;
  *
  * @author alesa
  */
-public class CommandPanel extends javax.swing.JPanel {
+public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
     /**
      * Contains the class to run the sequence.
@@ -43,7 +44,13 @@ public class CommandPanel extends javax.swing.JPanel {
 
     private File directory = new File("SequenceDrone");
     private Path name;
+    private Queue<String> commandsBufferOutputGraphics;
 
+    public void setCommandsBufferOutputGraphics(Queue<String> commandsBufferOutputGraphics) {
+        this.commandsBufferOutputGraphics = commandsBufferOutputGraphics;
+    }
+
+    
     /**
      * Creates new form CommandPanel.
      */
@@ -52,7 +59,7 @@ public class CommandPanel extends javax.swing.JPanel {
         DefaultCaret caret = (DefaultCaret) commandsText.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     }
-
+    
     /**
      * Serve ad aggiornare comandi Panel.
      *
@@ -63,6 +70,11 @@ public class CommandPanel extends javax.swing.JPanel {
         commandsText.append(commandConversion(command));
     }
 
+    
+    public void run(){
+        String command = commandsBufferOutputGraphics.remove();
+        refreshCommands(command);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
