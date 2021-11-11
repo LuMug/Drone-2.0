@@ -34,7 +34,7 @@ public class MainPanel extends JPanel implements Runnable {
     /**
      * Queue for history.
      */
-    private Queue<String> statusBufferData;
+    private static volatile Queue<String> statusBufferData;
 
     public void setStatusBufferData(Queue<String> statusBufferData) {
         this.statusBufferData = statusBufferData;
@@ -62,32 +62,32 @@ public class MainPanel extends JPanel implements Runnable {
      * predisposti per il movimento passando il valore adeguato.
      */
     public void run() {
-        while (true) {
-
+        while (true) {    
             String status = statusBufferData.poll();
-
             if (status != null) {
-                System.out.println("Data:" + status);
-                String id = status.substring(0, 3);
+                String id = status.substring(0, 4);
+                System.out.println(id);
+                System.out.println(status.substring(4,status.length()));
+
                 switch (id) {
                     case "pit:" -> {
-                        int pitch = Integer.parseInt(status.substring(4,
+                        double pitch = Double.parseDouble(status.substring(4,
                                 status.length()));
-                        sidePanel.moving(pitch);
+                        sidePanel.moving((int)pitch);
                     }
                     case "rol:" -> {
-                        int roll = Integer.parseInt(status.substring(4,
+                        double roll = Double.parseDouble(status.substring(4,
                                 status.length()));
-                        frontPanel.moving(roll);
+                        frontPanel.moving((int)roll);
                     }
                     case "yaw:" -> {
-                        int yaw = Integer.parseInt(status.substring(4,
+                        double yaw = Double.parseDouble(status.substring(4,
                                 status.length()));
-                        upPanel.moving(yaw);
+                        upPanel.moving((int)yaw);
 
                     }
                     case "alt:" -> {
-                        int alt = Integer.parseInt(status.substring(4,
+                        double alt = Double.parseDouble(status.substring(4,
                                 status.length()));
                         altimeterPanel.setAltitude(alt);
                     }
