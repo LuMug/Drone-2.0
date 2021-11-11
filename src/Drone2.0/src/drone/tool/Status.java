@@ -18,12 +18,12 @@ import java.util.Queue;
  * @version 11.03.2021
  * @author Alessandro Aloise
  */
-public class Status extends Thread{
-     
+public class Status extends Thread {
+
     private Queue<String> statuBufferData;
-    
+
     Map<String, Double> status = new HashMap<>();
-    
+
     /**
      * Istanza della classe di log.
      */
@@ -37,11 +37,11 @@ public class Status extends Thread{
      * Variabile per prendere la data.
      */
     Date data = new Date();
-    
+
     public void setStatuBufferData(Queue<String> statuBufferData) {
         this.statuBufferData = statuBufferData;
     }
-    
+
     private boolean end = true;
 
     /**
@@ -68,17 +68,24 @@ public class Status extends Thread{
                 packet = new DatagramPacket(buf, buf.length, address, port);
                 String received = new String(packet.getData(), 0, packet.getLength());
                 socket.receive(packet);
-                String[] values = received.split(";");
-                for (String value : values) {
-                    String[] pair = value.split(":");
-                    status.put(pair[0], Double.parseDouble(pair[1]));
+                if (!(received.equals(""))) {
+                    try {
+                        String[] values = received.split(";");
+                        for (String value : values) {
+                            String[] pair = value.split(":");
+                            status.put(pair[0], Double.parseDouble(pair[1]));
+
+                        }
+                    } catch (Exception ex) {
+                        
+                    }
                 }
-                statuBufferData.add("pit:" +status.get("pitch").toString());
-                statuBufferData.add("rol:"+status.get("roll").toString());
-                statuBufferData.add("yaw:"+status.get("yaw").toString());
-                statuBufferData.add("alt:"+status.get("h").toString());
+                statuBufferData.add("pit:" + status.get("pitch").toString());
+                statuBufferData.add("rol:" + status.get("roll").toString());
+                statuBufferData.add("yaw:" + status.get("yaw").toString());
+                statuBufferData.add("alt:" + status.get("h").toString());
                 Thread.sleep(100);
-                String finale = dateFormat.format(data) + " " + status;
+                String finale = dateFormat.format(data) + " " + received;
                 try {
                     log.scritturaFile(finale);
                 } catch (Exception ex) {
