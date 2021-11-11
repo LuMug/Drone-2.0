@@ -62,7 +62,10 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      * @param command da scrivere
      */
     public void refreshCommands(String command) {
-        commandsText.append(commandConversion(command) + "\n");
+        int result = command.compareTo("rc 0 0 0 0");
+        if (!(result == 0)) {
+            commandsText.append(commandConversion(command) + "\n");
+        }
     }
 
     @Override
@@ -179,8 +182,9 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                 }
                 break;
             default:
-                infoCommand = command;
-        }
+            // infoCommand = command;
+            }
+
         return infoCommand.trim();
     }
 
