@@ -15,12 +15,8 @@ public class UpPanel extends Model {
     /**
      * I gradi di rotazione dell'immagine.
      */
-    public int deg;
+    private int deg;
 
-    /**
-     * Icona con l'immagine del drone.
-     */
-    private ImageIcon icon;
 
     /**
      * Dimensione del drone;
@@ -34,8 +30,8 @@ public class UpPanel extends Model {
         //aggiunto riferimento a bin in class path e path di libreria
         ImageIcon icon;
         icon = new ImageIcon(getClass().getClassLoader().getResource("DroneSuperiore.png"));
-        Image image = icon.getImage();
-        imageBig = toBufferedImage(image);
+        Image img = icon.getImage();
+        imageBig = toBufferedImage(img);
     }
 
     @Override
@@ -87,8 +83,12 @@ public class UpPanel extends Model {
             } else {
                 g.drawImage(image, x, y, this);
             }
-
         }
-
+    }
+    
+    public void moving(int yaw){
+        deg=yaw;
+        validate();
+        repaint();
     }
 }
