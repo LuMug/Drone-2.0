@@ -2,17 +2,18 @@ package drone.command;
 
 import java.awt.Color;
 import java.io.File;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
 
 /**
- *
- * @author alesa
+ * Panel that takes care of printing the history of commands sent to the drone on the screen. 
+ * The panel also allows you to record a series of commands and execute an already recorded sequence.
+ * 
+ * @author Alessandro Aloise
+ * @version  11.11.2021
  */
 public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
@@ -37,12 +38,28 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     private boolean flagRec = false;
 
+    /**
+     * Folder where the file will be saved. 
+     */
     private File directory = new File("SequenceDrone");
-    private String name;
+    
+    /**
+     * Queue for history.
+     */
     private Queue<String> commandsBufferOutputGraphics;
-    private Queue<String> sequence = new ArrayDeque<>();
+    
+    /**
+     * Queue for the recorded sequence.
+     */
+    private Queue<String> sequence = new LinkedList<>();
+    
     private Record record = new Record(sequence);
+    private String name;
 
+    /**
+     * Method used to set the queue references.
+     * @param commandsBufferOutputGraphics Tail Reference.
+     */
     public void setCommandsBufferOutputGraphics(Queue<String> commandsBufferOutputGraphics) {
         this.commandsBufferOutputGraphics = commandsBufferOutputGraphics;
     }
@@ -57,7 +74,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     }
 
     /**
-     * Serve ad aggiornare comandi Panel.
+     * Method that takes care of adding the last commands sent to the pane.
      *
      * @param command da scrivere
      */
@@ -159,35 +176,48 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     private javax.swing.JToggleButton recButtun;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Method that does the conversion from drone command to more understandable commands.
+     * @param command Command to translate.
+     * @return Converted string.
+     */
     private String commandConversion(String command) {
         String infoCommand = "";
         String[] str = command.split(" ");
         switch (str[0]) {
             case "rc":
                 if (Integer.parseInt(str[1]) < 0) {
-                    infoCommand = "Sinistra ";
+                    infoCommand = "Left ";
                 } else if (Integer.parseInt(str[1]) > 0) {
-                    infoCommand = "Destra ";
+                    infoCommand = "Right ";
                 }
                 if (Integer.parseInt(str[2]) < 0) {
-                    infoCommand += " Indetro ";
+                    infoCommand += " Back ";
                 } else if (Integer.parseInt(str[2]) > 0) {
-                    infoCommand += " Avanti ";
+                    infoCommand += " Go ahead ";
                 }
                 if (Integer.parseInt(str[3]) < 0) {
-                    infoCommand += " Su ";
+                    infoCommand += " UP ";
                 } else if (Integer.parseInt(str[3]) > 0) {
 
-                    infoCommand += " Giù ";
+                    infoCommand += " Down ";
+                }
+                if (Integer.parseInt(str[4]) == 70) {
+                    infoCommand += " Turn right ";
+                } else if (Integer.parseInt(str[4]) == -70) {
+
+                    infoCommand += " Turn Left ";
                 }
                 break;
             default:
-            // infoCommand = command;
             }
 
         return infoCommand.trim();
     }
 
+    /**
+     * Method for choosing the file to execute.
+     */
     private void chooseSequence() {
         JFileChooser open = new JFileChooser();
         if (!directory.exists()) {
@@ -208,6 +238,9 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         }
     }
 
+    /**
+     * Method that deals with coloring the keys in a correct way.
+     */
     private void keyColor() {
         if (selecStatus) {
             executeButton.setBackground(Color.GRAY);
@@ -219,6 +252,9 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         selecStatus = !selecStatus;
     }
 
+    /**
+     * A method of saving a file.
+     */
     private void saveFile() {
         try {
 
