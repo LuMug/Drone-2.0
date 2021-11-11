@@ -194,19 +194,19 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                 if (Integer.parseInt(str[2]) < 0) {
                     infoCommand += " Back ";
                 } else if (Integer.parseInt(str[2]) > 0) {
-                    infoCommand += " Go ahead ";
+                    infoCommand += " Forward ";
                 }
                 if (Integer.parseInt(str[3]) < 0) {
-                    infoCommand += " UP ";
+                    infoCommand += " Up ";
                 } else if (Integer.parseInt(str[3]) > 0) {
 
                     infoCommand += " Down ";
                 }
                 if (Integer.parseInt(str[4]) == 70) {
-                    infoCommand += " Turn right ";
+                    infoCommand += " Spin right ";
                 } else if (Integer.parseInt(str[4]) == -70) {
 
-                    infoCommand += " Turn Left ";
+                    infoCommand += " Spin Left ";
                 }
                 break;
             default:
