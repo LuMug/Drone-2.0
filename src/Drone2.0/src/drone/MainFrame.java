@@ -52,7 +52,7 @@ public class MainFrame extends javax.swing.JFrame implements KeyListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public drone.command.CommandPanel commandPanel;
-    private graphics.MainPanel mainPanel;
+    public graphics.MainPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 
     @Override
