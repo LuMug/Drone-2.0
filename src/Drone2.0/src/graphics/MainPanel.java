@@ -65,28 +65,32 @@ public class MainPanel extends JPanel implements Runnable {
         while (true) {
 
             String status = statusBufferData.poll();
-            String id = status.substring(0, 3);
-            switch (id) {
-                case "pit:" -> {
-                    int pitch = Integer.parseInt(status.substring(4,
-                            status.length()));
-                    sidePanel.moving(pitch);
-                }
-                case "rol:" -> {
-                    int roll = Integer.parseInt(status.substring(4,
-                            status.length()));
-                    frontPanel.moving(roll);
-                }
-                case "yaw:" -> {
-                    int yaw = Integer.parseInt(status.substring(4,
-                            status.length()));
-                    upPanel.moving(yaw);
 
-                }
-                case "alt:" -> {
-                    int alt = Integer.parseInt(status.substring(4,
-                            status.length()));
-                    altimeterPanel.setAltitude(alt);
+            if (status != null) {
+                System.out.println("Data:" + status);
+                String id = status.substring(0, 3);
+                switch (id) {
+                    case "pit:" -> {
+                        int pitch = Integer.parseInt(status.substring(4,
+                                status.length()));
+                        sidePanel.moving(pitch);
+                    }
+                    case "rol:" -> {
+                        int roll = Integer.parseInt(status.substring(4,
+                                status.length()));
+                        frontPanel.moving(roll);
+                    }
+                    case "yaw:" -> {
+                        int yaw = Integer.parseInt(status.substring(4,
+                                status.length()));
+                        upPanel.moving(yaw);
+
+                    }
+                    case "alt:" -> {
+                        int alt = Integer.parseInt(status.substring(4,
+                                status.length()));
+                        altimeterPanel.setAltitude(alt);
+                    }
                 }
             }
         }
