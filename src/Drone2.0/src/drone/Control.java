@@ -1,5 +1,6 @@
 package drone;
 
+import drone.tool.Status;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.UIManager;
@@ -71,6 +72,7 @@ public class Control extends Thread {
             LinkedList<String> commandsBufferInput=new LinkedList<String>();
             LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
             LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
+            LinkedList<String> statuBufferData = new LinkedList<>();
             MainFrame mainFrame = new MainFrame();
             mainFrame.setVisible(true);
 
@@ -87,6 +89,10 @@ public class Control extends Thread {
             Thread threadCommandPanel = new Thread(mainFrame.commandPanel);
             threadCommandPanel.start();
             control.start();
+            Status status = new Status();
+            status.start();
+            status.setStatuBufferData(statuBufferData);
+            mainFrame.mainPanel.setStatusBufferData(statuBufferData);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
             System.out.println("Error:" + e);
         }
