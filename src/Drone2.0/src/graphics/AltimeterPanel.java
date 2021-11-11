@@ -130,9 +130,6 @@ public class AltimeterPanel extends Model {
         int handH = getHeight() - imgStartY * 2
                 - (imageSize - (imageSize / 3)) + 15;
         int handW = handH / 15;
-
-        altitude = 5.5;
-
         double angle = altitude / 1.58 + MIN_ANGLE;
 
         double xP = handH * Math.cos(angle) + getWidth() / 2;
