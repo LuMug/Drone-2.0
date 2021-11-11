@@ -30,6 +30,9 @@ public class DroneAction extends Thread {
      * The socket for the communication of the drone commands
      */
     protected DatagramSocket socket;
+
+    protected boolean firstSend = false;
+
     private Queue<String> commandsBufferOutputDrone;
 
     /**
@@ -50,14 +53,14 @@ public class DroneAction extends Thread {
      * The run method of the.
      */
     public void run() {
-             try {
-                Thread.sleep(50);
-            } catch (InterruptedException ex) {
-            }
-            String command = commandsBufferOutputDrone.poll();
-            if (command != null) {
-                sendCommand(command);
-            }
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException ex) {
+        }
+        String command = commandsBufferOutputDrone.poll();
+        if (command != null) {
+            sendCommand(command);
+        }
     }
 
     /**
@@ -66,6 +69,13 @@ public class DroneAction extends Thread {
      */
     public void sendCommand(String command) {
         try {
+            if (!firstSend) {
+                command = "command";
+                byte[] data = command.getBytes();
+                DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
+                socket.send(packet);
+                firstSend= !firstSend;
+            }
             byte[] data = command.getBytes();
             DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
             socket.send(packet);
