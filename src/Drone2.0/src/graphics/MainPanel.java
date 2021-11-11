@@ -66,8 +66,6 @@ public class MainPanel extends JPanel implements Runnable {
             String status = statusBufferData.poll();
             if (status != null) {
                 String id = status.substring(0, 4);
-                System.out.println(id);
-                System.out.println(status.substring(4,status.length()));
 
                 switch (id) {
                     case "pit:" -> {
