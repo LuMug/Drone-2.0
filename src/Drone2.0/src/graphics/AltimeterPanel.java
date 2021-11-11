@@ -1,13 +1,11 @@
 package graphics;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -28,14 +26,21 @@ public class AltimeterPanel extends Model {
      */
     private double altitude = 0;
 
+    /**
+     *
+     * Font usato nel label.
+     */
     private Font font1;
 
     /**
-     * BufferdImage con la lancetta
+     * Padding dell'altimetro.
      */
-    private BufferedImage handImageBuff;
-
     private static final int PAD = 40;
+
+    /**
+     * Valore per cui la lancetta è sullo 0.
+     */
+    private static final double MIN_ANGLE = 4.7;
 
     /**
      * Costruttore della classe. Permette di istanziare le due immagini e
@@ -76,6 +81,7 @@ public class AltimeterPanel extends Model {
         panelW = getWidth();
 
         int imageSize;
+        
         if (panelW >= panelH) {
             imageSize = panelH - PAD;
 
@@ -83,85 +89,59 @@ public class AltimeterPanel extends Model {
             imageSize = panelW - PAD;
         }
 
-        //Get the point where the image start
-        int imgStartX = (getWidth() - imageSize) / 2;
-        int imgStartY = (getHeight() - imageSize) / 2;
-
         if (imageBig != null) {
             image = resize(imageBig, imageSize, imageSize);
-
-            //panel is on the field in the image when proportion are 3|2
-            //also considered, trying again and again, the black rectagle dims
-            alt.setLocation(imgStartX + imageSize / 3 + imageSize / 25,
-                    imgStartY + imageSize / 2 + imageSize / 10);
-
-            //font 22 is ok when panelW is 330-->dim= panel/16
-            font1 = new Font("SansSerif", Font.BOLD, imageSize / 17);
-            alt.setFont(font1);
-            alt.setText("H: " + "0.09" + " m");
             int x = (this.getWidth() - image.getWidth()) / 2;
             int y = (this.getHeight() - image.getHeight()) / 2;
-
             g.drawImage(image, x, y, this);
 
         }
+        
+        
+        //Get the point where the image start
+        int imgStartX = (getWidth() - imageSize) / 2;
+        int imgStartY = (getHeight() - imageSize) / 2;
+        //panel is on the field in the image when proportion are 3|2
+        //also considered, trying again and again, the black rectagle dims
+        alt.setLocation(imgStartX + imageSize / 3 + imageSize / 25,
+                imgStartY + imageSize / 2 + imageSize / 10);
 
+        //font 22 is ok when panelW is 330-->dim= panel/16
+        font1 = new Font("SansSerif", Font.BOLD, imageSize / 17);
+        alt.setFont(font1);
+        alt.setText("H: " + altitude + " m");
+
+        /*
         ImageIcon handIcon;
         handIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(
                 getClass().getClassLoader().getResource("Lancetta.png")));
         Image handImage = handIcon.getImage();
         handImageBuff = toBufferedImage(handImage);
-
-        int handH = getHeight() - imgStartY * 2
-                - (imageSize - (imageSize / 3)) + 15;
-        int handW = handH / 5;
-
         handImageBuff = resize(handImageBuff, handW, handH);
-
-        int angle=90;
         handImageBuff = rotate(handImageBuff, angle);
-        int[] newDims=getDims(handImageBuff, angle);
         g.drawImage(handImageBuff,
                 getWidth()/2,
                 getHeight()/2,
                 this);
+         */
+        //angle goes from 4.7 to 11
+        //one section is 0.63
+        //1/1.63=1.58
+        int handH = getHeight() - imgStartY * 2
+                - (imageSize - (imageSize / 3)) + 15;
+        int handW = handH / 15;
+
+        altitude = 5.5;
+
+        double angle = altitude / 1.58 + MIN_ANGLE;
+
+        double xP = handH * Math.cos(angle) + getWidth() / 2;
+        double yP = handH * Math.sin(angle) + getHeight() / 2;
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(handW));
+        g.setColor(Color.red);
+        g2d.drawLine((int) xP, (int) yP, getWidth() / 2, getHeight() / 2);
     }
-    
-    
-   public int[] getDims(BufferedImage img, double angle) {
-
-        double rads = Math.toRadians(angle);
-        double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
-        int w = img.getWidth();
-        int h = img.getHeight();
-        int newWidth = (int) Math.floor(w * cos + h * sin);
-        int newHeight = (int) Math.floor(h * cos + w * sin);
-        int[] newDims={newWidth-1, newHeight-1};
-        return newDims;
-    }
-
-    /**
-     * Metodo utile per convertire un immagine di tipo Image in una
-     * BufferedImage.
-     *
-     * @param img l'immagine di tipo Image
-     * @return l'immagine di tipo BufferedImage
-     */
-    public static BufferedImage toBufferedImage(Image img) {
-        if (img instanceof BufferedImage) {
-            return (BufferedImage) img;
-        }
-        BufferedImage bimage = new BufferedImage(img.getWidth(null),
-                img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D bGr = bimage.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
-        return bimage;
-    }
-
-
-  
 
     /**
      * Metodo setter dell'altitudine. Similmente ai setter presenti in

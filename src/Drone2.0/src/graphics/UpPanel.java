@@ -68,25 +68,24 @@ public class UpPanel extends Model {
         poi ridimensionare il drone di conseguenza.
          */
         droneS = droneS - (droneHypo - droneS);
-        
-        
+
         if (imageBig != null) {
             image = resize(imageBig, droneS, droneS);
 
             int x = (getWidth() - image.getWidth()) / 2;
             int y = (getHeight() - image.getHeight()) / 2;
 
-            if(deg!=0){
-            rotatedImage = rotate(image, deg);
+            if (deg != 0) {
+                rotatedImage = rotate(image, deg);
 
                 g.drawImage(
                         rotatedImage,
-                        x - (int) (rotatedImage.getWidth()/6.5),
-                        y - (int) (rotatedImage.getHeight()/6.5),
+                        x - (int) (rotatedImage.getWidth() / 6.5),
+                        y - (int) (rotatedImage.getHeight() / 6.5),
                         this
                 );
-            }else{
-                g.drawImage(image,x,y,this);
+            } else {
+                g.drawImage(image, x, y, this);
             }
 
         }
