@@ -85,7 +85,8 @@ public class Status extends Thread {
                 statuBufferData.add("yaw:" + status.get("yaw").toString());
                 statuBufferData.add("alt:" + status.get("h").toString());
                 Thread.sleep(100);
-                String finale = dateFormat.format(data) + " " + received;
+                String info = received.substring(0, received.length()-4);
+                String finale = dateFormat.format(data) + " " + info;
                 try {
                     log.scritturaFile(finale);
                 } catch (Exception ex) {
