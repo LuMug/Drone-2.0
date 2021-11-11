@@ -80,7 +80,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     public void refreshCommands(String command) {
         int result = command.compareTo("rc 0 0 0 0");
-        if (!(result == 0)) {
+        if (!(result == 0) ) {
             commandsText.append(commandConversion(command) + "\n");
         }
     }
@@ -210,6 +210,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                 }
                 break;
             default:
+                infoCommand =command;
             }
 
         return infoCommand.trim();
