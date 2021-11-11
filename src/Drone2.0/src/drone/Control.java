@@ -1,6 +1,7 @@
 package drone;
 
 import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.UIManager;
 
@@ -45,9 +46,9 @@ public class Control extends Thread {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
             //Creazione delle code
-            Queue<String> commandsBufferInput = new ArrayDeque<>();
-            Queue<String> commandsBufferOutputDrone = new ArrayDeque<>();
-            Queue<String> commandsBufferOutputGraphics = new ArrayDeque<>();
+            LinkedList<String> commandsBufferInput=new LinkedList<String>();
+            LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
+            LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
             MainFrame mainFrame = new MainFrame();
             mainFrame.setVisible(true);
 
