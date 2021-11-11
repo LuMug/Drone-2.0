@@ -93,6 +93,8 @@ public class Control extends Thread {
             status.start();
             status.setStatuBufferData(statuBufferData);
             mainFrame.mainPanel.setStatusBufferData(statuBufferData);
+            Thread threadMainPanel = new Thread(mainFrame.mainPanel);
+            threadMainPanel.start();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
             System.out.println("Error:" + e);
         }
