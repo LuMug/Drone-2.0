@@ -1,6 +1,7 @@
 package graphics;
 
 import java.awt.GridLayout;
+import java.util.Queue;
 import javax.swing.JPanel;
 
 /**
@@ -52,9 +53,15 @@ public class MainPanel extends JPanel implements Runnable{
     private static volatile int alt;
 
     /**
-     * Riferiemnto al drone.
+     * Queue for history.
      */
-    //private Drone drone;
+    private Queue<String> statusBufferData;
+
+    
+    public void setStatusBufferData(Queue<String> statusBufferData) {
+        this.statusBufferData = statusBufferData;
+    }
+    
     
     /**
      * Metodo costruttore.
@@ -125,7 +132,25 @@ public class MainPanel extends JPanel implements Runnable{
     public void run() {
         
         while(true){
-             frontPanel.moving(20);
+            
+            String status = statusBufferData.poll();
+            String id=status.substring(0, 4);
+            if(id.equals("pit:")){
+                
+                
+            
+            }else if(id.equals("rol:")){
+                
+            
+            }else if(id.equals("yaw:")){
+        
+            }else if(id.equals("alt:")){
+            
+            
+            }
+                
+
+            frontPanel.moving(roll);
             sidePanel.moving(pitch);
             altimeterPanel.setAltitude(alt);
             upPanel.deg = yaw;
