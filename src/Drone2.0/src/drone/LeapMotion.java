@@ -11,7 +11,7 @@ import java.util.Queue;
 public class LeapMotion {
 
     /**
-     * Imput queue.
+     * Queue.
      */
     private Queue<String> commandsBufferInput;
 
@@ -21,7 +21,6 @@ public class LeapMotion {
 
     /**
      * Costruttore.
-     *
      */
     public LeapMotion() {
     }
@@ -37,8 +36,8 @@ public class LeapMotion {
         Hand leftHand = null;
         Finger rightHandIndexFinger = null;
         Finger rightHandMiddleFinger = null;
-        Finger leftHandIndexFinger = null;
-        Finger leftHandMiddleFinger = null;
+        Finger leftHandIndexFinger= null;
+        Finger leftHandMiddleFinger= null;
         String command = "";
         float highCommand = 0;
         float pitch = 0;
