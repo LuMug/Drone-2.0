@@ -33,7 +33,7 @@ public class Control extends Thread {
     
     /**
      * Constructor method to which all queues are passed.
-     * @param commandsBuffer Imput queue.
+     * @param commandsBufferInput Input queue.
      * @param commandsBufferOutputDrone Dedicated queue for output of commands to be sent.
      * @param commandsBufferOutputGraphics Output for command history.
      */
