@@ -69,7 +69,7 @@ public class Control extends Thread {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
             //Queue creation
-            LinkedList<String> commandsBufferInput=new LinkedList<String>();
+            LinkedList<String> commandsBufferInput=new LinkedList<>();
             LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
             LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
             LinkedList<String> statuBufferData = new LinkedList<>();
@@ -78,6 +78,8 @@ public class Control extends Thread {
 
             //Imput queue.
             Control control = new Control(commandsBufferInput, commandsBufferOutputDrone, commandsBufferOutputGraphics);
+            LeapMotion leapMotion = new LeapMotion();
+            leapMotion.setCommandsBufferInput(commandsBufferInput);
             mainFrame.setCommandBufferInput(commandsBufferInput);
 
             //output queue.
