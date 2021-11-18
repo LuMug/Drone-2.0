@@ -62,7 +62,7 @@ public class MainPanel extends JPanel implements Runnable {
      * predisposti per il movimento passando il valore adeguato.
      */
     public void run() {
-        while (true) {    
+        while (true) {
             String status = statusBufferData.poll();
             if (status != null) {
                 String id = status.substring(0, 4);
@@ -71,23 +71,29 @@ public class MainPanel extends JPanel implements Runnable {
                     case "pit:" -> {
                         double pitch = Double.parseDouble(status.substring(4,
                                 status.length()));
-                        sidePanel.moving((int)pitch);
+                        sidePanel.moving((int) pitch);
+                        System.out.println(pitch);
                     }
                     case "rol:" -> {
                         double roll = Double.parseDouble(status.substring(4,
                                 status.length()));
-                        frontPanel.moving((int)roll);
+                        frontPanel.moving((int) roll);
+                        System.out.println(roll);
+
                     }
                     case "yaw:" -> {
                         double yaw = Double.parseDouble(status.substring(4,
                                 status.length()));
-                        upPanel.moving((int)yaw);
+                        upPanel.moving((int) yaw);
+                        System.out.println(yaw);
 
                     }
                     case "alt:" -> {
                         double alt = Double.parseDouble(status.substring(4,
                                 status.length()));
                         altimeterPanel.setAltitude(alt);
+                        System.out.println(alt);
+
                     }
                 }
             }
