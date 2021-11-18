@@ -71,30 +71,34 @@ public class Control extends Thread {
             LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
             LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
             LinkedList<String> statuBufferData = new LinkedList<>();
+            
+            // creazione
             MainFrame mainFrame = new MainFrame();
+            LeapMotion leapMotion = new LeapMotion();
+            DroneAction action = new DroneAction(commandsBufferOutputDrone);
+            KeyDispatcher dispatcher = new KeyDispatcher();
+            Thread threadCommandPanel = new Thread(mainFrame.commandPanel);
+            Thread threadMainPanel = new Thread(mainFrame.mainPanel);
+            Status status = new Status();
             mainFrame.setVisible(true);
 
             //Imput queue.
             Control control = new Control(commandsBufferInput, commandsBufferOutputDrone, commandsBufferOutputGraphics);
-            LeapMotion leapMotion = new LeapMotion();
             leapMotion.setCommandsBufferInput(commandsBufferInput);
-            KeyDispatcher dispatcher = new KeyDispatcher();
             dispatcher.setCommandBufferInput(commandsBufferInput);
             
             //output queue.
             mainFrame.commandPanel.setCommandsBufferOutputGraphics(commandsBufferOutputGraphics);
-            DroneAction action = new DroneAction(commandsBufferOutputDrone);
+            status.setStatuBufferData(statuBufferData);
+            mainFrame.mainPanel.setStatusBufferData(statuBufferData);
+           
 
             //Star Thread.
             action.start();
-            Thread threadCommandPanel = new Thread(mainFrame.commandPanel);
+            
             threadCommandPanel.start();
             control.start();
-            Status status = new Status();
             status.start();
-            status.setStatuBufferData(statuBufferData);
-            mainFrame.mainPanel.setStatusBufferData(statuBufferData);
-            Thread threadMainPanel = new Thread(mainFrame.mainPanel);
             threadMainPanel.start();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException e) {
             System.out.println("Error:" + e);
