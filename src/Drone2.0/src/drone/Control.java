@@ -1,12 +1,15 @@
 package drone;
 
 import drone.tool.Status;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import javax.swing.UIManager;
 
 /**
  * Class that deals with splitting incoming and outgoing data.
+ *
  * @author Alessandro Aloise
  */
 public class Control extends Thread {
@@ -15,12 +18,12 @@ public class Control extends Thread {
      * Input queue.
      */
     private Queue<String> commandsBuffer;
-    
+
     /**
      * Dedicated queue for output of commands to be sent.
      */
     private Queue<String> commandsBufferOutputDrone;
-    
+
     /**
      * Output for command history.
      */
@@ -30,11 +33,13 @@ public class Control extends Thread {
      * Variable that manages the thread.
      */
     private boolean runFlag = true;
-    
+
     /**
      * Constructor method to which all queues are passed.
+     *
      * @param commandsBufferInput Input queue.
-     * @param commandsBufferOutputDrone Dedicated queue for output of commands to be sent.
+     * @param commandsBufferOutputDrone Dedicated queue for output of commands
+     * to be sent.
      * @param commandsBufferOutputGraphics Output for command history.
      */
     public Control(Queue<String> commandsBufferInput, Queue<String> commandsBufferOutputDrone, Queue<String> commandsBufferOutputGraphics) {
@@ -49,10 +54,10 @@ public class Control extends Thread {
     @Override
     public void run() {
         while (runFlag) {
-            try {            
+            try {
                 Thread.sleep(1);
             } catch (InterruptedException ex) {
-                System.out.println("Ex"+ ex);
+                System.out.println("Ex" + ex);
             }
             String command = commandsBuffer.poll();
             if (command != null) {
@@ -62,16 +67,16 @@ public class Control extends Thread {
         }
     }
 
-    public static void main(String[] args) {
+public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
             //Queue creation
-            LinkedList<String> commandsBufferInput= new LinkedList<>();
+            LinkedList<String> commandsBufferInput = new LinkedList<>();
             LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
             LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
             LinkedList<String> statuBufferData = new LinkedList<>();
-            
+
             //Declaration
             MainFrame mainFrame = new MainFrame();
             LeapMotion leapMotion = new LeapMotion();
@@ -86,12 +91,11 @@ public class Control extends Thread {
             Control control = new Control(commandsBufferInput, commandsBufferOutputDrone, commandsBufferOutputGraphics);
             leapMotion.setCommandsBufferInput(commandsBufferInput);
             dispatcher.setCommandBufferInput(commandsBufferInput);
-            
+
             //output queue.
             mainFrame.commandPanel.setCommandsBufferOutputGraphics(commandsBufferOutputGraphics);
             status.setStatuBufferData(statuBufferData);
             mainFrame.mainPanel.setStatusBufferData(statuBufferData);
-           
 
             //Star Thread.
             action.start();
