@@ -182,38 +182,37 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      * @return Converted string.
      */
     private String commandConversion(String command) {
-        String infoCommand = "";
+        StringBuilder infoCommand = new StringBuilder();
         String[] str = command.split(" ");
         switch (str[0]) {
-            case "rc":
+            case "rc" -> {
                 if (Integer.parseInt(str[1]) < 0) {
-                    infoCommand = "Left ";
+                    infoCommand.append("Left ");
                 } else if (Integer.parseInt(str[1]) > 0) {
-                    infoCommand = "Right ";
+                    infoCommand.append("Right ");
                 }
                 if (Integer.parseInt(str[2]) < 0) {
-                    infoCommand += " Back ";
+                    infoCommand.append(" Back ");
                 } else if (Integer.parseInt(str[2]) > 0) {
-                    infoCommand += " Forward ";
+                    infoCommand.append(" Forward ");
                 }
                 if (Integer.parseInt(str[3]) < 0) {
-                    infoCommand += " Up ";
+                    infoCommand.append(" Up ");
                 } else if (Integer.parseInt(str[3]) > 0) {
 
-                    infoCommand += " Down ";
+                    infoCommand.append(" Down ");
                 }
                 if (Integer.parseInt(str[4]) == 70) {
-                    infoCommand += " Spin right ";
+                    infoCommand.append(" Spin right ");
                 } else if (Integer.parseInt(str[4]) == -70) {
 
-                    infoCommand += " Spin Left ";
+                    infoCommand.append(" Spin Left ");
                 }
-                break;
-            default:
-                infoCommand =command;
+            }
+            default -> infoCommand.append(command);
             }
 
-        return infoCommand.trim();
+        return infoCommand.toString().trim();
     }
 
     /**

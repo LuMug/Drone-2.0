@@ -77,7 +77,7 @@ public class DroneAction extends Thread {
                 byte[] data = firstSendCommand.getBytes();
                 DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
                 socket.send(packet);
-                firstSend = !firstSend;
+                firstSend = false;
             }
             byte[] data = command.getBytes();
             DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
