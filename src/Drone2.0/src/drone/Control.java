@@ -67,12 +67,12 @@ public class Control extends Thread {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
             //Queue creation
-            LinkedList<String> commandsBufferInput=new LinkedList<>();
+            LinkedList<String> commandsBufferInput= new LinkedList<>();
             LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
             LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
             LinkedList<String> statuBufferData = new LinkedList<>();
             
-            // creazione
+            //Declaration
             MainFrame mainFrame = new MainFrame();
             LeapMotion leapMotion = new LeapMotion();
             DroneAction action = new DroneAction(commandsBufferOutputDrone);
@@ -95,7 +95,6 @@ public class Control extends Thread {
 
             //Star Thread.
             action.start();
-            
             threadCommandPanel.start();
             control.start();
             status.start();
