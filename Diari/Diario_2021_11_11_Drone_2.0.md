@@ -11,7 +11,7 @@
 |10:35 - 16:30 | Gestione focus                                                    | Gianni             |
 |10:35 - 12:30 | Inizio implementazione status                                     | Alessandro         |
 |10:35 - 12:30 | Implementazione lancetta su altimetro                             | Michea             |
-|13:15 - 14:00 | Gestione pasaggio dati da Status a Grafica con code               | Alessandro, Michea |
+|13:15 - 14:00 | Gestione passaggio dati da Status a Grafica con code               | Alessandro, Michea |
 |14:00 - 14:30 | Prove di volo con nuova coda                                      | Alessandro, Michea |
 |14:30 - 16:30 | Implementazione Status                                            | Alessandro         |
 |14:30 - 16:30 | Sviluppo codice di riconoscimento stringhe coda e fix bug         | Michea             |
@@ -21,9 +21,9 @@
 
 ##  Problemi riscontrati e soluzioni adottate
 
-1. Nelle nostre prime prove di volo il drone non volava, abbiamo aggiunto un `while (true)` alla `thread` che si occupa del volo e abbiamo risolto,
+1. Nelle nostre prime prove di volo il drone non volava, abbiamo aggiunto un `while (true)` alla `Thread` che si occupa del volo e abbiamo risolto,
 2. In parallelo, Alessandro e Michea, hanno sviluppato la classe `Status` e le sue `Queue`. Quella che interessava Michea era quella contenente il flusso di informazioni prodotto dal drone, nello specifico le info sulla posizione (`pitch`,`roll`,`yaw`, e `altitude`), fondamentali per il funzionamento della grafica.
-3. Qui si spiega la logica di riconosciemnto della stringa, infatti `Status` istanzia una `Queue` a cui `graphics.MainPanel` fa riferimento. In qusta grafica vengono inseriti una serie di dati, con un identificativo della famiglia del dato, es: `yaw`, o `alt`, che permette poi di decidere dove inviare il dato.
+3. Qui si spiega la logica di riconoscimento della stringa, infatti `Status` istanzia una `Queue` a cui `graphics.MainPanel` fa riferimento. In questa grafica vengono inseriti una serie di dati, con un identificativo della famiglia del dato, es: `yaw`, o `alt`, che permette poi di decidere dove inviare il dato.
 4. Nell'implementazione del `KeyListener` ci siamo accorti che, se si preme su un altro elemento del frame, il focus viene perso. A questo proposito non siamo riusciti a trovare una soluzione, ma non ci siamo riusciti inizialmente. Abbiamo poi parlato con il professsor Petrini e lui ha proposto una soluzione usando un `KeyDispatcher`, una classe che catturasse i tasti ad un livello superiore di Java. Ne parliamo meglio nel prossimo diario.
 5. Un altro problema nello sviluppo del codice si è presentato quando ci siamo accorti che il drone rispondeva in ritardo ai comandi, o meglio: quando molti comandi venivano eseguiti in sequenza si `stashavano` nel drone e lui li eseguiva con un certo ritardo. La soluzione è in elaborazione.
 
