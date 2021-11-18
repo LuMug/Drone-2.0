@@ -3,15 +3,13 @@ package drone;
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  *
- * @author geo.petrini
+ * @author Gianni Grasso
  */
 // custom dispatcher
 class KeyDispatcher implements KeyEventDispatcher {
-
     private static volatile LinkedList<String> commandBufferInput;
 
     @Override
@@ -21,8 +19,6 @@ class KeyDispatcher implements KeyEventDispatcher {
         if (evt.getID() == KeyEvent.KEY_PRESSED) {
             if (evt.getExtendedKeyCode() == 87) {
                 commandBufferInput.add("rc 0 70 0 0");
-                System.out.println(commandBufferInput.get(0));
-
             }
             if (evt.getExtendedKeyCode() == 65) {
                 commandBufferInput.add("rc -70 0 0 0");
