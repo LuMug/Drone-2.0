@@ -7,11 +7,11 @@
 
 |Orario        |Lavoro svolto                                                      |Eseguito da         |
 |--------------|-------------------------------------------------------------------|--------------------|
-|10:05 - 10:30 | Prove di volo drone                                               | Tutti              |
-|10:35 - 16:30 | Gestione focus                                                    | Gianni             |
-|10:35 - 12:30 | Inizio implementazione status                                     | Alessandro         |
-|10:35 - 12:30 | Implementazione lancetta su altimetro                             | Michea             |
-|13:15 - 14:00 | Gestione passaggio dati da Status a Grafica con code               | Alessandro, Michea |
+|10:50 - 11:15 | Prove di volo drone                                               | Tutti              |
+|11:15 - 16:30 | Gestione focus                                                    | Gianni             |
+|11:15 - 12:30 | Inizio implementazione status                                     | Alessandro         |
+|11:15 - 12:30 | Implementazione lancetta su altimetro                             | Michea             |
+|13:15 - 14:00 | Gestione passaggio dati da Status a Grafica con code              | Alessandro, Michea |
 |14:00 - 14:30 | Prove di volo con nuova coda                                      | Alessandro, Michea |
 |14:30 - 16:30 | Implementazione Status                                            | Alessandro         |
 |14:30 - 16:30 | Sviluppo codice di riconoscimento stringhe coda e fix bug         | Michea             |
