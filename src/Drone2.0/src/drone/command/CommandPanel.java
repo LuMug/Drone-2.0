@@ -89,7 +89,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(50);
+                Thread.sleep(1);
             } catch (InterruptedException ex) {
             }
             String command = commandsBufferOutputGraphics.poll();

@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 public class Control extends Thread {
 
     /**
-     * Imput queue.
+     * Input queue.
      */
     private Queue<String> commandsBuffer;
     
@@ -37,8 +37,8 @@ public class Control extends Thread {
      * @param commandsBufferOutputDrone Dedicated queue for output of commands to be sent.
      * @param commandsBufferOutputGraphics Output for command history.
      */
-    public Control(Queue<String> commandsBuffer, Queue<String> commandsBufferOutputDrone, Queue<String> commandsBufferOutputGraphics) {
-        this.commandsBuffer = commandsBuffer;
+    public Control(Queue<String> commandsBufferInput, Queue<String> commandsBufferOutputDrone, Queue<String> commandsBufferOutputGraphics) {
+        this.commandsBuffer = commandsBufferInput;
         this.commandsBufferOutputDrone = commandsBufferOutputDrone;
         this.commandsBufferOutputGraphics = commandsBufferOutputGraphics;
     }
@@ -50,7 +50,7 @@ public class Control extends Thread {
     public void run() {
         while (runFlag) {
             try {            
-                Thread.sleep(50);
+                Thread.sleep(1);
             } catch (InterruptedException ex) {
                 System.out.println("Ex"+ ex);
             }
@@ -60,8 +60,6 @@ public class Control extends Thread {
                 commandsBufferOutputGraphics.add(command);
             }
         }
-
-
     }
 
     public static void main(String[] args) {
@@ -80,8 +78,9 @@ public class Control extends Thread {
             Control control = new Control(commandsBufferInput, commandsBufferOutputDrone, commandsBufferOutputGraphics);
             LeapMotion leapMotion = new LeapMotion();
             leapMotion.setCommandsBufferInput(commandsBufferInput);
-            mainFrame.setCommandBufferInput(commandsBufferInput);
-
+            KeyDispatcher dispatcher = new KeyDispatcher();
+            dispatcher.setCommandBufferInput(commandsBufferInput);
+            
             //output queue.
             mainFrame.commandPanel.setCommandsBufferOutputGraphics(commandsBufferOutputGraphics);
             DroneAction action = new DroneAction(commandsBufferOutputDrone);

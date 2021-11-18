@@ -6,34 +6,36 @@
 package drone;
 
 import java.awt.Dimension;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Queue;
+import java.awt.KeyboardFocusManager;
 
 /**
  *
- * @author alesa
+ * 
+ * @author gianni.grasso
  */
-public class MainFrame extends javax.swing.JFrame implements KeyListener {
-
-    Queue<String> commandBufferInput;
-
+public class MainFrame extends javax.swing.JFrame {
+    //private LinkedList<String> q1 = new LinkedList<String>();
+    private KeyDispatcher kd;
+    
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
         this.setMinimumSize(new Dimension(800, 400));
-
-        this.requestFocus();
-        this.setFocusable(true);
-        this.addKeyListener(this);
+        initKeyListener();
     }
 
-    public void setCommandBufferInput(Queue<String> commandBufferInput) {
-        this.commandBufferInput = commandBufferInput;
-    }
+    private void initKeyListener() {
+        kd = new KeyDispatcher();
 
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(kd);
+    }
+    
+    
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -49,58 +51,8 @@ public class MainFrame extends javax.swing.JFrame implements KeyListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public drone.command.CommandPanel commandPanel;
     public graphics.MainPanel mainPanel;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent evt) {
-        if (evt.getExtendedKeyCode() == 87) {
-            commandBufferInput.add("rc 0 70 0 0");
-        }
-        if (evt.getExtendedKeyCode() == 65) {
-            commandBufferInput.add("rc -70 0 0 0");
-        }
-        if (evt.getExtendedKeyCode() == 83) {
-            commandBufferInput.add("rc 0 -70 0 0");
-        }
-        if (evt.getExtendedKeyCode() == 68) {
-            commandBufferInput.add("rc 70 0 0 0");
-        }
-        if (evt.getExtendedKeyCode() == 37) {
-            commandBufferInput.add("rc 0 0 0 -70");
-        }
-        if (evt.getExtendedKeyCode() == 39) {
-            commandBufferInput.add("rc 0 0 0 70");
-        }
-        if (evt.getExtendedKeyCode() == 40) {
-            commandBufferInput.add("rc 0 0 -79 0");
-        }
-        if (evt.getExtendedKeyCode() == 38) {
-            commandBufferInput.add("rc 0 0 70 0");
-        }
-        if (evt.getExtendedKeyCode() == 32) {
-            commandBufferInput.add("rc 0 0 0 0");
-        }
-        if (evt.getExtendedKeyCode() == 84) {
-            commandBufferInput.add("takeoff");
-        }
-        if (evt.getExtendedKeyCode() == 76) {
-            commandBufferInput.add("land");
-        }
-        if (evt.getExtendedKeyCode() == 13) {
-            commandBufferInput.add("emergency");
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        commandBufferInput.add("rc 0 0 0 0");
-    }
 }
