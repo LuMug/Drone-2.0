@@ -230,6 +230,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         try {
             String fileName = open.getSelectedFile().getName();
             if (!started) {
+                // codice da guarfare 
                 SequenceRun = new Sequence(fileName);
                 SequenceRun.start();
                 started = true;
@@ -257,16 +258,18 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     private void saveFile() {
         try {
-
+            
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setCurrentDirectory(directory);
             FileNameExtensionFilter drn = new FileNameExtensionFilter("Sequence file (*.sequence)", "sequence");
             fileChooser.setDialogTitle("Specify a file to save");
             int userSelection = fileChooser.showSaveDialog(this);
-
+            
             if (userSelection == JFileChooser.APPROVE_OPTION) {
+                // salva il file ma con nome sbagliato.
+                // salva come null.sequence.
                 File fileToSave = fileChooser.getSelectedFile();
-                System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+                //System.out.println("Save as file: " + fileToSave.getAbsolutePath());
             }
         } catch (NullPointerException e) {
 
