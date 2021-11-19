@@ -15,7 +15,7 @@
 |15:00 - 16:30 | Limitazione dei pacchetti                                         | Tutti              |
 
 
-##  Problemi riscontrati e soluzioni adottate
+## Problemi riscontrati e soluzioni adottate
 
 Oggi abbiamo avuto molti problemi:
 
