@@ -1,5 +1,7 @@
 package drone.command;
 
+import com.leapmotion.leap.Controller;
+import drone.LeapMotion;
 import java.awt.Color;
 import java.io.File;
 import java.util.LinkedList;
@@ -40,6 +42,19 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      *
      */
     private boolean flagRec = true;
+    
+    
+    private boolean flagInput =false;
+
+    /**
+     * Contiene l'istanza del leap motion.
+     */
+    private LeapMotion leapMotion;
+
+    /**
+     * Contiene l'stanza del controller per il leapMotion.
+     */
+    private Controller leapController;
 
     /**
      * Folder where the file will be saved.
@@ -119,6 +134,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         buttonPanel = new javax.swing.JPanel();
         recButtun = new javax.swing.JToggleButton();
         executeButton = new javax.swing.JToggleButton();
+        inputButtun = new javax.swing.JToggleButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -132,7 +148,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        buttonPanel.setLayout(new java.awt.GridLayout(1, 0));
+        buttonPanel.setLayout(new java.awt.GridLayout(2, 0));
 
         recButtun.setBackground(new java.awt.Color(255, 255, 255));
         recButtun.setText("REC");
@@ -151,6 +167,14 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
             }
         });
         buttonPanel.add(executeButton);
+
+        inputButtun.setText("KEYBORD ON");
+        inputButtun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputButtunActionPerformed(evt);
+            }
+        });
+        buttonPanel.add(inputButtun);
 
         add(buttonPanel, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
@@ -175,11 +199,27 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         chooseSequence();
     }//GEN-LAST:event_executeButtonActionPerformed
 
+    private void inputButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputButtunActionPerformed
+        flagInput=!flagInput;
+        if (flagInput) {
+            inputButtun.setText("LEAP ON");
+            leapController = new Controller();
+            leapMotion = new LeapMotion();
+            leapController.addListener(leapMotion);
+
+        } else {
+            inputButtun.setText("KEYBORD ON");
+            leapController.removeListener(leapMotion);
+        }
+
+    }//GEN-LAST:event_inputButtunActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JTextArea commandsText;
     private javax.swing.JToggleButton executeButton;
+    private javax.swing.JToggleButton inputButtun;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton recButtun;
     // End of variables declaration//GEN-END:variables
