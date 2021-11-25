@@ -9,13 +9,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
 
 /**
- * Panel that takes care of printing the history of commands sent to the drone on the screen. 
- * The panel also allows you to record a series of commands and execute an already recorded sequence.
- * 
+ * Panel that takes care of printing the history of commands sent to the drone
+ * on the screen. The panel also allows you to record a series of commands and
+ * execute an already recorded sequence.
+ *
  * @author Alessandro Aloise
- * @version  11.11.2021
+ * @version 11.11.2021
  */
 public class CommandPanel extends javax.swing.JPanel implements Runnable {
+
+    boolean isMenu = false;
 
     /**
      * Contains the class to run the sequence.
@@ -36,28 +39,29 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     /**
      *
      */
-    private boolean flagRec = false;
+    private boolean flagRec = true;
 
     /**
-     * Folder where the file will be saved. 
+     * Folder where the file will be saved.
      */
     private File directory = new File("SequenceDrone");
-    
+
     /**
      * Queue for history.
      */
     private Queue<String> commandsBufferOutputGraphics;
-    
+
     /**
      * Queue for the recorded sequence.
      */
-    private Queue<String> sequence = new LinkedList<>();
-    
-    private Record record = new Record(sequence);
+    private Queue<String> sequence = new LinkedList<String>();
+
+    private Record record = new Record();
     private String name;
 
     /**
      * Method used to set the queue references.
+     *
      * @param commandsBufferOutputGraphics Tail Reference.
      */
     public void setCommandsBufferOutputGraphics(Queue<String> commandsBufferOutputGraphics) {
@@ -80,7 +84,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     public void refreshCommands(String command) {
         int result = command.compareTo("rc 0 0 0 0");
-        if (!(result == 0) ) {
+        if (!(result == 0)) {
             commandsText.append(commandConversion(command) + "\n");
         }
     }
@@ -88,19 +92,25 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     @Override
     public void run() {
         while (true) {
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException ex) {
-            }
-            String command = commandsBufferOutputGraphics.poll();
-            if (command != null) {
-                refreshCommands(command);
-                sequence.add(command);
+            if (!isMenu) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException ex) {
+                }
+                String command = commandsBufferOutputGraphics.poll();
+                if (command != null) {
+                    refreshCommands(command);
+                    sequence.add(command);
+                    System.out.println(command);
+                }
+            }else{
+                System.out.println("");
             }
         }
     }
 
     @SuppressWarnings("unchecked")
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -144,26 +154,24 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
         add(buttonPanel, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
-
     private void recButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recButtunActionPerformed
-        if (!flagRec) {
+        if (flagRec) {
             sequence.clear();
             flagRec = !flagRec;
             recButtun.setText("STOP");
-
         } else {
             flagRec = !flagRec;
+            isMenu = true;
             saveFile();
             recButtun.setText("REC");
-            record.sequenceWriter(name);
-
         }
         //keyColor();
 
     }//GEN-LAST:event_recButtunActionPerformed
 
     private void executeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeButtonActionPerformed
-        keyColor();
+        sequence.clear();
+        //keyColor();
         chooseSequence();
     }//GEN-LAST:event_executeButtonActionPerformed
 
@@ -177,7 +185,9 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Method that does the conversion from drone command to more understandable commands.
+     * Method that does the conversion from drone command to more understandable
+     * commands.
+     *
      * @param command Command to translate.
      * @return Converted string.
      */
@@ -209,8 +219,9 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                     infoCommand.append(" Spin Left ");
                 }
             }
-            default -> infoCommand.append(command);
-            }
+            default ->
+                infoCommand.append(command);
+        }
 
         return infoCommand.toString().trim();
     }
@@ -228,10 +239,10 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         open.setFileFilter(drn);
         open.showDialog(null, "Esegui");
         try {
-            String fileName = open.getSelectedFile().getName();
+            String name = open.getSelectedFile().getAbsolutePath();
             if (!started) {
                 // codice da guarfare 
-                SequenceRun = new Sequence(fileName);
+                SequenceRun = new Sequence(name);
                 SequenceRun.start();
                 started = true;
             }
@@ -258,18 +269,21 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     private void saveFile() {
         try {
-            
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setCurrentDirectory(directory);
             FileNameExtensionFilter drn = new FileNameExtensionFilter("Sequence file (*.sequence)", "sequence");
             fileChooser.setDialogTitle("Specify a file to save");
             int userSelection = fileChooser.showSaveDialog(this);
-            
+            String name = fileChooser.getSelectedFile().getAbsolutePath();
+            isMenu = true;
+
             if (userSelection == JFileChooser.APPROVE_OPTION) {
-                // salva il file ma con nome sbagliato.
-                // salva come null.sequence.
-                File fileToSave = fileChooser.getSelectedFile();
-                //System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+                record.createFile(name + ".sequence");
+
+                record.setMessage((LinkedList<String>) sequence);
+                record.writeFile(name + ".sequence");
+
+                isMenu = false;
             }
         } catch (NullPointerException e) {
 
