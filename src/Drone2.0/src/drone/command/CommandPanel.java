@@ -1,5 +1,7 @@
 package drone.command;
 
+import com.leapmotion.leap.Controller;
+import drone.LeapMotion;
 import java.awt.Color;
 import java.io.File;
 import java.util.LinkedList;
@@ -9,11 +11,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
 
 /**
- * Panel that takes care of printing the history of commands sent to the drone on the screen. 
- * The panel also allows you to record a series of commands and execute an already recorded sequence.
- * 
+ * Panel that takes care of printing the history of commands sent to the drone
+ * on the screen. The panel also allows you to record a series of commands and
+ * execute an already recorded sequence.
+ *
  * @author Alessandro Aloise
- * @version  11.11.2021
+ * @version 11.11.2021
  */
 public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
@@ -37,27 +40,41 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      *
      */
     private boolean flagRec = false;
+    
+    
+    private boolean flagInput =false;
 
     /**
-     * Folder where the file will be saved. 
+     * Contiene l'istanza del leap motion.
+     */
+    private LeapMotion leapMotion;
+
+    /**
+     * Contiene l'stanza del controller per il leapMotion.
+     */
+    private Controller leapController;
+
+    /**
+     * Folder where the file will be saved.
      */
     private File directory = new File("SequenceDrone");
-    
+
     /**
      * Queue for history.
      */
     private Queue<String> commandsBufferOutputGraphics;
-    
+
     /**
      * Queue for the recorded sequence.
      */
     private Queue<String> sequence = new LinkedList<>();
-    
+
     private Record record = new Record(sequence);
     private String name;
 
     /**
      * Method used to set the queue references.
+     *
      * @param commandsBufferOutputGraphics Tail Reference.
      */
     public void setCommandsBufferOutputGraphics(Queue<String> commandsBufferOutputGraphics) {
@@ -80,7 +97,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     public void refreshCommands(String command) {
         int result = command.compareTo("rc 0 0 0 0");
-        if (!(result == 0) ) {
+        if (!(result == 0)) {
             commandsText.append(commandConversion(command) + "\n");
         }
     }
@@ -109,6 +126,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         buttonPanel = new javax.swing.JPanel();
         recButtun = new javax.swing.JToggleButton();
         executeButton = new javax.swing.JToggleButton();
+        inputButtun = new javax.swing.JToggleButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -122,7 +140,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        buttonPanel.setLayout(new java.awt.GridLayout(1, 0));
+        buttonPanel.setLayout(new java.awt.GridLayout(2, 0));
 
         recButtun.setBackground(new java.awt.Color(255, 255, 255));
         recButtun.setText("REC");
@@ -141,6 +159,14 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
             }
         });
         buttonPanel.add(executeButton);
+
+        inputButtun.setText("KEYBORD ON");
+        inputButtun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputButtunActionPerformed(evt);
+            }
+        });
+        buttonPanel.add(inputButtun);
 
         add(buttonPanel, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
@@ -167,17 +193,35 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         chooseSequence();
     }//GEN-LAST:event_executeButtonActionPerformed
 
+    private void inputButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputButtunActionPerformed
+        flagInput=!flagInput;
+        if (flagInput) {
+            inputButtun.setText("LEAP ON");
+            leapController = new Controller();
+            leapMotion = new LeapMotion();
+            leapController.addListener(leapMotion);
+
+        } else {
+            inputButtun.setText("KEYBORD ON");
+            leapController.removeListener(leapMotion);
+        }
+
+    }//GEN-LAST:event_inputButtunActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JTextArea commandsText;
     private javax.swing.JToggleButton executeButton;
+    private javax.swing.JToggleButton inputButtun;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton recButtun;
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Method that does the conversion from drone command to more understandable commands.
+     * Method that does the conversion from drone command to more understandable
+     * commands.
+     *
      * @param command Command to translate.
      * @return Converted string.
      */
@@ -209,8 +253,9 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                     infoCommand.append(" Spin Left ");
                 }
             }
-            default -> infoCommand.append(command);
-            }
+            default ->
+                infoCommand.append(command);
+        }
 
         return infoCommand.toString().trim();
     }
@@ -258,13 +303,13 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     private void saveFile() {
         try {
-            
+
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setCurrentDirectory(directory);
             FileNameExtensionFilter drn = new FileNameExtensionFilter("Sequence file (*.sequence)", "sequence");
             fileChooser.setDialogTitle("Specify a file to save");
             int userSelection = fileChooser.showSaveDialog(this);
-            
+
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 // salva il file ma con nome sbagliato.
                 // salva come null.sequence.
