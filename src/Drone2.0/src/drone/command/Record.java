@@ -3,69 +3,60 @@ package drone.command;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Class that records the command sequences in a file.
- *
- * @author Alessandro Aloise
- * @version 25 marzo 2021
+ *The Record class is used to record the movement sequences
+ *of a drone and write them into files.
+ * 
+ * @author Gianni Grasso
+ * @version 25.11.2021
  */
-public class Record {
-
+public class Record extends Thread{
     /**
-     * Constant for the file path.
+     * The contents of the file.
      */
-    public static final String ROOT = "SequenceDrone";
-
-    Queue<String> sequence;
-
-    /**
-     * Variabile per scrivere sul file.
-     */
-    public static FileWriter fw;
-
-    /**
-     * Variabile per creare il file.
-     */
-    public static File file;
-
-    /**
-     * Method that deals with recording the sequence of commands.
-     *
-     * @param sequence
-     */
-    public Record(Queue<String> sequence) {
-        this.sequence = sequence;
+    static String message;
+    
+    public void setMessage(LinkedList<String> sequence){
+        for (int i=0; i<sequence.size(); i++){
+            message = message + ";" + sequence.get(i);
+        }
     }
-
+    
     /**
-     * Method that deals with writing the sequence.
-     *
-     * @param nomeFile
+     * Create the file if it does not exist.
+     * 
+     * @param fileName the name of the file
      */
-    public void sequenceWriter(String nomeFile) {
-        creationFile(nomeFile);
+    public void createFile(String fileName) {
         try {
-            for (int i = 0; i < sequence.size(); i++) {
-                if (sequence.size() > 0) {
-                    String command = sequence.remove() + "\r\n";
-                    fw.write(command);
-                }
+            File myObj = new File(fileName);
+            
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
             }
-            fw.close();
-        } catch (IOException ex) {
-            System.out.println("Error file già esistente");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
         }
     }
-
-    public void creationFile(String nome) {
-        try {
-            String path = ROOT + "/" + nome + ".sequence";
-            file = new File(path);
-            file.createNewFile();
-            fw = new FileWriter(file);
-        } catch (IOException ex) {
-        }
+    
+    /**
+     * Writes the file if possible.
+     * 
+     * @param fileName the name of the file
+     */
+    public void writeFile(String fileName){
+        try {  
+            FileWriter myWriter = new FileWriter(fileName);
+            myWriter.write(message);
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }  
     }
 }
