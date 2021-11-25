@@ -72,27 +72,23 @@ public class MainPanel extends JPanel implements Runnable {
                         double pitch = Double.parseDouble(status.substring(4,
                                 status.length()));
                         sidePanel.moving((int) pitch);
-                        System.out.println(pitch);
                     }
                     case "rol:" -> {
                         double roll = Double.parseDouble(status.substring(4,
                                 status.length()));
                         frontPanel.moving((int) roll);
-                        System.out.println(roll);
 
                     }
                     case "yaw:" -> {
                         double yaw = Double.parseDouble(status.substring(4,
                                 status.length()));
                         upPanel.moving((int) yaw);
-                        System.out.println(yaw);
 
                     }
                     case "alt:" -> {
                         double alt = Double.parseDouble(status.substring(4,
                                 status.length()));
                         altimeterPanel.setAltitude(alt);
-                        System.out.println(alt);
 
                     }
                 }
