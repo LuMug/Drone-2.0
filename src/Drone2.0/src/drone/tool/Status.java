@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
-
 /**
  * Classe che si occupa di scrivere un file di log.
  *
@@ -20,7 +19,8 @@ import java.util.Queue;
  */
 public class Status extends Thread {
 
-    private Queue<String> statuBufferData;
+    private Queue<String> statusBufferData;
+    private Queue<String> analyticsBufferData;
 
     Map<String, Double> status = new HashMap<>();
 
@@ -38,8 +38,12 @@ public class Status extends Thread {
      */
     Date data = new Date();
 
-    public void setStatuBufferData(Queue<String> statuBufferData) {
-        this.statuBufferData = statuBufferData;
+    public void setStatusBufferData(Queue<String> statusBufferData) {
+        this.statusBufferData = statusBufferData;
+    }
+    
+   public void setAnalyticsBufferData(Queue<String> analyticsBufferData) {
+        this.analyticsBufferData = analyticsBufferData;
     }
 
     private boolean end = true;
@@ -80,10 +84,33 @@ public class Status extends Thread {
                         
                     }
                 }
-                statuBufferData.add("pit:" + status.get("pitch").toString());
-                statuBufferData.add("rol:" + status.get("roll").toString());
-                statuBufferData.add("yaw:" + status.get("yaw").toString());
-                statuBufferData.add("alt:" + status.get("h").toString());
+                statusBufferData.add("pit:" + status.get("pitch").toString());
+                statusBufferData.add("rol:" + status.get("roll").toString());
+                statusBufferData.add("yaw:" + status.get("yaw").toString());
+                statusBufferData.add("alt:" + status.get("h").toString());
+                
+                //analytics
+                analyticsBufferData.add("Pitch: " + status.get("pitch").toString());
+                analyticsBufferData.add("Roll: " + status.get("roll").toString());
+                analyticsBufferData.add("Yaw: " + status.get("yaw").toString());
+                analyticsBufferData.add("Altitude: " + status.get("h").toString());
+                analyticsBufferData.add("Position x: " + status.get("vgx").toString());
+                analyticsBufferData.add("Position y: " + status.get("vgy").toString());
+                analyticsBufferData.add("Position z: " + status.get("vgz").toString());
+                analyticsBufferData.add("Acceleration x: " + status.get("agx").toString());
+                analyticsBufferData.add("Acceleration y: " + status.get("agy").toString());
+                analyticsBufferData.add("Acceleration z: " + status.get("agz").toString());
+                analyticsBufferData.add("Lowest temperature: " + status.get("templ").toString());
+                analyticsBufferData.add("Highest temperature: " + status.get("temph").toString());
+                analyticsBufferData.add("Time of flight: " + status.get("tof").toString());
+                analyticsBufferData.add("Batteryt: " + status.get("bat").toString());
+                analyticsBufferData.add("Time of flight: " + status.get("tof").toString());
+                analyticsBufferData.add("Baro: " + status.get("baro").toString());
+                analyticsBufferData.add("Time of engine use : " + status.get("time").toString());
+
+               
+
+                //analytics
                 Thread.sleep(100);
                 String info = received.substring(0, received.length()-4);
                 String finale = dateFormat.format(data) + " " + info;

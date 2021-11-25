@@ -1,11 +1,11 @@
 package drone;
 
 import drone.tool.Status;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import javax.swing.UIManager;
+
 
 /**
  * Class that deals with splitting incoming and outgoing data.
@@ -75,10 +75,12 @@ public static void main(String[] args) {
             LinkedList<String> commandsBufferInput = new LinkedList<>();
             LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
             LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
-            LinkedList<String> statuBufferData = new LinkedList<>();
+            LinkedList<String> statusBufferData = new LinkedList<>();
+            LinkedList<String> analyticsBufferData = new LinkedList<>();
 
             //Declaration
             MainFrame mainFrame = new MainFrame();
+            AnalyticsFrame analyticsFrame=new AnalyticsFrame();
             LeapMotion leapMotion = new LeapMotion();
             DroneAction action = new DroneAction(commandsBufferOutputDrone);
             KeyDispatcher dispatcher = new KeyDispatcher();
@@ -94,9 +96,15 @@ public static void main(String[] args) {
 
             //output queue.
             mainFrame.commandPanel.setCommandsBufferOutputGraphics(commandsBufferOutputGraphics);
-            status.setStatuBufferData(statuBufferData);
-            mainFrame.mainPanel.setStatusBufferData(statuBufferData);
+            status.setStatusBufferData(statusBufferData);
+            status.setAnalyticsBufferData(analyticsBufferData);
+            
+            mainFrame.mainPanel.setStatusBufferData(statusBufferData);
+            analyticsFrame.setAnalyticsBufferData(analyticsBufferData);
 
+           
+            
+                    
             //Star Thread.
             action.start();
             threadCommandPanel.start();
