@@ -8,7 +8,7 @@ import java.util.Queue;
  * @author Alessandro Aloise
  * @version 18.11.2021
  */
-public class LeapMotion {
+public class LeapMotion extends Listener {
 
     /**
      * Queue.
