@@ -89,25 +89,24 @@ public class Status extends Thread {
                 statusBufferData.add("yaw:" + status.get("yaw").toString());
                 statusBufferData.add("alt:" + status.get("h").toString());
                 
-                //analytics
-                analyticsBufferData.add("Pitch: " + status.get("pitch").toString());
-                analyticsBufferData.add("Roll: " + status.get("roll").toString());
-                analyticsBufferData.add("Yaw: " + status.get("yaw").toString());
-                analyticsBufferData.add("Altitude: " + status.get("h").toString());
-                analyticsBufferData.add("Position x: " + status.get("vgx").toString());
-                analyticsBufferData.add("Position y: " + status.get("vgy").toString());
-                analyticsBufferData.add("Position z: " + status.get("vgz").toString());
-                analyticsBufferData.add("Acceleration x: " + status.get("agx").toString());
-                analyticsBufferData.add("Acceleration y: " + status.get("agy").toString());
-                analyticsBufferData.add("Acceleration z: " + status.get("agz").toString());
-                analyticsBufferData.add("Lowest temperature: " + status.get("templ").toString());
-                analyticsBufferData.add("Highest temperature: " + status.get("temph").toString());
-                analyticsBufferData.add("Time of flight: " + status.get("tof").toString());
-                analyticsBufferData.add("Batteryt: " + status.get("bat").toString());
-                analyticsBufferData.add("Time of flight: " + status.get("tof").toString());
-                analyticsBufferData.add("Baro: " + status.get("baro").toString());
-                analyticsBufferData.add("Time of engine use : " + status.get("time").toString());
-
+                analyticsBufferData.add("<html>"+
+                    "Pitch: " + status.get("pitch").toString()
+                +"<br>"+"Roll: " + status.get("roll").toString()
+                +"<br>"+"Yaw: " + status.get("yaw").toString()
+                +"<br>"+"Altitude: " + status.get("h").toString()
+                +"<br>"+"Position x: " + status.get("vgx").toString()
+                +"<br>"+"Position y: " + status.get("vgy").toString()
+                +"<br>"+"Position z: " + status.get("vgz").toString()
+                +"<br>"+"Acceleration x: " + status.get("agx").toString()
+                +"<br>"+"Acceleration y: " + status.get("agy").toString()
+                +"<br>"+"Acceleration z: " + status.get("agz").toString()
+                +"<br>"+"Lowest temperature: " + status.get("templ").toString()
+                +"<br>"+"Highest temperature: " + status.get("temph").toString()
+                +"<br>"+"Time of flight: " + status.get("tof").toString()
+                +"<br>"+"Batteryt: " + status.get("bat").toString()
+                +"<br>"+"Time of flight: " + status.get("tof").toString()
+                +"<br>"+"Baro: " + status.get("baro").toString()
+                +"<br>"+"Time of engine use : " + status.get("time").toString()+"</html>");
                
 
                 //analytics

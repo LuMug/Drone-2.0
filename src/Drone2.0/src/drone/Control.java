@@ -1,7 +1,7 @@
 package drone;
 
+import drone.tool.analytics.AnalyticsPanel;
 import drone.tool.Status;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.UIManager;
@@ -80,7 +80,7 @@ public static void main(String[] args) {
 
             //Declaration
             MainFrame mainFrame = new MainFrame();
-            AnalyticsFrame analyticsFrame=new AnalyticsFrame();
+            AnalyticsPanel analyticsFrame=new AnalyticsPanel();
             LeapMotion leapMotion = new LeapMotion();
             DroneAction action = new DroneAction(commandsBufferOutputDrone);
             KeyDispatcher dispatcher = new KeyDispatcher();
@@ -97,8 +97,7 @@ public static void main(String[] args) {
             //output queue.
             mainFrame.commandPanel.setCommandsBufferOutputGraphics(commandsBufferOutputGraphics);
             status.setStatusBufferData(statusBufferData);
-            status.setAnalyticsBufferData(analyticsBufferData);
-            
+            status.setAnalyticsBufferData(analyticsBufferData);  
             mainFrame.mainPanel.setStatusBufferData(statusBufferData);
             analyticsFrame.setAnalyticsBufferData(analyticsBufferData);
 
