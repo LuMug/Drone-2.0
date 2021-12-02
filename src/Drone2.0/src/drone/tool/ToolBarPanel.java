@@ -62,6 +62,8 @@ public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
         } catch (IOException ex) {
             System.out.println("Errore apertura live");
             System.out.println(ex.getMessage());
+        } catch (InterruptedException ex) {
+            System.out.println("Errore browser");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

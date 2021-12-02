@@ -89,7 +89,6 @@ public class AnalyticsPanel extends JPanel implements Runnable {
                         + "<br>" + "Highest temperature: " + 0.0
                         + "<br>" + "Time of flight: " + 0.0
                         + "<br>" + "Batteryt: " + 0.0
-                        + "<br>" + "Time of flight: " + 0.0
                         + "<br>" + "Baro: " + 0.0
                         + "<br>" + "Time of engine use : " + 0.0);*/
             }
