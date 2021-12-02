@@ -65,8 +65,21 @@ class KeyDispatcher implements KeyEventDispatcher {
             if (evt.getExtendedKeyCode() == 76) {
                 commandBufferInput.add("land");
             }
-            if (evt.getExtendedKeyCode() == 13) {
+            //NB: 13? | 10? 
+            if (evt.getExtendedKeyCode() == 10) {
                 commandBufferInput.add("emergency");
+            }
+            if (evt.getExtendedKeyCode() == 85) {
+                commandBufferInput.add("flip f");
+            }
+            if (evt.getExtendedKeyCode() == 74) {
+                commandBufferInput.add("flip b");
+            }
+            if (evt.getExtendedKeyCode() == 75) {
+                commandBufferInput.add("flip r");
+            }
+            if (evt.getExtendedKeyCode() == 72) {
+                commandBufferInput.add("flip l");
             }
             pressing = true;
             ++dummyCounter;
