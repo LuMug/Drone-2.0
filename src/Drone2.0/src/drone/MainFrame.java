@@ -41,7 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         commandPanel = new drone.command.CommandPanel();
         mainPanel = new graphics.MainPanel();
-        toolBarPanel1 = new drone.ToolBarPanel();
+        toolBarPanel1 = new drone.tool.ToolBarPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Drone2.0");
@@ -56,6 +56,6 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public drone.command.CommandPanel commandPanel;
     public graphics.MainPanel mainPanel;
-    private drone.ToolBarPanel toolBarPanel1;
+    private drone.tool.ToolBarPanel toolBarPanel1;
     // End of variables declaration//GEN-END:variables
 }

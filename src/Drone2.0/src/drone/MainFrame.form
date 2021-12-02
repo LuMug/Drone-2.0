@@ -48,7 +48,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="drone.ToolBarPanel" name="toolBarPanel1">
+    <Component class="drone.tool.ToolBarPanel" name="toolBarPanel1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Last"/>
