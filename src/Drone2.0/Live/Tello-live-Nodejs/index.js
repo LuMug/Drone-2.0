@@ -115,8 +115,8 @@ setTimeout(function() {
   ];
 
   // Spawn an ffmpeg instance
-  // /usr/local/bin/ffmpeg'
-  var streamer = spawn('ffmpeg', args);
+  // '/usr/local/bin/ffmpeg'
+  var streamer = spawn('/usr/local/bin/ffmpeg', args);
   // Uncomment if you want to see ffmpeg stream info
   //streamer.stderr.pipe(process.stderr);
   streamer.on("exit", function(code){
