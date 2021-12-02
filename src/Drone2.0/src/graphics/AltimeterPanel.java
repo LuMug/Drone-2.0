@@ -10,55 +10,65 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
+ * This panel is the fourth component of the main interface where the drone'
+ * state is shown: In this panel it's rappresented the altitude of the drone. It
+ * isn't like the other panel in this package, infact here there is not a proper
+ * image of the drone, but a sketch of an altimeter. The altitude is displayed
+ * with an hand and a written value.
  *
  * @author Michea Colautti
- * @version 07.10.2021
+ * @version 26.11.2021
  */
 public class AltimeterPanel extends Model {
 
     /**
-     * Label contenente l'altitudine e l'unità di misura.
+     * This label contains the altitude value.
      */
     public JLabel alt;
 
     /**
-     * Valore contenente l'altitudine.
+     * This is the value with the altitude.
      */
     private double altitude = 0;
 
     /**
      *
-     * Font usato nel label.
+     * This is the font used in the label.
      */
     private Font font1;
 
     /**
-     * Padding dell'altimetro.
+     * This is the margin between the altimeter and the panel.
      */
     private static final int PAD = 40;
 
     /**
-     * Valore per cui la lancetta è sullo 0.
+     * This is the angle necessary to put the altimeter's hand on the start
+     * value.witch
      */
     private static final double MIN_ANGLE = 4.7;
 
     /**
-     * Costruttore della classe. Permette di istanziare le due immagini e
-     * richiama 'initComponents'.
+     * Constructor of the class. It allows to instantiate the two images and
+     * calls the 'initComponents' method.
      */
     public AltimeterPanel() {
         ImageIcon icon;
-        icon = new ImageIcon(getClass().getClassLoader().getResource("Altimetro.png"));
+        icon = new ImageIcon(getClass().getClassLoader().
+                getResource("Altimetro.png"));
         Image image = icon.getImage();
         imageBig = toBufferedImage(image);
         initComponents();
 
     }
 
+    /**
+     * Initcomponent allowd to instantiate the JLabel and set the font.
+     */
     private void initComponents() {
 
         alt = new JLabel("H: " + altitude + " m");
-        font1 = new Font("SansSerif", Font.BOLD, 30);
+        font1 = new Font("Helvetica", Font.BOLD, 30);
         alt.setFont(font1);
         alt.setForeground(Color.WHITE);
         add(alt);
@@ -66,9 +76,9 @@ public class AltimeterPanel extends Model {
 
     @Override
     /**
-     * Metodo che mi peremtte di disegnare le componenti. Non eseguo un
-     * controllo sui gradi massimi poichè quest'immagine è libera di muoversi su
-     * 360 gradi.
+     * Method that allows to draw the components. It's differen from the others
+     * paint method: indeed here there isn't any check for the maxium degrees v
+     * value, this image is free to move on 360 degrees.
      */
     public void paintComponent(Graphics g) {
 
@@ -81,7 +91,7 @@ public class AltimeterPanel extends Model {
         panelW = getWidth();
 
         int imageSize;
-        
+
         if (panelW >= panelH) {
             imageSize = panelH - PAD;
 
@@ -90,40 +100,28 @@ public class AltimeterPanel extends Model {
         }
 
         if (imageBig != null) {
-            image = resize(imageBig, imageSize, imageSize);
+            image = resizeImage(imageBig, imageSize, imageSize);
             int x = (this.getWidth() - image.getWidth()) / 2;
             int y = (this.getHeight() - image.getHeight()) / 2;
             g.drawImage(image, x, y, this);
 
         }
-        
-        
+
         //Get the point where the image start
         int imgStartX = (getWidth() - imageSize) / 2;
         int imgStartY = (getHeight() - imageSize) / 2;
-        //panel is on the field in the image when proportion are 3|2
-        //also considered, trying again and again, the black rectagle dims
+        
+        //The altitude label is over the correct spot if label is placed at
+        //imagesize/3 for X axis, and imageStart/2 for Y axis.
+        //also considered, trying again and again, the black rectagle dimension.
         alt.setLocation(imgStartX + imageSize / 3 + imageSize / 25,
                 imgStartY + imageSize / 2 + imageSize / 10);
 
         //font 22 is ok when panelW is 330-->dim= panel/16
-        font1 = new Font("SansSerif", Font.BOLD, imageSize / 17);
+        font1 = new Font("Helvetica", Font.BOLD, imageSize / 17);
         alt.setFont(font1);
         alt.setText("H: " + altitude + " m");
 
-        /*
-        ImageIcon handIcon;
-        handIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(
-                getClass().getClassLoader().getResource("Lancetta.png")));
-        Image handImage = handIcon.getImage();
-        handImageBuff = toBufferedImage(handImage);
-        handImageBuff = resize(handImageBuff, handW, handH);
-        handImageBuff = rotate(handImageBuff, angle);
-        g.drawImage(handImageBuff,
-                getWidth()/2,
-                getHeight()/2,
-                this);
-         */
         //angle goes from 4.7 to 11
         //one section is 0.63
         //1/1.63=1.58
@@ -141,11 +139,9 @@ public class AltimeterPanel extends Model {
     }
 
     /**
-     * Metodo setter dell'altitudine. Similmente ai setter presenti in
-     * ImageFrame questo metodo serve per aggiornare l'altitudine. Metodo
-     * richimato da 'ImageFrame'.
-     *
-     * @param newAlt è il nuovo valore dell'altitudine.
+     * Altitude setter method, converts the value from cm to meters and 
+     * set the value.
+     * @param newAlt the new value of the altitude.
      */
     public void setAltitude(double newAlt) {
         altitude = newAlt / 100;

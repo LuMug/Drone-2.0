@@ -65,7 +65,7 @@ public class Model extends JPanel {
      * @param newH è la nuova altezza dell'immagine.
      * @return l'immagine ridimensionata.
      */
-    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+    public static BufferedImage resizeImage(BufferedImage img, int newW, int newH) {
         if (img == null) {
             return null;
         }
@@ -171,7 +171,7 @@ public class Model extends JPanel {
 
         if (imageBig != null) {
 
-            image = resize(imageBig, droneW, droneH);
+            image = resizeImage(imageBig, droneW, droneH);
 
             x = (this.getWidth() - image.getWidth()) / 2;
             y = (this.getHeight() - image.getHeight()) / 2;

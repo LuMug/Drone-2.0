@@ -5,6 +5,9 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
+ * This panel is the first component of the main interface where the drone'
+ * state is shown: This panel shows the drone seen from the front. 
+ * The image tilts according to its roll.
  *
  * @author Michea Colautti
  * @version 07.10.2021
@@ -12,10 +15,10 @@ import javax.swing.ImageIcon;
 public class FrontPanel extends Model{
 
     /**
-     * Costruttore della classe. Permette di istanziare l'immagine.
+     * Class contructor, allows to istanciate the image.
      */
     public FrontPanel() {
-        //aggiunto riferimento a bin in class path e path di libreria
+        
         ImageIcon icon;
         icon = new ImageIcon(getClass().getClassLoader().getResource("DroneFrontale.png"));
         Image image = icon.getImage();
@@ -25,12 +28,12 @@ public class FrontPanel extends Model{
 
 
     /**
-     * Metodo per il movimento dell'immagine. Aggiorna il valore
-     * dell'inclinazione, verificando che i valori registrati dal drone non
-     * superino l'inclinazione massima permessa dalla costante
+     *  Method for moving the image. It update the value of the image 
+     * inclination, verifying that the values ​​recorded by the drone are not
+     * exceed the maximum inclination allowed by the constant
      * ImageModel.MAXDEG.
      *
-     * @param rotate è l'inclinazione in gradi.
+     * @param rotate the inclinaton in dergees.
      */
     public void moving(int rotate) {
         if (rotate < 0) {

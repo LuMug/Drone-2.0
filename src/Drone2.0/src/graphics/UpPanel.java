@@ -6,7 +6,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * This panel is the fourth component of the main interface where the drone'
+ * state is shown: In this panel it's rappresented the altitude of the drone
  * @author Michea Colautti
  * @version 07.10.2021
  */
@@ -66,7 +67,7 @@ public class UpPanel extends Model {
         droneS = droneS - (droneHypo - droneS);
 
         if (imageBig != null) {
-            image = resize(imageBig, droneS, droneS);
+            image = resizeImage(imageBig, droneS, droneS);
 
             int x = (getWidth() - image.getWidth()) / 2;
             int y = (getHeight() - image.getHeight()) / 2;
