@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package drone;
+package drone.tool;
 
+import drone.tool.analytics.AnalyticsFrame;
 import java.awt.Dimension;
 
 /**
@@ -29,14 +30,12 @@ public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(1, 4, 50, 20));
-
-        jButton3.setText("LEAP ON");
-        add(jButton3);
+        add(jPanel1);
 
         jButton1.setForeground(new java.awt.Color(242, 57, 6));
         jButton1.setText("Live");
@@ -72,7 +71,7 @@ public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
     @Override
