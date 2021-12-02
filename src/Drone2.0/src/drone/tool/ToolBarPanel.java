@@ -1,24 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package drone.tool;
 
 import drone.tool.analytics.AnalyticsFrame;
-import java.awt.Dimension;
+import java.io.IOException;
 
 /**
  *
- * @author micheacolautti
+ * @author Michea Colautti
+ * @version 2/12/2021
  */
 public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
+
+    Browser browser;
 
     /**
      * Creates new form ToolBarPanel
      */
     public ToolBarPanel() {
         initComponents();
-       
+        browser=new Browser();
     }
 
     /**
@@ -57,7 +56,13 @@ public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            browser.script();
+            browser.openBrowser();
+        } catch (IOException ex) {
+            System.out.println("Errore apertura live");
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
