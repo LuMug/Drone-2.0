@@ -104,7 +104,6 @@ public class Status extends Thread {
                 +"<br>"+"Highest temperature: " + status.get("temph").toString()
                 +"<br>"+"Time of flight: " + status.get("tof").toString()
                 +"<br>"+"Batteryt: " + status.get("bat").toString()
-                +"<br>"+"Time of flight: " + status.get("tof").toString()
                 +"<br>"+"Baro: " + status.get("baro").toString()
                 +"<br>"+"Time of engine use : " + status.get("time").toString()+"</html>");
                

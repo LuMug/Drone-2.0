@@ -7,12 +7,11 @@
 
 |Orario        |Lavoro svolto                                                      |Eseguito da         |
 |--------------|-------------------------------------------------------------------|--------------------|
-|10:50 - 13:30 | Implementazione Tool Bar + Analytics frame                        | Michea             |
-|10:50 - 15:40 | Implementazione Leap Motion                                       | Alessandro         |
+|10:50 - 16:30 | Implementazione Tool Bar + Analytics frame                        | Michea             |
+|10:50 - 16:30 | Implementazione Leap Motion                                       | Alessandro         |
 |10:50 - 12:20 | Registrazione comandi                                             | Gianni             |
 |13:15 - 14:15 | Creazione file di registrazione                                   | Gianni             |
-|13:15 - 14:15 | Creazione file di registrazione                                   | Gianni             |
-|14:15 - 15:40 | Scrittura file di registrazione                                   | Gianni             |
+|14:15 - 16:30 | Scrittura file di registrazione                                   | Gianni             |
 
 
 
