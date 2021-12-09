@@ -4,8 +4,11 @@ import com.leapmotion.leap.Controller;
 import drone.LeapMotion;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
@@ -21,11 +24,6 @@ import javax.swing.text.DefaultCaret;
 public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
     boolean isMenu = false;
-
-    /**
-     * Contains the class to run the sequence.
-     */
-    private Sequence SequenceRun;
 
     /**
      * Defines whether a sequence is started or not.
@@ -71,7 +69,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     private Queue<String> sequence = new LinkedList<String>();
 
-    private Record record = new Record();
+    private Sequence record = new Sequence();
     private String name;
 
     /**
@@ -194,9 +192,16 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     }//GEN-LAST:event_recButtunActionPerformed
 
     private void executeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeButtonActionPerformed
-        sequence.clear();
+        //sequence.clear();
         //keyColor();
         chooseSequence();
+        try {
+            record.readFile(fileName);
+        } catch (IOException ex) {
+            Logger.getLogger(CommandPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CommandPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_executeButtonActionPerformed
 
     private void inputButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputButtunActionPerformed
@@ -266,6 +271,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         return infoCommand.toString().trim();
     }
 
+    String fileName;
     /**
      * Method for choosing the file to execute.
      */
@@ -279,12 +285,12 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         open.setFileFilter(drn);
         open.showDialog(null, "Esegui");
         try {
-            String name = open.getSelectedFile().getAbsolutePath();
+            fileName = open.getSelectedFile().getAbsolutePath();
             if (!started) {
-                // codice da guarfare 
+                /** codice da guarfare 
                 SequenceRun = new Sequence(name);
                 SequenceRun.start();
-                started = true;
+                started = true;*/
             }
         } catch (NullPointerException e) {
         }

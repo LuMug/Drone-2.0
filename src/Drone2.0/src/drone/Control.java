@@ -1,5 +1,6 @@
 package drone;
 
+import drone.command.Sequence;
 import drone.tool.analytics.AnalyticsPanel;
 import drone.tool.Status;
 import java.util.LinkedList;
@@ -78,21 +79,23 @@ public static void main(String[] args) {
             LinkedList<String> statusBufferData = new LinkedList<>();
             LinkedList<String> analyticsBufferData = new LinkedList<>();
 
-            //Declaration
+            //DeclarationKeyDispatcher
             MainFrame mainFrame = new MainFrame();
             AnalyticsPanel analyticsFrame=new AnalyticsPanel();
             LeapMotion leapMotion = new LeapMotion();
             DroneAction action = new DroneAction(commandsBufferOutputDrone);
             KeyDispatcher dispatcher = new KeyDispatcher();
+            Sequence sequence = new Sequence();
             Thread threadCommandPanel = new Thread(mainFrame.commandPanel);
             Thread threadMainPanel = new Thread(mainFrame.mainPanel);
             Status status = new Status();
             mainFrame.setVisible(true);
-
+ 
             //Imput queue.
             Control control = new Control(commandsBufferInput, commandsBufferOutputDrone, commandsBufferOutputGraphics);
             leapMotion.setCommandsBufferInput(commandsBufferInput);
             dispatcher.setCommandBufferInput(commandsBufferInput);
+            sequence.setSequence(commandsBufferInput);
 
             //output queue.
             mainFrame.commandPanel.setCommandsBufferOutputGraphics(commandsBufferOutputGraphics);

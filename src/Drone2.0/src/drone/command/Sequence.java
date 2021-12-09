@@ -1,63 +1,94 @@
 package drone.command;
 
-import drone.DroneAction;
+import drone.Control;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
- * Class helpful in repeating the recorded sequences.
- * 
- * @author Alessandro Aloise
- * @version 25 febbraio 2021
+ * The Sequence class is used to record the movement sequences of a drone and
+ write them into files.
+ *
+ * @author Gianni Grasso
+ * @version 25.11.2021
  */
 public class Sequence extends Thread {
-    
-    /**
-     * Constant for the file path.
-     */
-    protected static final String ROOT = "SequenceDrone";
-    
-    
-     /**
-     * Constant for the file path.
-     */
-    protected static final int TIME_WAITING = 125;
-    
-    /**
-     * Variable for the Path file.
-     */
-    protected Path file;
-    
-    
-    /**
-     * DroneAction Class Instance.
-     */
-    protected DroneAction drone;
 
-    public Sequence(String file) {
-        this.file = Paths.get(ROOT + "/" + file + ".sequence");
-    }
-    
-    
     /**
-     * Method that deals with repeating the sequence.
+     * A queue containing all the rows of a file
      */
-    public void run() {
-        try {
-            if (Files.exists(file)) {
-                List<String> lines = Files.readAllLines(file);
-                for (String comando : lines) {
-                    drone.sendCommand(comando);
-                    Thread.sleep(TIME_WAITING);
-                }
-            }
-        } catch (IOException ex) {
-            System.out.println("Error:"+ ex);
-        } catch (InterruptedException ex) {
-            System.out.println("Error:"+ ex);
+    private static volatile LinkedList<String> commandBufferInput = new LinkedList<String>();
+
+    /**
+     * The contents of the file.
+     */
+    static String message;
+
+    public void setMessage(LinkedList<String> sequence) {
+        for (int i = 0; i < sequence.size(); i++) {
+            message = message + "\n" + sequence.get(i);
         }
+    }
+
+    /**
+     * Create the file if it does not exist.
+     *
+     * @param fileName the name of the file
+     */
+    public void createFile(String fileName) {
+        try {
+            File myObj = new File(fileName);
+
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
+    }
+
+    /**
+     * Writes the file if possible.
+     *
+     * @param fileName the name of the file
+     */
+    public void writeFile(String fileName) {
+        try {
+            FileWriter myWriter = new FileWriter(fileName);
+            myWriter.write(message);
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
+    }
+    Control controller;
+
+    public void readFile(String fileName) throws FileNotFoundException, IOException, InterruptedException {
+        BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
+
+        String line = bufReader.readLine();
+        while (line != null) {
+            Thread.sleep(10);
+            commandBufferInput.add(line);
+            line = bufReader.readLine();
+        }
+
+        for (int i = 0; i < commandBufferInput.size(); i++) {
+
+            System.out.println(commandBufferInput.get(i));
+        }
+        bufReader.close();
+    }
+
+    public void setSequence(LinkedList<String> commandBufferInput) {
+        this.commandBufferInput = commandBufferInput;
     }
 }
