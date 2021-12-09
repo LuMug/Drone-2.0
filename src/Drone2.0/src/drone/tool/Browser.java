@@ -1,10 +1,8 @@
 package drone.tool;
 
 import java.awt.Desktop;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -24,8 +22,14 @@ public class Browser {
             builder.redirectErrorStream(true);
 
             String usrPath = System.getProperty("user.dir") + "/Live/Script/RunLiveMac.sh";
-            builder.command("sh", "-c", usrPath);
-            Process process = builder.start();
+            String usrPath2 = System.getProperty("user.dir") + "/Live/Tello-live-Nodejs/index.js";
+            //builder.command("sh", "-c", usrPath);
+            //Process process = builder.start();
+            ProcessBuilder pb = new ProcessBuilder("node", usrPath2);
+            System.out.println(usrPath2);
+            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+            Process p = pb.start();
             /*int in = -1;
             InputStream is = process.getInputStream();
             try {
