@@ -36,7 +36,7 @@
 9. [Allegati](#allegati)
 
 
-## Introduzione
+# Introduzione
 ### Informazioni sul progetto
 - Allievi coinvolti nel progetto:  Gianni Grasso, Samuele Ganci, Alessandro Aloise, Michea Colautti.
 - Classe: I3BB Scuola Arti e Mestieri Trevano, sezione Informatica.
@@ -58,7 +58,7 @@ Our project will be even more secure, we will enable and create some safety feat
   l'`SDK` installata di fabbrica sul drone.
   Dobbiamo, oltre a creare il sistema di pilotaggio, instaurare una comunicazione che permetta lo scambio di dati del drone; non solo dati come l'inclinazione,       l'altitudine, ma anche dati statistici come la batteria.
 
-## Analisi
+# Analisi
 ### Analisi del dominio
 
 È stato richiesto di correggere e migliorare l'interfaccia di controllo drone da noi creata un anno fa. Il programma da noi creato presentava infatti molte imperfezioni ed elementi che non funzionavano. Per questo approfitteremo della presenza di 3 membri del gruppo su 4 per riprendere il progetto, correggerlo, e magari aggiungere nuove funzionalità. 
@@ -187,3 +187,15 @@ Per la pianificazione alleghiamo il Gantt preventivo da noi stabilito:
 Abbiamo preso la vecchia interfaccia e abbiamo cambiato tutto quello che non ci convinceva e abbiamo cercato di renderla più user friendly e più accattivante:
 ![Progettazione](../Documenti/Progettazione/UI/GUI/Drone2.0_GUI.png)
 > Interfaccia drone
+
+# Implementazione
+Durante la realizzazione del progetto sono state ridefinite molte cose rispetto alla prima versione, innanzitutto è stato fatto un refactor del codice precedente, andando a cambiare e ottimizzare i files dell'intero progetto.
+
+Abbiamo anche definito una nuova struttura per i files e i package al fine di ottimizzare il lavoro e rendere tutto più pulito:
+![Struttura]()
+
+Per quanto riguarda la ristrutturazione delle vecchie classi, molte di esse sono state definitivamente eliminate, anche a causa del cambio di struttura. È stata invece creata una classe principale per poter gestire tutte le varie parti e funzioni che compongono l'applicativo, ovvero la classe Control.
+
+Per quanto riguarda la classe Drone, sono state rimosse parecchie ridondanze e spostate altrettanti metodi, suddividendo le funzionalità in altre classi.
+
+Il KeyListener è stato sostutuito da un KeyDispatcher, al fine di rimuovere un fastidioso problema riguardo al focus dell'applicazione.
