@@ -32,6 +32,7 @@ public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new java.awt.GridLayout(1, 4, 50, 20));
         add(jPanel1);
@@ -53,6 +54,9 @@ public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
             }
         });
         add(jButton2);
+
+        jLabel1.setText("Battery");
+        add(jLabel1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -78,6 +82,7 @@ public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
