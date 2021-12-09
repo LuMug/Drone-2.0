@@ -242,7 +242,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         switch (str[0]) {
             case "rc" -> {
                 if (Integer.parseInt(str[1]) < 0) {
-                    infoCommand.append("Left ");
+                    infoCommand.append(" Left ");
                 } else if (Integer.parseInt(str[1]) > 0) {
                     infoCommand.append("Right ");
                 }
@@ -252,10 +252,10 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                     infoCommand.append(" Forward ");
                 }
                 if (Integer.parseInt(str[3]) < 0) {
-                    infoCommand.append(" Up ");
+                    infoCommand.append(" Down ");
                 } else if (Integer.parseInt(str[3]) > 0) {
 
-                    infoCommand.append(" Down ");
+                    infoCommand.append(" up ");
                 }
                 if (Integer.parseInt(str[4]) == 70) {
                     infoCommand.append(" Spin right ");
