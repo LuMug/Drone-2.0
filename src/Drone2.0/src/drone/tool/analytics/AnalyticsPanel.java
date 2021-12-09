@@ -73,24 +73,6 @@ public class AnalyticsPanel extends JPanel implements Runnable {
             if (analyticsBufferData.size() > 0) {
 
                 lab.setText(analyticsBufferData.poll());
-            } else {
-                /* lab.setText("<html>"
-                        + "Pitch: " + 0.0
-                        + "<br>" + "Roll: " + 0.0
-                        + "<br>" + "Yaw: " + 0.0
-                        + "<br>" + "Altitude: " + 0.0
-                        + "<br>" + "Position x: " + 0.0
-                        + "<br>" + "Position y: " + 0.0
-                        + "<br>" + "Position z: " + 0.0
-                        + "<br>" + "Acceleration x: " + 0.0
-                        + "<br>" + "Acceleration y: " + 0.0
-                        + "<br>" + "Acceleration z: " + 0.0
-                        + "<br>" + "Lowest temperature: " + 0.0
-                        + "<br>" + "Highest temperature: " + 0.0
-                        + "<br>" + "Time of flight: " + 0.0
-                        + "<br>" + "Batteryt: " + 0.0
-                        + "<br>" + "Baro: " + 0.0
-                        + "<br>" + "Time of engine use : " + 0.0);*/
             }
         }
     }

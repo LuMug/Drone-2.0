@@ -18,9 +18,7 @@ public class AnalyticsFrame extends javax.swing.JFrame implements Runnable {
     public AnalyticsFrame() {
         initComponents();
         this.setMinimumSize(new Dimension(650, 450));
-        this.setMaximumSize(new Dimension(800, 570));
-
-
+        this.setMaximumSize(new Dimension(800, 570)); 
     }
 
     /**
