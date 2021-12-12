@@ -183,10 +183,25 @@ Per la pianificazione alleghiamo il Gantt preventivo da noi stabilito:
 - Leap Motion
 
 
-#### Interfaccia
+
+
+
+# Progettazione
+
+## Design delle interfacce
+
+### Interfaccia principale
 Abbiamo preso la vecchia interfaccia e abbiamo cambiato tutto quello che non ci convinceva e abbiamo cercato di renderla più user friendly e più accattivante:
-![Progettazione](../Documenti/Progettazione/UI/GUI/Drone2.0_GUI.png)
+![Progettazione](Progettazione/GUI/Interfaccia/Drone2.0_GUI.png)
 > Interfaccia drone
+
+Come si può vedere rispetto alla prima versione del progetto l'interfaccia é cambiata: sulla sinistra troviamo, come del resto era nella versionep recedente, la lista dei comandi eseguiti. La novità è che al posto di essere una lunga sequenza di istruzioni incomprensibili, stampiamo una traduzione in modo tale che l'utente possa capire meglio cosa sta succedendo. Altre modifiche sostanziali sono: 
+* Abbiamo cambiato il riquadro in basso a destra; dove prima c'era un valore numerico con l'altitudine ora rappresentiamo lo stesso valore in 2 modi. Il primo è tramite una lancetta rossa, non visibile nella progettazione, che percorre l'altimetro in base all'altezza. Il secondo sarà invece il valore dell'altitudine numerico, convertito in metri, e inserito nello spazion nero apposito.
+* Inoltre abbiamo cambiato completamente la gestione della barra inferiore in modo tale che sia più pulita e ordinata 
+
+
+### Design procedurale
+
 
 # Implementazione
 Durante la realizzazione del progetto sono state ridefinite molte cose rispetto alla prima versione, innanzitutto è stato fatto un refactor del codice precedente, andando a cambiare e ottimizzare i files dell'intero progetto.
@@ -199,3 +214,4 @@ Per quanto riguarda la ristrutturazione delle vecchie classi, molte di esse sono
 Per quanto riguarda la classe Drone, sono state rimosse parecchie ridondanze e spostate altrettanti metodi, suddividendo le funzionalità in altre classi.
 
 Il KeyListener è stato sostutuito da un KeyDispatcher, al fine di rimuovere un fastidioso problema riguardo al focus dell'applicazione.
+
