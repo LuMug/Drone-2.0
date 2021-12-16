@@ -18,18 +18,13 @@ public class Browser {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("os")) {
 
-            ProcessBuilder builder = new ProcessBuilder();
-            builder.redirectErrorStream(true);
-
+            ProcessBuilder pb = new ProcessBuilder();
+            pb.redirectErrorStream(true);
             String usrPath = System.getProperty("user.dir") + "/Live/Script/RunLiveMac.sh";
-            String usrPath2 = System.getProperty("user.dir") + "/Live/Tello-live-Nodejs/index.js";
-            //builder.command("sh", "-c", usrPath);
-            //Process process = builder.start();
-            ProcessBuilder pb = new ProcessBuilder("node", usrPath2);
-            System.out.println(usrPath2);
-            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
-            Process p = pb.start();
+            pb.command("sh", "-c", usrPath);
+            Process process = pb.start();
+
+
             /*int in = -1;
             InputStream is = process.getInputStream();
             try {
@@ -41,7 +36,6 @@ public class Browser {
             }
             int exitCode = process.waitFor();
             System.out.println("Exited with " + exitCode);*/
-
         } else {
             String usrPath = System.getProperty("user.dir") + "/Live/Script/";
             String path = "cmd /c start" + usrPath + "RunLiveWin.bat";
