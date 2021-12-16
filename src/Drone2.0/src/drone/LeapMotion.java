@@ -1,7 +1,10 @@
 package drone;
 
 import com.leapmotion.leap.*;
+import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,10 +16,13 @@ public class LeapMotion extends Listener {
     /**
      * Queue.
      */
-    private Queue<String> commandsBufferInput;
+    private static volatile LinkedList<String> commandsBufferInput;
+    
+    private boolean pressing = false;
+    private int dummyCounter = 0;
 
-    public void setCommandsBufferInput(Queue<String> commandsBufferInput) {
-        this.commandsBufferInput = commandsBufferInput;
+    public void setCommandsBufferInput(LinkedList<String> commandBufferInput) {
+        this.commandsBufferInput = commandBufferInput;
     }
 
     /**
@@ -77,12 +83,6 @@ public class LeapMotion extends Listener {
             yaw = rightHand.direction().yaw();
             roll = rightHand.palmNormal().roll();
         }
-        if (rightHand == null || leftHand == null) {
-            command = "rc 0 0 0 0";
-            commandsBufferInput.add(command);
-            command = "land";
-            commandsBufferInput.add(command);
-        }
         if (!rightHandIndexFinger.isExtended()) {
             command = "takeoff";
             commandsBufferInput.add(command);
@@ -99,62 +99,67 @@ public class LeapMotion extends Listener {
             command = "rc 0 0 0 0";
             commandsBufferInput.add(command);
         } else {
-            if (pitch >= 0.25) {
-                if (pitch <= 0.60) {
-                    pitchSpeed = -1 * convertRange(pitch, 0.25, 0.60, 10, 50);
-                } else {
-                    pitchSpeed = -100;
-                }
-            } else if (pitch <= -0.25) {
-                if (pitch >= -0.60) {
-                    pitchSpeed = convertRange(pitch, -0.25, -0.60, 10, 50);
-                } else {
-                    pitchSpeed = 100;
-                }
-            }
-            if (roll <= -0.40) {
-                if (roll >= -0.75) {
-                    rollSpeed = convertRange(roll, -0.40, -0.75, 10, 50);
-                } else {
-                    rollSpeed = 100;
-                }
-            } else if (roll >= 0.40) {
-                if (roll <= 0.75) {
-                    rollSpeed = -1 * convertRange(roll, 0.40, 0.75, 10, 50);
-                } else {
-                    rollSpeed = -100;
-                }
-            }
-            if (yaw >= 0.15) {
-                if (yaw <= 0.25) {
-                    yawSpeed = convertRange(yaw, 0.15, 0.25, 10, 50);
-                } else {
-                    yawSpeed = 100;
-                }
-            } else if (yaw <= -0.35) {
-                if (yaw >= -0.75) {
-                    yawSpeed = -1 * convertRange(yaw, -0.35, -0.75, 10, 50);
-                } else {
-                    yawSpeed = -100;
-                }
-            }
-            if (highCommand <= 175) {
-                if (highCommand != 0) {
-                    if (highCommand < 75) {
-                        highSpeed = -100;
+            try {
+                if (pitch >= 0.25) {
+                    if (pitch <= 0.60) {
+                        pitchSpeed = -1 * convertRange(pitch, 0.25, 0.60, 10, 50);
                     } else {
-                        highSpeed = -1 * (110 - convertRange(highCommand, 75, 175, 10, 50));
+                        pitchSpeed = -100;
+                    }
+                } else if (pitch <= -0.25) {
+                    if (pitch >= -0.60) {
+                        pitchSpeed = convertRange(pitch, -0.25, -0.60, 10, 50);
+                    } else {
+                        pitchSpeed = 100;
                     }
                 }
-            } else if (highCommand >= 225) {
-                if (highCommand > 325) {
-                    highSpeed = 100;
-                } else {
-                    highSpeed = convertRange(highCommand, 225, 325, 10, 50);
+                if (roll <= -0.40) {
+                    if (roll >= -0.75) {
+                        rollSpeed = convertRange(roll, -0.40, -0.75, 10, 50);
+                    } else {
+                        rollSpeed = 100;
+                    }
+                } else if (roll >= 0.40) {
+                    if (roll <= 0.75) {
+                        rollSpeed = -1 * convertRange(roll, 0.40, 0.75, 10, 50);
+                    } else {
+                        rollSpeed = -100;
+                    }
                 }
+                if (yaw >= 0.15) {
+                    if (yaw <= 0.25) {
+                        yawSpeed = convertRange(yaw, 0.15, 0.25, 10, 50);
+                    } else {
+                        yawSpeed = 100;
+                    }
+                } else if (yaw <= -0.35) {
+                    if (yaw >= -0.75) {
+                        yawSpeed = -1 * convertRange(yaw, -0.35, -0.75, 10, 50);
+                    } else {
+                        yawSpeed = -100;
+                    }
+                }
+                if (highCommand <= 175) {
+                    if (highCommand != 0) {
+                        if (highCommand < 75) {
+                            highSpeed = -100;
+                        } else {
+                            highSpeed = -1 * (110 - convertRange(highCommand, 75, 175, 10, 50));
+                        }
+                    }
+                } else if (highCommand >= 225) {
+                    if (highCommand > 325) {
+                        highSpeed = 100;
+                    } else {
+                        highSpeed = convertRange(highCommand, 225, 325, 10, 50);
+                    }
+                }
+                command = "rc " + rollSpeed + " " + pitchSpeed + " " + highSpeed + " " + yawSpeed;
+                Thread.sleep(200);
+                commandsBufferInput.add(command);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(LeapMotion.class.getName()).log(Level.SEVERE, null, ex);
             }
-            command = "rc " + rollSpeed + " " + pitchSpeed + " " + highSpeed + " " + yawSpeed;
-            commandsBufferInput.add(command);
         }
     }
 
