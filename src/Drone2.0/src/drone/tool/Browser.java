@@ -20,7 +20,6 @@ public class Browser {
 
             ProcessBuilder pb = new ProcessBuilder();
             pb.redirectErrorStream(true);
-
             String usrPath = System.getProperty("user.dir") + "/Live/Script/RunLiveMac.sh";
             pb.command("sh", "-c", usrPath);
             Process process = pb.start();
