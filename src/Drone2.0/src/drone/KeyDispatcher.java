@@ -89,7 +89,6 @@ class KeyDispatcher implements KeyEventDispatcher {
             pressing = false;
         }
 
-        // allow the event to be redispatched
         return false;
     }
 
