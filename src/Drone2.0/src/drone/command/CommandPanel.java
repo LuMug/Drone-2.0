@@ -10,6 +10,7 @@ import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JScrollBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultCaret;
 
@@ -24,6 +25,7 @@ import javax.swing.text.DefaultCaret;
 public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
     boolean isMenu = false;
+    
 
     /**
      * Defines whether a sequence is started or not.
@@ -229,6 +231,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     private javax.swing.JToggleButton recButtun;
     // End of variables declaration//GEN-END:variables
 
+    
     /**
      * Method that does the conversion from drone command to more understandable
      * commands.
@@ -237,6 +240,9 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      * @return Converted string.
      */
     private String commandConversion(String command) {
+        JScrollBar sb = jScrollPane1.getVerticalScrollBar();
+        sb.setValue( sb.getMaximum() );
+        
         StringBuilder infoCommand = new StringBuilder();
         String[] str = command.split(" ");
         switch (str[0]) {
@@ -254,7 +260,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                 if (Integer.parseInt(str[3]) < 0) {
                     infoCommand.append(" Down ");
                 } else if (Integer.parseInt(str[3]) > 0) {
-
                     infoCommand.append(" up ");
                 }
                 if (Integer.parseInt(str[4]) == 70) {
