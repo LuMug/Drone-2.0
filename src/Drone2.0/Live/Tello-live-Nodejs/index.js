@@ -26,18 +26,18 @@ const TELLO_PORT = 8889
   1. Create the web server that the user can access at
   http://localhost:3000/index.html
 */
-server = http.createServer(function(request, response) {
+server = http.createServer(function (request, response) {
 
   // Log that an http connection has come through
   console.log(
-		'HTTP Connection on ' + HTTP_PORT + ' from: ' + 
-		request.socket.remoteAddress + ':' +
-		request.socket.remotePort
-	);
+    'HTTP Connection on ' + HTTP_PORT + ' from: ' +
+    request.socket.remoteAddress + ':' +
+    request.socket.remotePort
+  );
 
   // Read file from the local directory and serve to user
   // in this case it will be index.html
-  fs.readFile(__dirname + '/www/' + request.url, function (err,data) {
+  fs.readFile(__dirname + '/www/' + request.url, function (err, data) {
     if (err) {
       response.writeHead(404);
       response.end(JSON.stringify(err));
@@ -52,17 +52,17 @@ server = http.createServer(function(request, response) {
 /*
   2. Create the stream server where the video stream will be sent
 */
-const streamServer = http.createServer(function(request, response) {
+const streamServer = http.createServer(function (request, response) {
 
   // Log that a stream connection has come through
   console.log(
-		'Stream Connection on ' + STREAM_PORT + ' from: ' + 
-		request.socket.remoteAddress + ':' +
-		request.socket.remotePort
-	);
+    'Stream Connection on ' + STREAM_PORT + ' from: ' +
+    request.socket.remoteAddress + ':' +
+    request.socket.remotePort
+  );
 
   // When data comes from the stream (FFmpeg) we'll pass this to the web socket
-  request.on('data', function(data) {
+  request.on('data', function (data) {
     // Now that we have data let's pass it to the web socket server
     webSocketServer.broadcast(data);
   });
@@ -77,7 +77,7 @@ const webSocketServer = new WebSocket.Server({
 });
 
 // Broadcast the stream via websocket to connected clients
-webSocketServer.broadcast = function(data) {
+webSocketServer.broadcast = function (data) {
   webSocketServer.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
       client.send(data);
@@ -103,7 +103,7 @@ udpClient.send("streamon", TELLO_PORT, TELLO_IP, null);
 */
 
 // Delay for 3 seconds before we start ffmpeg
-setTimeout(function() {
+setTimeout(function () {
   var args = [
     "-i", "udp://0.0.0.0:11111",
     "-r", "30",
@@ -116,10 +116,10 @@ setTimeout(function() {
 
   // Spawn an ffmpeg instance
   // '/usr/local/bin/ffmpeg'
-  var streamer = spawn('/usr/local/bin/ffmpeg', args);
+  var streamer = spawn('C:\FFmpeg\bin', args);
   // Uncomment if you want to see ffmpeg stream info
   //streamer.stderr.pipe(process.stderr);
-  streamer.on("exit", function(code){
-      console.log("Failure", code);
+  streamer.on("exit", function (code) {
+    console.log("Failure", code);
   });
 }, 3000);

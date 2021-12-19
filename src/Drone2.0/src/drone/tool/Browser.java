@@ -37,8 +37,9 @@ public class Browser {
             int exitCode = process.waitFor();
             System.out.println("Exited with " + exitCode);*/
         } else {
-            String usrPath = System.getProperty("user.dir") + "/Live/Script/";
-            String path = "cmd /c start" + usrPath + "RunLiveWin.bat";
+            String usrPath = System.getProperty("user.dir") + "\\Live\\Script\\";
+            String path = "cmd /c start " + usrPath + "RunLiveWin.bat";
+            System.out.println(path);
             Runtime rn = Runtime.getRuntime();
             Process pr = rn.exec(path);
 
