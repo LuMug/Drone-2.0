@@ -182,7 +182,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
             saveFile();
             recButtun.setText("REC");
         }
-        //keyColor();
 
     }//GEN-LAST:event_recButtunActionPerformed
 
@@ -286,21 +285,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         } catch (NullPointerException e) {
         }
     }
-
-    /**
-     * Method that deals with coloring the keys in a correct way.
-     */
-    private void keyColor() {
-        if (selecStatus) {
-            executeButton.setBackground(Color.GRAY);
-            recButtun.setBackground(Color.WHITE);
-        } else {
-            executeButton.setBackground(Color.WHITE);
-            recButtun.setBackground(Color.GRAY);
-        }
-        selecStatus = !selecStatus;
-    }
-
     /**
      * A method of saving a file.
      */
@@ -316,14 +300,12 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 record.createFile(name + ".sequence");
-
                 record.setMessage((LinkedList<String>) sequence);
                 record.writeFile(name + ".sequence");
-
                 isMenu = false;
             }
         } catch (NullPointerException e) {
-
+            System.out.println("Error:" +e);
         }
     }
 }
