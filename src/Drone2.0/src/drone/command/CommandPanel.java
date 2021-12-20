@@ -26,7 +26,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
     boolean isMenu = false;
     
-
     /**
      * Defines whether a sequence is started or not.
      */
@@ -116,7 +115,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                 if (command != null) {
                     refreshCommands(command);
                     sequence.add(command);
-                    System.out.println(command);
                 }
             }else{
                 System.out.println("");
@@ -218,7 +216,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
             inputButtun.setText("KEYBORD ON");
             leapController.removeListener(leapMotion);
         }
-
     }//GEN-LAST:event_inputButtunActionPerformed
 
 
