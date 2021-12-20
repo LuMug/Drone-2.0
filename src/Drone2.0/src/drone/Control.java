@@ -81,7 +81,7 @@ public static void main(String[] args) {
 
             //DeclarationKeyDispatcher
             MainFrame mainFrame = new MainFrame();
-            AnalyticsPanel analyticsFrame=new AnalyticsPanel();
+            AnalyticsPanel analyticsPanel=new AnalyticsPanel();
             LeapMotion leapMotion = new LeapMotion();
             DroneAction action = new DroneAction(commandsBufferOutputDrone);
             KeyDispatcher dispatcher = new KeyDispatcher();
@@ -102,7 +102,7 @@ public static void main(String[] args) {
             status.setStatusBufferData(statusBufferData);
             status.setAnalyticsBufferData(analyticsBufferData);  
             mainFrame.mainPanel.setStatusBufferData(statusBufferData);
-            analyticsFrame.setAnalyticsBufferData(analyticsBufferData);
+            analyticsPanel.setAnalyticsBufferData(analyticsBufferData);
 
            
             
