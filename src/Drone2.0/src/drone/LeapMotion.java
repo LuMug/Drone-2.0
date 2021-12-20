@@ -2,7 +2,6 @@ package drone;
 
 import com.leapmotion.leap.*;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
