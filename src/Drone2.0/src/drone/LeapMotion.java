@@ -17,10 +17,6 @@ public class LeapMotion extends Listener {
      * Queue.
      */
     private static volatile LinkedList<String> commandsBufferInput;
-    
-    private boolean pressing = false;
-    private int dummyCounter = 0;
-
     public void setCommandsBufferInput(LinkedList<String> commandBufferInput) {
         this.commandsBufferInput = commandBufferInput;
     }
