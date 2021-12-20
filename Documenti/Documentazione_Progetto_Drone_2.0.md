@@ -257,31 +257,41 @@ Nella classe Drone sono state rimosse parecchie ridondanze e spostati altrettant
 
 Per quanto riguarda l'invio dei dati verso il drone è stato creato un metodo apposito, per prima cosa esso verifica se è la prima volta che viene mandato un comando tramite il flag firstSend, se è così il flag diventa false e viene istanziata e inviata una stringa contenente il comando "command", comando che serve per abilitare il drone a rispondere alle richieste UDP.
 Successivamente viene istanziato un array di byte che tramite il metodo getBytes() salva al suo interno i byte della stringa inserita come parametro. Viene poi creato anche un oggetto DatagramPacket che, ricevendo come parametro i byte del comando da inviare, la lunghezza dei dati, l'ip a cui mandare i dati e la relativa porta, invia il pacchetto finale al drone tramite il metodo send(). Infine viene creato un altro oggetto DatagramPacket, stavolta usando dei parametri hardcoded.
+
 ```java
 public void sendCommand(String command) {
-    try {
-        if (firstSend) {
-            String firstSendCommand = "command";
-            byte[] data = firstSendCommand.getBytes();
-            DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
-            socket.send(packet);
-            firstSend = false;
-        }
-        byte[] data = command.getBytes();
-        DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(DRONE_IP), COMMANDS_PORT);
-        socket.send(packet);
-
-        DatagramPacket receivePacket = new DatagramPacket(new byte[256], new byte[256].length);
-    } catch (SocketException ex) {
-        System.out.println("ERRORE: " + ex.getMessage());
-    } catch (IOException ex) {
-        System.out.println("ERRORE: " + ex.getMessage());
-    }
+	try {
+		if (firstSend) {
+			String firstSendCommand = "command";
+			byte[] data = firstSendCommand.getBytes();
+			DatagramPacket packet = new DatagramPacket(
+				data, data.length, InetAddress.getByName(DRONE_IP), 
+				COMMANDS_PORT);
+				
+			socket.send(packet);
+			firstSend = false;
+		}
+		byte[] data = command.getBytes();
+		DatagramPacket packet = new DatagramPacket(
+			data, data.length, InetAddress.getByName(DRONE_IP), 
+			COMMANDS_PORT);
+			
+		socket.send(packet);
+	
+		DatagramPacket receivePacket = new DatagramPacket(
+			new byte[256], new byte[256].length);
+			
+	} catch (SocketException ex) {
+		System.out.println("ERRORE: " + ex.getMessage());
+	} catch (IOException ex) {
+		System.out.println("ERRORE: " + ex.getMessage());
+	}
 }
 ```
 
 Il metodo sendCommand() è quindi fondamentale per la comunicazione tra client e drone, ma per funzionare correttamente ha bisogno di essere eseguito in loop in modo tale da poter inviare dati continuamente, motivo per il quale è stata fatta estendere la classe Thread a questa classe.
 Nel metodo run() che rappresenta la Thread della classe DroneAction viene eseguito un ciclo infinito dove ogni 50 millisecondi viene ridefinito l'attributo command (che rappresenta la stringa da inviare di volta inn volta), salvando al suo interno l'ultimo elemento di una coda che viene usata per salvare la sequenza di comandi da eseguire. Infine, come menzionato prima, viene invocato il metodo sendCommand() passando come parametro l'attributo command appena ridefinito, per poter finalmente inviare il pacchetto al drone.
+
 ```java
 public void run() {
     while (true) {
@@ -300,7 +310,9 @@ public void run() {
 ### KeyDispatcher
 Il KeyListener è stato sostituito da un KeyDispatcher, al fine di rimuovere un fastidioso problema riguardante il focus dell'applicazione, così facendo il focus della tastiera è diventato dinamico e l'utente non ha problemi nel passare da un tool all'altro continuando a guidare il drone con la modalità Keyboard. A livello di codice il KeyDispatcher è molto simile a un classico keyListener, tuttavia è stato dovuto fare un accorgimento per poter adattare meglio i controlli da tastiera al drone, ciò che è stato fatto è la riduzione di lettura di comandi da parte del drone, in pratica nel keyDispatcher vengono mandati soltanto la metà dei pacchetti di richiesta di movimento al drone, filtrando queste richieste il drone risulta più reattivo durante la guida e anche più fluido nei movimenti.
 
-Questa classe è molto breve, contiene due attributi, un flag booleano chiamato pressing e un numero intero chiamato dummyCounter, entrambi vengono utilizati nell'unico metodo usato per il funzionamento del programma, ovvero dispatchedKeyEvent, un metodo che contiene tre grosse sezioni divise tramite degli if, l'unico di essi che è stato utilizzato frequentemente è la sezione keyPressed. Questa porzione di codice viene eseguito ogni volta che l'utente preme un tasto sulla tastiera e in base al codice del tasto premuto manda dei comandi al drone, filtrando però la frequenza massima di tasti premuti tramite i due attributi descritti prima (pressing e dummyCounter).
+Questa classe è molto breve, contiene due attributi, un flag booleano chiamato pressing e un numero intero chiamato dummyCounter, entrambi vengono utilizati nell'unico metodo usato per il funzionamento del programma, ovvero dispatchedKeyEvent, un metodo che contiene tre grosse sezioni divise tramite degli if, l'unico di essi che è stato utilizzato frequentemente è la sezione keyPressed. Questa porzione di codice viene eseguito ogni volta che l'utente preme un tasto sulla tastiera e in base al codice del tasto premuto manda dei comandi al drone, filtrando però la frequenza massima di tasti premuti tramite i due attributi descritti 
+prima (pressing e dummyCounter).
+
 ```java
 if (evt.getID() == KeyEvent.KEY_PRESSED) {
     if (evt.getExtendedKeyCode() == 87) {
@@ -369,6 +381,7 @@ if (evt.getID() == KeyEvent.KEY_PRESSED) {
 Il sistema di sequenze è stato rivisto, non solo sono stati risolti i problemi relativi all'esecuzione e al salvataggio di esse ma è stato ricalibrato l'intero sistema per fare in modo che la velocità di esecuzione sia adatta, visto che la sensibilità di base risultava troppo elevata. Una volta cliccato sul bottone per avviare la registrazione la classe Sequence si occupa della creazione del file e della scrittura dei comandi registrati al suo interno e, successivamente, se si decide di salvare la registrazione viene rinominato il file. Anche l'esecuzione delle sequenze sono compito di questa classe, che ha una sua coda dedicata all'interno della quale inserisce tutti i comandi precedentemente letti dal file scelto dell'utente, comandi che vengono poi passati dalla coda di classe alla coda principale di input della classe Control. Per quanto riguarda la registrazione e il salvataggio delle sequenze ci sono due metodi principali, createFile e writeFile, che servono rispettivamente per la creazione e la scrittura dei files.
 
 Nel metodo createFile() che riceve come parametro una stringa (il nome del file), viene creato un oggetto file usando come parametro la stringa ricevuta anche dal metodo stesso. Successivamente viene fatto un controllo per verificare che il file appena istanziato non esista già, in tal caso viene stampata a terminale una stringa di conferma, in caso contrario viene segnalato che il file esiste già e non viene quindi creato.
+
 ```java
 public void createFile(String fileName) {
     try {
@@ -386,6 +399,7 @@ public void createFile(String fileName) {
 ```
 
 Nel metodo writeFIle() invece, viene creato un oggett FileWriter con la stessa modalità del metodo createFile().  Successivamente viene scritto nel file scelto utilizzando il metodo write(), ciò che verrà scritto sarà la stringa message che viene definita tramite il metodo setMessage salvando al suo interno tutti i comandi della coda, andando a capo dopo ognuno di essi.
+
 ```java
 public void setMessage(LinkedList<String> sequence) {
     for (int i = 0; i < sequence.size(); i++) {
@@ -408,6 +422,7 @@ public void writeFile(String fileName) {
 ```
 
 Per la lettura delle sequenze invece è stato sviluppato un solo metodo, ovvero readFile(), che crea un oggetto BufferedReader ricevendo come parametro una stringa che sarà il nome del file (la stessa che viene passata come parametro allo stesso metodo). Successviamente viene istanziata una stringa chiamata line contenente il contenuto della prima riga del file, tramite un ciclo che termina quando non ci sono più righe leggibile nel file viene aggiunta la linea corrente all'oggetto BufferedReader e la variabile line viene ridefinita passando alla prossima riga.
+
 ```java
 public void readFile(String fileName) throws FileNotFoundException, IOException, InterruptedException {
     BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
