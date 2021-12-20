@@ -17,7 +17,7 @@ NON PREVENUTO
 #### Struttura:
 - [Codice](src/)
 
-- [Documentazione 2.0](Documenti/Documentazione_Progetto_Drone.md)
+- [Documentazione 2.0](/Documenti/Documentazione_Progetto_Drone_2.0.md)
 - [Documentazione 1.0](https://github.com/LuMug/Drone/blob/main/Documenti/Documentazione_Progetto_Drone.md)
 - [Gantt preventivo](/Documenti/Gantt/GANTT_Preventivo.mpp)
 
