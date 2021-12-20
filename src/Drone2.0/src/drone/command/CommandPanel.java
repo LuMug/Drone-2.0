@@ -25,11 +25,6 @@ import javax.swing.text.DefaultCaret;
 public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
     boolean isMenu = false;
-    
-    /**
-     * Defines whether a sequence is started or not.
-     */
-    private boolean started = false;
 
     /**
      * It serves to select either the recording or the execution of the
@@ -288,12 +283,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         open.showDialog(null, "Esegui");
         try {
             fileName = open.getSelectedFile().getAbsolutePath();
-            if (!started) {
-                /** codice da guarfare 
-                SequenceRun = new Sequence(name);
-                SequenceRun.start();
-                started = true;*/
-            }
         } catch (NullPointerException e) {
         }
     }
