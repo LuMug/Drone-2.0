@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author Michea Colautti
  * @version 2/12/2021
  */
-public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
+public class ToolBarPanel extends javax.swing.JPanel{
 
     Browser browser;
 
@@ -86,8 +86,4 @@ public class ToolBarPanel extends javax.swing.JPanel implements Runnable {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -71,7 +71,6 @@ public class AnalyticsPanel extends JPanel implements Runnable {
             lab.setFont(font1);
             lab.setBorder(new EmptyBorder(0, 20, 0, 0));
             if (analyticsBufferData.size() > 0) {
-
                 lab.setText(analyticsBufferData.poll());
             }
         }
@@ -81,17 +80,17 @@ public class AnalyticsPanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         int panelW = getWidth();
 
-        int droneW;
-        int droneH;
-        droneW = panelW - panelW / 2;
-        droneH = droneW / 2;
+        int iconW;
+        int iconH;
+        iconW = panelW - panelW / 2;
+        iconH = iconW / 2;
         g.clearRect(0, 0, panelW, getHeight());
 
         g.setColor(Color.black);
         int x, y = 0;
 
         BufferedImage small;
-        small = resizeImage(buffImg, (int) (droneW / 1.2), (int) (droneH / 1.2));
+        small = resizeImage(buffImg, (int) (iconW / 1.2), (int) (iconH / 1.2));
 
         x = (this.getWidth() - small.getWidth()) / 2;
         y = (this.getHeight() - small.getHeight()) / 2;
