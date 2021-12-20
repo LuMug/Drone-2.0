@@ -44,8 +44,8 @@ public class MainPanel extends JPanel implements Runnable {
      * Metodo costruttore.
      */
     public MainPanel() {
-        GridLayout ImageFrameLayout = new GridLayout(2, 2);
-        setLayout(ImageFrameLayout);
+        GridLayout MainPanelLayout = new GridLayout(2, 2);
+        setLayout(MainPanelLayout);
         frontPanel = new FrontPanel();
         sidePanel = new SidePanel();
         upPanel = new UpPanel();
@@ -62,33 +62,37 @@ public class MainPanel extends JPanel implements Runnable {
      * predisposti per il movimento passando il valore adeguato.
      */
     public void run() {
-        while (true) {
+        boolean in = true;
+        while (in) {
             String status = statusBufferData.poll();
             if (status != null) {
                 String id = status.substring(0, 4);
 
                 switch (id) {
-                    case "pit:" -> {
+                    case "pit:": {
                         double pitch = Double.parseDouble(status.substring(4,
                                 status.length()));
                         sidePanel.moving((int) pitch);
+                        break;
                     }
-                    case "rol:" -> {
+                    case "rol:": {
                         double roll = Double.parseDouble(status.substring(4,
                                 status.length()));
                         frontPanel.moving((int) roll);
-
+                        break;
                     }
-                    case "yaw:" -> {
+                    case "yaw:": {
                         double yaw = Double.parseDouble(status.substring(4,
                                 status.length()));
                         upPanel.moving((int) yaw);
+                        break;
 
                     }
-                    case "alt:" -> {
+                    case "alt:": {
                         double alt = Double.parseDouble(status.substring(4,
                                 status.length()));
                         altimeterPanel.setAltitude(alt);
+                        break;
 
                     }
                 }

@@ -35,12 +35,12 @@ public class UpPanel extends Model {
         imageBig = toBufferedImage(img);
     }
 
-    @Override
     /**
      * Metodo che mi peremtte di disegnare le componenti. Non eseguo un
      * controllo sui gradi massimi poichè quest'immagine è libera di muoversi su
      * 360 gradi.
      */
+    @Override
     public void paintComponent(Graphics g) {
 
         g.setColor(Color.WHITE);

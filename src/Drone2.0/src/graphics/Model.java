@@ -46,10 +46,6 @@ public class Model extends JPanel {
      */
     public int rotDeg;
 
-    /**
-     * I gradi massimi rotazione delle immagini.
-     */
-    public static final int MAXDEG = 40;
 
     /**
      * Costruttore vuoto, ogni casse figlia avrà il suo personalizzato.

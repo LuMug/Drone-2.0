@@ -38,17 +38,13 @@ public class FrontPanel extends Model{
     public void moving(int rotate) {
         if (rotate < 0) {
 
-            if (rotate >= -MAXDEG) {
                 rotDeg = -rotate;
                 validate();
                 repaint();
-            }
         } else {
-            if (rotate <= MAXDEG) {
                 rotDeg = -1 * rotate;
                 validate();
                 repaint();                
-            }
         }
     }
 }

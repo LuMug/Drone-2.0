@@ -74,12 +74,13 @@ public class AltimeterPanel extends Model {
         add(alt);
     }
 
-    @Override
+
     /**
      * Method that allows to draw the components. It's differen from the others
      * paint method: indeed here there isn't any check for the maxium degrees v
      * value, this image is free to move on 360 degrees.
      */
+    @Override
     public void paintComponent(Graphics g) {
 
         g.setColor(Color.WHITE);
@@ -124,9 +125,10 @@ public class AltimeterPanel extends Model {
 
         //angle goes from 4.7 to 11
         //one section is 0.63
-        //1/1.63=1.58
+        //1/0.63=1.58
         int handH = getHeight() - imgStartY * 2
                 - (imageSize - (imageSize / 3)) + 15;
+
         int handW = handH / 15;
         double angle = altitude / 1.58 + MIN_ANGLE;
 
