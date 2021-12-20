@@ -2,12 +2,12 @@ package drone;
 
 import com.leapmotion.leap.*;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *  Class that handles LeapMotion
+ * 
  * @author Alessandro Aloise
  * @version 18.11.2021
  */
@@ -17,22 +17,18 @@ public class LeapMotion extends Listener {
      * Queue.
      */
     private static volatile LinkedList<String> commandsBufferInput;
-    
-    private boolean pressing = false;
-    private int dummyCounter = 0;
-
     public void setCommandsBufferInput(LinkedList<String> commandBufferInput) {
         this.commandsBufferInput = commandBufferInput;
     }
 
     /**
-     * Costruttore.
+     * Empty Builder.
      */
     public LeapMotion() {
     }
 
     /**
-     * Metodo richiamato ogni volta che il leap motion registra un nuovo dato.
+     * Method invoked each time leap motion records a new piece of data.
      *
      * @param controller che gestisce il leap motion
      */
@@ -164,27 +160,27 @@ public class LeapMotion extends Listener {
     }
 
     /**
-     * Converte il valore di un range in un valore di un altro range.
+     * Converts the value of one range to a value of another range.
      *
-     * @param value da mappare nel primo range
-     * @param r1Min valore minimo del primo range
-     * @param r1Max valore massimo del primo range
-     * @param r2Min valore minimo del secondo range
-     * @param r2Max valore massimo del secondo range
-     * @return valore mappato nel secondo range
+     * @param value to map in the first range
+     * @param r1Min minimum value of the first range
+     * @param r1Max maximum value of the first range
+     * @param r2Min minimum value of the second range
+     * @param r2Max maximum value of the second range
+     * @return value mapped in the second range
      */
     public int convertRange(double value, double r1Min, double r1Max, double r2Min, double r2Max) {
         return (int) (((value - r1Min) * (r2Max - r2Min)) / (r1Max - r1Min) + r2Min);
     }
 
     /**
-     * Ritorna se il valore passato e' all'interno del range, minimo e massimo
-     * escluso.
+     * Returns if the passed value is inside the range, minimum and maximum
+     * excluded.
      *
-     * @param value da controllare
-     * @param min da controllare
-     * @param max da controllare
-     * @return se il valore e' o meno nel range
+     * @param value to check
+     * @param min to check
+     * @param max to check
+     * @return if the value is or not in the range
      */
     public boolean betweenExcluded(double value, double min, double max) {
         if (value > min && value < max) {

@@ -25,12 +25,6 @@ import javax.swing.text.DefaultCaret;
 public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
     boolean isMenu = false;
-    
-
-    /**
-     * Defines whether a sequence is started or not.
-     */
-    private boolean started = false;
 
     /**
      * It serves to select either the recording or the execution of the
@@ -116,7 +110,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                 if (command != null) {
                     refreshCommands(command);
                     sequence.add(command);
-                    System.out.println(command);
                 }
             }else{
                 System.out.println("");
@@ -189,7 +182,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
             saveFile();
             recButtun.setText("REC");
         }
-        //keyColor();
 
     }//GEN-LAST:event_recButtunActionPerformed
 
@@ -218,7 +210,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
             inputButtun.setText("KEYBORD ON");
             leapController.removeListener(leapMotion);
         }
-
     }//GEN-LAST:event_inputButtunActionPerformed
 
 
@@ -291,30 +282,9 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         open.showDialog(null, "Esegui");
         try {
             fileName = open.getSelectedFile().getAbsolutePath();
-            if (!started) {
-                /** codice da guarfare 
-                SequenceRun = new Sequence(name);
-                SequenceRun.start();
-                started = true;*/
-            }
         } catch (NullPointerException e) {
         }
     }
-
-    /**
-     * Method that deals with coloring the keys in a correct way.
-     */
-    private void keyColor() {
-        if (selecStatus) {
-            executeButton.setBackground(Color.GRAY);
-            recButtun.setBackground(Color.WHITE);
-        } else {
-            executeButton.setBackground(Color.WHITE);
-            recButtun.setBackground(Color.GRAY);
-        }
-        selecStatus = !selecStatus;
-    }
-
     /**
      * A method of saving a file.
      */
@@ -330,14 +300,12 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 record.createFile(name + ".sequence");
-
                 record.setMessage((LinkedList<String>) sequence);
                 record.writeFile(name + ".sequence");
-
                 isMenu = false;
             }
         } catch (NullPointerException e) {
-
+            System.out.println("Error:" +e);
         }
     }
 }

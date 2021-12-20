@@ -91,7 +91,7 @@ public static void main(String[] args) {
             Status status = new Status();
             mainFrame.setVisible(true);
  
-            //Imput queue.
+            //Input queue.
             Control control = new Control(commandsBufferInput, commandsBufferOutputDrone, commandsBufferOutputGraphics);
             leapMotion.setCommandsBufferInput(commandsBufferInput);
             dispatcher.setCommandBufferInput(commandsBufferInput);
@@ -102,10 +102,7 @@ public static void main(String[] args) {
             status.setStatusBufferData(statusBufferData);
             status.setAnalyticsBufferData(analyticsBufferData);  
             mainFrame.mainPanel.setStatusBufferData(statusBufferData);
-            analyticsPanel.setAnalyticsBufferData(analyticsBufferData);
-
-           
-            
+            analyticsPanel.setAnalyticsBufferData(analyticsBufferData);        
                     
             //Star Thread.
             action.start();
