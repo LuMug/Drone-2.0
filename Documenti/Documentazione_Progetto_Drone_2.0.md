@@ -536,21 +536,19 @@ public void writeFile(String fileName) {
 Per la lettura delle sequenze invece è stato sviluppato un solo metodo, ovvero readFile(), che crea un oggetto BufferedReader ricevendo come parametro una stringa che sarà il nome del file (la stessa che viene passata come parametro allo stesso metodo). Successviamente viene istanziata una stringa chiamata line contenente il contenuto della prima riga del file, tramite un ciclo che termina quando non ci sono più righe leggibile nel file viene aggiunta la linea corrente all'oggetto BufferedReader e la variabile line viene ridefinita passando alla prossima riga.
 
 ```java
-public void readFile(String fileName) throws FileNotFoundException, IOException, InterruptedException {
-    BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
+public void readFile(String fileName) throws 
+	FileNotFoundException, IOException, InterruptedException {
+	
+	BufferedReader bufReader = new BufferedReader(
+		new FileReader(fileName)
+	);
 
-    String line = bufReader.readLine();
-    while (line != null) {
-        Thread.sleep(10);
-        commandBufferInput.add(line);
-        line = bufReader.readLine();
-    }
-
-    for (int i = 0; i < commandBufferInput.size(); i++) {
-
-        System.out.println(commandBufferInput.get(i));
-    }
-    bufReader.close();
+	String line = bufReader.readLine();
+	while (line != null) {
+		Thread.sleep(10);
+		commandBufferInput.add(line);
+		line = bufReader.readLine();
+	} bufReader.close();
 }
 ```
 
