@@ -46,7 +46,7 @@
 
 ### Abstract
 
-  > *Drones are more and  more common in our society. Today we see drone operating everywhere, in every sector. We see drone used in the military, in construction site, Amazon and other companies use drone to ship packet of merch to the people, in some cases drone even deliver the post. For this reason, we want to improve our drone control system, we will make a radical refactor of our old structure, adding new graphics, improving communications, and so on. Thanks to this project piloting a DJI Tello drone will become easy and fun. As the od project we will use, in addition to our drone, a Leap Motion sensor to track movements, the drone will be fully controllable with this sensor and even with the keyboard. 
+  > *Drones are more and  more common in our society. Today we see drone operating everywhere, in every sector. We see drone used in the military, in construction site, Amazon and other companies use drone to ship packet of merch to the people, in some cases drone even deliver the post. For this reason, we want to improve our drone control system, we will make a radical refactor of our old structure, adding new graphics, improving communications, and so on. Thanks to this project piloting a DJI Tello drone will become easy and fun. As the od project we will use, in addition to our drone, a Leap Motion sensor to track movements, the drone will be fully controllable with this sensor and even with the keyboard.
 Our project will be even more secure, we will enable and create some safety feature so that anyone can use our product without hurting someone or themselves.*
 
 
@@ -61,12 +61,12 @@ Our project will be even more secure, we will enable and create some safety feat
 # Analisi
 ### Analisi del dominio
 
-È stato richiesto di correggere e migliorare l'interfaccia di controllo drone da noi creata un anno fa. Il programma da noi creato presentava infatti molte imperfezioni ed elementi che non funzionavano. Per questo approfitteremo della presenza di 3 membri del gruppo su 4 per riprendere il progetto, correggerlo, e magari aggiungere nuove funzionalità. 
+È stato richiesto di correggere e migliorare l'interfaccia di controllo drone da noi creata un anno fa. Il programma da noi creato presentava infatti molte imperfezioni ed elementi che non funzionavano. Per questo approfitteremo della presenza di 3 membri del gruppo su 4 per riprendere il progetto, correggerlo, e magari aggiungere nuove funzionalità.
 Alla fine verrà prodotta un interfaccia di controllo per un drone DJI tello, fortemente basata sulla nostra prima versione ma migliorata nell'aspetto grafico, nelle dinamiche di controllo, nella struttura del codice e anche, in maniera minore, negli obbiettivi.
 
 
 ### Analisi e specifica dei requisiti
- 
+
 
 |               |**ID: Req-001**|
 |--------------|----------------|
@@ -196,9 +196,9 @@ Abbiamo preso la vecchia interfaccia e abbiamo cambiato tutto quello che non ci 
 ![Progettazione](Progettazione/GUI/Interfaccia/Drone2.0_GUI.png)
 > Interfaccia drone
 
-Come si può vedere rispetto alla prima versione del progetto l'interfaccia é cambiata: sulla sinistra troviamo, come del resto era nella versionep recedente, la lista dei comandi eseguiti. La novità è che al posto di essere una lunga sequenza di istruzioni incomprensibili, stampiamo una traduzione in modo tale che l'utente possa capire meglio cosa sta succedendo. Altre modifiche sostanziali sono: 
+Come si può vedere rispetto alla prima versione del progetto l'interfaccia é cambiata: sulla sinistra troviamo, come del resto era nella versionep recedente, la lista dei comandi eseguiti. La novità è che al posto di essere una lunga sequenza di istruzioni incomprensibili, stampiamo una traduzione in modo tale che l'utente possa capire meglio cosa sta succedendo. Altre modifiche sostanziali sono:
 * Abbiamo cambiato il riquadro in basso a destra; dove prima c'era un valore numerico con l'altitudine ora rappresentiamo lo stesso valore in 2 modi. Il primo è tramite una lancetta rossa, non visibile nella progettazione, che percorre l'altimetro in base all'altezza. Il secondo sarà invece il valore dell'altitudine numerico, convertito in metri, e inserito nello spazion nero apposito.
-* Inoltre abbiamo cambiato completamente la gestione della barra inferiore in modo tale che sia più pulita e ordinata 
+* Inoltre abbiamo cambiato completamente la gestione della barra inferiore in modo tale che sia più pulita e ordinata
 
 
 ### Pop-up informazioni.
@@ -250,7 +250,52 @@ Per la definizione della nuova struttura del progetto è stato deciso di divider
 ![Struttura]()
 
 Riguardo invece la ristrutturazione delle vecchie classi, molte di esse sono state definitivamente eliminate, anche a causa del cambio di struttura. È stata invece creata una classe principale per poter gestire tutte le varie parti e funzioni che compongono l'applicativo, ovvero la classe Control. Essa ha lo scopo di gestire tutti i tool che offre l'applicativo, all'interno di questa classe sono state create delle code alla quale vengono poi passati i dati e comunicati alle varie classi.
-![Control]()
+
+### Control
+
+A differenza della prima versione del progetto abbiamo deciso di avere una classe che gestisse tutti i dati dell'applicazione. Questa classe doveva smistare in modo automatico i dati, per poter fare questo abbiamo deciso di usare delle Queue che sono letteralmente delle code ci sono servite per gestire meglio input e output dei dati. Abbiamo deciso di usare una Queue generale di input che riceve da tutti i dispositivi di input quindi tastiera e leapmotion. L'unico problema che abbiamo riscontrato nell'utilizzo questo metodo è che i dati solo leggibili solo una volta con il metodo poll e noi avevamo bisogno di che più classi avessero lo stesso dato quindi abbiamo creato più Queue per dividere i dati.
+
+```java
+public void run() {
+    while (runFlag) {
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException ex) {
+            System.out.println("Ex" + ex);
+        }
+        String command = commandsBuffer.poll();
+        if (command != null) {
+            commandsBufferOutputDrone.add(command);
+            commandsBufferOutputGraphics.add(command);
+        }
+    }
+}
+```
+Questo metodo viene eseguito in contenzione dato che la classe 'Control' è una Thread. L'idea che sta alla base di questo codice è che venga preso l'ultima istruzione nella coda che ora si trova in ultima posizione quindi se avessimo dentro la nostra coda 1,2,3,4 andremo a prendere il 4 e a cancellarlo dalla nostra coda. Una volta fatto questo il dato viene salvato all'interno della variabile command e viene fatto un controllo che il valore non sia nullo. Una volta effettuato questo controllo il dato viene salvato nella coda dedicata alla grafica ma anche alla coda dei comandi da mandare al drone. Tutto questo ci fa avere un sistema di gestione dei dati perfetto senza errori e perdita dei dati.
+
+
+#### Control- Main
+All'interno della classe Control c'è anche il main della nostra applicazione da dove parte tutto.
+Come prima istruzione abbiamo quella per la gestione della grafica che dice al nostro programma di usare la grafica del sistema operativo.
+
+```java
+UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+```
+
+andando avanti possiamo trovare tutta la parte di codice dedicata come scritto alla creazione delle Queue.
+
+```java
+
+  LinkedList<String> commandsBufferInput = new LinkedList<>();
+  LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
+  LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
+  LinkedList<String> statusBufferData = new LinkedList<>();
+  LinkedList<String> analyticsBufferData = new LinkedList<>();
+
+```
+Subito sotto possiamo trovare tutte le dichiarazioni delle classi.Scendendo ancora possiamo trovare tutta la gestione degli Iput queue che sono usa sequenza di setter delle classi, dopo la gestione degli input abbiamo la stessa cosa per gli output. Infine trovia tutti i vari start per le Thread.
+
 
 ### DroneAction
 Nella classe Drone sono state rimosse parecchie ridondanze e spostati altrettanti metodi, cercando di rendere la classe il più generica possibile per suddividere le funzionalità in altre classi apposite. Proprio a questo scopo questa classe è stata rinominata DroneAction. Questa classe ha lo scopo di rappresentare il del drone ed è la classe che interagisce direttamente con esso, all'interno di essa sono salvate le sue caratteristiche come ad esempio l'indirizzo ip e le porte d'ascolto, inoltre si occupa della realizzazione dei socket e dell'invio dei messaggi. Infomrazioni come ip e porta sono salvate come costanti, visto che la porta di ascolto e l'ip del drone restano sempre uguali, almeno per quanto riguarda l'invio e la ricezione dei comandi.
@@ -265,22 +310,22 @@ public void sendCommand(String command) {
 			String firstSendCommand = "command";
 			byte[] data = firstSendCommand.getBytes();
 			DatagramPacket packet = new DatagramPacket(
-				data, data.length, InetAddress.getByName(DRONE_IP), 
+				data, data.length, InetAddress.getByName(DRONE_IP),
 				COMMANDS_PORT);
-				
+
 			socket.send(packet);
 			firstSend = false;
 		}
 		byte[] data = command.getBytes();
 		DatagramPacket packet = new DatagramPacket(
-			data, data.length, InetAddress.getByName(DRONE_IP), 
+			data, data.length, InetAddress.getByName(DRONE_IP),
 			COMMANDS_PORT);
-			
+
 		socket.send(packet);
-	
+
 		DatagramPacket receivePacket = new DatagramPacket(
 			new byte[256], new byte[256].length);
-			
+
 	} catch (SocketException ex) {
 		System.out.println("ERRORE: " + ex.getMessage());
 	} catch (IOException ex) {
@@ -310,7 +355,7 @@ public void run() {
 ### KeyDispatcher
 Il KeyListener è stato sostituito da un KeyDispatcher, al fine di rimuovere un fastidioso problema riguardante il focus dell'applicazione, così facendo il focus della tastiera è diventato dinamico e l'utente non ha problemi nel passare da un tool all'altro continuando a guidare il drone con la modalità Keyboard. A livello di codice il KeyDispatcher è molto simile a un classico keyListener, tuttavia è stato dovuto fare un accorgimento per poter adattare meglio i controlli da tastiera al drone, ciò che è stato fatto è la riduzione di lettura di comandi da parte del drone, in pratica nel keyDispatcher vengono mandati soltanto la metà dei pacchetti di richiesta di movimento al drone, filtrando queste richieste il drone risulta più reattivo durante la guida e anche più fluido nei movimenti.
 
-Questa classe è molto breve, contiene due attributi, un flag booleano chiamato pressing e un numero intero chiamato dummyCounter, entrambi vengono utilizati nell'unico metodo usato per il funzionamento del programma, ovvero dispatchedKeyEvent, un metodo che contiene tre grosse sezioni divise tramite degli if, l'unico di essi che è stato utilizzato frequentemente è la sezione keyPressed. Questa porzione di codice viene eseguito ogni volta che l'utente preme un tasto sulla tastiera e in base al codice del tasto premuto manda dei comandi al drone, filtrando però la frequenza massima di tasti premuti tramite i due attributi descritti 
+Questa classe è molto breve, contiene due attributi, un flag booleano chiamato pressing e un numero intero chiamato dummyCounter, entrambi vengono utilizati nell'unico metodo usato per il funzionamento del programma, ovvero dispatchedKeyEvent, un metodo che contiene tre grosse sezioni divise tramite degli if, l'unico di essi che è stato utilizzato frequentemente è la sezione keyPressed. Questa porzione di codice viene eseguito ogni volta che l'utente preme un tasto sulla tastiera e in base al codice del tasto premuto manda dei comandi al drone, filtrando però la frequenza massima di tasti premuti tramite i due attributi descritti
 prima (pressing e dummyCounter).
 
 ```java
@@ -376,6 +421,73 @@ if (evt.getID() == KeyEvent.KEY_PRESSED) {
     ++dummyCounter;
 }
 ```
+## CommandPanel
+
+La classe CommandPanel si occupa di mostrare a schermo tutti i comandi eseguiti e traditti in modo tale che l'utente finale possa capire cosa il dorne ha fatto. I comandi mostrati nella parte dedicata non sono gli stessi che il dorne ha ricevuto ma come detto sono stati tradotti per renderli comprensibili a un utente anche non esperto. C'é un metodo che si occupa in fatti di fare questo che é il seguente:
+
+```java
+private String commandConversion(String command) {
+       JScrollBar sb = jScrollPane1.getVerticalScrollBar();
+       sb.setValue( sb.getMaximum() );
+
+       StringBuilder infoCommand = new StringBuilder();
+       String[] str = command.split(" ");
+       switch (str[0]) {
+           case "rc" -> {
+               if (Integer.parseInt(str[1]) < 0) {
+                   infoCommand.append(" Left ");
+               } else if (Integer.parseInt(str[1]) > 0) {
+                   infoCommand.append("Right ");
+               }
+               if (Integer.parseInt(str[2]) < 0) {
+                   infoCommand.append(" Back ");
+               } else if (Integer.parseInt(str[2]) > 0) {
+                   infoCommand.append(" Forward ");
+               }
+               if (Integer.parseInt(str[3]) < 0) {
+                   infoCommand.append(" Down ");
+               } else if (Integer.parseInt(str[3]) > 0) {
+                   infoCommand.append(" up ");
+               }
+               if (Integer.parseInt(str[4]) == 70) {
+                   infoCommand.append(" Spin right ");
+               } else if (Integer.parseInt(str[4]) == -70) {
+
+                   infoCommand.append(" Spin Left ");
+               }
+           }
+           default ->
+               infoCommand.append(command);
+       }
+
+       return infoCommand.toString().trim();
+   }
+```
+Questo metodo riceve il comando da convertire e ritorna il comando convertito, funziona nel seguente modo.La stringa ricevuta dal metodo assomiglierà molto a questa "rc 10 10 0 0". La stringa viene divisa utilizando gli spazi e viene salvata all'interno di un array. Una volta fatto questo viene controlato che la strina inizi per "rc" in caso contrario viene imediatamente ritornata senza fare altri controlli.In caso che invece la stringa iniziasse per "rc" allora l'array passa in una serie di controlli e i vari valori che c'erano all'interno della stringa vengono comutati in parole e salvate in un altra variabile. Alla fine del metodo viene ritornata la stringa convertita.
+
+Il metodo apena descrito viene invocato solo dopo che il metodo run verifichi che ci sono nuovi dati all'interno della sua coda e per fare questa operazione l'abbiamo scritto il seguente codice:
+
+```java
+public void run() {
+        while (true) {
+            if (!isMenu) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException ex) {
+                }
+                String command = commandsBufferOutputGraphics.poll();
+                if (command != null) {
+                    refreshCommands(command);
+                    sequence.add(command);
+                }
+            }else{
+                System.out.println("");
+            }
+        }
+    }
+
+```
+Questo codice come quello un po' di control fa prima una verifica che l'ultimo elemento sia valido e che non sia nullo e una volta fatto questo richiama il metodo refreshCommands che al suo interno fa un piccolo controllo che il messaggio passato non sia "rc 0 0 0 0" perché in caso che sia quella l'istruzione passata allora non viene neanche richiamato il metodo commandConversion perché non deve essere visualizato nulla a schermo. In caso contario viene invece invocato.
 
 ### Sequence
 Il sistema di sequenze è stato rivisto, non solo sono stati risolti i problemi relativi all'esecuzione e al salvataggio di esse ma è stato ricalibrato l'intero sistema per fare in modo che la velocità di esecuzione sia adatta, visto che la sensibilità di base risultava troppo elevata. Una volta cliccato sul bottone per avviare la registrazione la classe Sequence si occupa della creazione del file e della scrittura dei comandi registrati al suo interno e, successivamente, se si decide di salvare la registrazione viene rinominato il file. Anche l'esecuzione delle sequenze sono compito di questa classe, che ha una sua coda dedicata all'interno della quale inserisce tutti i comandi precedentemente letti dal file scelto dell'utente, comandi che vengono poi passati dalla coda di classe alla coda principale di input della classe Control. Per quanto riguarda la registrazione e il salvataggio delle sequenze ci sono due metodi principali, createFile e writeFile, che servono rispettivamente per la creazione e la scrittura dei files.
@@ -469,7 +581,7 @@ Per la documentazione procederemo in ordine, come in passato.
 
 ### MainPanel
 
-MainPanel è il corrispettivo di ImageFrame nella versione 1.0 del progetto. Abbiamo cambiato il nome per meglio descrivere la classe, che è un pannello che poi verrà inserito nel Frame principale dell'applicazione. La sua funzione è rimasta quella di istanziare tutti i pannelli della nostra classe per mostrarli. Inoltre è obbligatorio citare che MainPanel è una Thread, implementa infatti Runnable. Questo è fondamentale se vogliamo chela grafica si aggiorni senza bloccare il resto dell'app. 
+MainPanel è il corrispettivo di ImageFrame nella versione 1.0 del progetto. Abbiamo cambiato il nome per meglio descrivere la classe, che è un pannello che poi verrà inserito nel Frame principale dell'applicazione. La sua funzione è rimasta quella di istanziare tutti i pannelli della nostra classe per mostrarli. Inoltre è obbligatorio citare che MainPanel è una Thread, implementa infatti Runnable. Questo è fondamentale se vogliamo chela grafica si aggiorni senza bloccare il resto dell'app.
 MainPanel viene quindi istanziato e fatto partire nella classe `Control`. Qui alleghiamo il metodo costruttore di MainPanel:
 
 ```java
@@ -600,7 +712,7 @@ Questo metodo prende come prima cosa le dimensioni del pannello, per poi calcola
 
 Per fare tutto questo il procedimento è stato il seguente:
 
- 
+
 Come primo passo abbiamo dovuto rendere tutte le immagini grandi uguali, in modo da poter sempre applicare delle proporzioni corrette nel ridimensionamento con il metodo `resizeImage`.
 
 Abbiamo poi definito delle proporzioni nuove, calcolando la lunghezza dell'immagine come la metà della lunghezza del pannello, e calcolando l'altezza come 1/4 della nuova lunghezza:
@@ -618,7 +730,7 @@ Abbiamo poi definito delle proporzioni nuove, calcolando la lunghezza dell'immag
 In sé questo codice è abbastanza per gestire il caso in cui l'altezza sia sufficiente a contenere l'immagine ruotata, ma questo non è garantito. Infatti come abbiamo detto prima se la lunghezza della diagonale dell'immagine, dovesse essere maggiore all'altezza del pannello, l'immagine verrebbe tagliata. Si pensi di prendere due rettangoli, uno leggermente più piccolo dell'altro, e sovrapporli. Se il triangolo interno si trova al centro di quello esterno non ci sono problemi, ma se il primo dovesse venire ruotato finirebbe con il passare i bordi del rettangolo esterno. Per prevenire tutto questo abbiamo quindi calcolato la diagonale usando Pitagora, se il valore da noi trovato dovesse essere maggiore o uguale all'altezza del pannello, allora eseguiamo una variante del calcolo già citato sopra:
 
 ```java
-int droneHypo = (int) Math.sqrt(Math.pow(droneW, 2) 
+int droneHypo = (int) Math.sqrt(Math.pow(droneW, 2)
 	+ Math.pow(droneH, 2));
 if (droneHypo >= panelH) {
 		droneW = panelH;
@@ -635,12 +747,12 @@ if (imageBig != null) {
 	x = (this.getWidth() - image.getWidth()) / 2;
 	y = (this.getHeight() - image.getHeight()) / 2;
 	image = rotate(image, rotDeg);
-	
+
 	if (rotDeg > 0) {
-		g.drawImage(image, x - image.getWidth() / 5, y - 
+		g.drawImage(image, x - image.getWidth() / 5, y -
 			(int) (image.getHeight() / 3.4), this);
 	} else if (rotDeg < 0) {
-		g.drawImage(image, x + image.getWidth() / 5, y - 
+		g.drawImage(image, x + image.getWidth() / 5, y -
 			(int) (image.getHeight() / 3.4), this);
 	} else {
 		g.drawImage(image, x, y, this);
@@ -713,7 +825,7 @@ Questa classe differisce leggermente dalle due precedenti, infatti a cambiare è
 
 Tuttavia la logica è pressoché la stessa, il costruttore prende l’immagine allo stesso modo, ma al posto di esserci un metodo di movimento che sfrutta il `paintComponent` definito nel modello `Model`, questa classe ha un suo ha un suo metodo `paintComponent`.
 
-Come si poteva vedere anche nello switch, anche il metodo incaricato di gestire il movimento è diverso. Infatti in questo caso 
+Come si poteva vedere anche nello switch, anche il metodo incaricato di gestire il movimento è diverso. Infatti in questo caso
 
 In questo metodo, oltre al rapporto nuovo che viene usato, dato dal fatto che l'immagine è un quadrato e non un rettangolo, vengono calcolate in maniera diversa anche le dimensioni dell'immagine.
 
@@ -733,7 +845,7 @@ if (panelW >= panelH) {
 Poi per il calcolo della dimensione effettiva, ricordando che se l'immagine ruota e il pannello ha delle dimensioni particolari, quelle citate sopra, ho adottato una logica simile a quella presentata precedentemente:
 
 ```java
-int droneHypo = (int) Math.sqrt(Math.pow(droneS, 2) 
+int droneHypo = (int) Math.sqrt(Math.pow(droneS, 2)
 	+ Math.pow(droneS, 2));
 droneS = droneS - (droneHypo - droneS);
 ```
@@ -800,7 +912,7 @@ Ancora prima di parlare della lancetta abbiamo però pensato a come posizionare 
 ```java
  alt.setLocation(imgStartX + imageSize / 3 + imageSize / 25,
  	imgStartY + imageSize / 2 + imageSize / 10);
-``` 
+```
 
 Le variabili `imgStartX/Y` sono, come il nome suggerisce, le coordinate dove l'altimetro inizia. Per trovarle abbiamo preso l'altezza o la lunghezza del pannello, tolto la l'altezza o la lunghezza dell'immagine e diviso per 2. Siccome l'immagine è sempre posizionata al centro abbiamo la certezza matematica di ottenere il punto corretto.
 
@@ -821,13 +933,13 @@ Invece per quanto riguarda la lancetta, l'implementazione è risultata più semp
 Per ottener questi dati abbiamo come prima cosa trovato la lunghezza della lancetta, definita con una proporzione. Il succo del calcolo è che data l'altezza del frame, viene tolta la parte superiore e la parte inferiore all'altimetro. Poi a questo viene tolto 1/3 della dimensione dell'immagine. L'ultimo valore invece, (15), è un valore trovato con molte prove, serve a gestire il fatto che l'altimetro stesso abbia un bordo grigio, che dovrebbe rappresentare la parte in metallo a cui è fissato solitamente l'altimetro negli aerei.
 
 ```java
-int handH = getHeight() - imgStartY * 2 
+int handH = getHeight() - imgStartY * 2
 	- (imageSize - (imageSize / 3)) + 15;
 int handW = handH / 15;
 ```
 La larghezza della lancetta è definita invece come 1/15 della lunghezza.
 
-L'ultimo dato da trovare è quindi l'angolo. Per trovarlo abbiamo quindi prima scritto i calcoli per trovare le coordinate x e y della punta della lancetta, per poi disegnare la lancetta stessa. 
+L'ultimo dato da trovare è quindi l'angolo. Per trovarlo abbiamo quindi prima scritto i calcoli per trovare le coordinate x e y della punta della lancetta, per poi disegnare la lancetta stessa.
 
 ```java
 //Calcolo coordinate
@@ -864,13 +976,13 @@ Per questo capitolo paritremo però dallo sviluppo della live:
 Lo sviluppo della live ha complicato abbastanza il nostro progetto, infatti abbiamo dovuto modifcare un po' sia il codice della classe responsabile di chiamare gli script, sia il codice degli script stessi. Il primo passo è stato creare la classe per la barra inferiore, poi abbiamo modificato la classe `Browser` e i suoi script, e in seguito abbiamo fatto il pannello delle informazioni.
 
 #### ToolBarPanel
-Questa è una classe molto semplice, rappresenta la barra inferiore della nostra applicazione, e contiente 2 pulsanti. Abbiamo deciso di rimuovere l'indicazione della batteria, in quanto già presente nel pannello dei dati di volo. 
+Questa è una classe molto semplice, rappresenta la barra inferiore della nostra applicazione, e contiente 2 pulsanti. Abbiamo deciso di rimuovere l'indicazione della batteria, in quanto già presente nel pannello dei dati di volo.
 Il codice della toolbar è quindi molto semplice. Al suo interno c'è un istanza della classe `Browser` e una della classe `AnalyticsFrame`, e due metodi: il primo per l'attivazione della live, e il secondo per l'attivazione del frame Analytics.
 
 ```java
 private void jButton1ActionPerformed(
 	java.awt.event.ActionEvent evt) {                                         
-	
+
 	try {
 		browser.script();
 		browser.openBrowser();
@@ -1005,7 +1117,7 @@ Come abbiamo detto nella progettazione questo pannello non deve potersi ingrandi
 
 ```java
 this.setMinimumSize(new Dimension(650, 450));
-this.setMaximumSize(new Dimension(800, 570)); 
+this.setMaximumSize(new Dimension(800, 570));
 ```
 
 #### AnalyticsPanel
@@ -1105,9 +1217,9 @@ public void paintComponent(Graphics g) {
 
 	g.setColor(Color.black);
 	int x, y = 0;
-	
+
 	BufferedImage small;
-	small = resizeImage(buffImg, (int) (iconW / 1.2), 
+	small = resizeImage(buffImg, (int) (iconW / 1.2),
 		(int) (iconH / 1.2));
 
 	x = (this.getWidth() - small.getWidth()) / 2;
@@ -1115,6 +1227,51 @@ public void paintComponent(Graphics g) {
 	g.drawImage(small, (int) (x + x * 0.5), y, this);
 }
 ```
+
+## LeapMotion
+
+Questa classe arriva dal vecchio progetto non é stata stravolta troppo ma l'anno scroso non é stata docuemtnata molto bene quindi abbiamo deciso di farlo in questa versione.
+
+Come tutte le altre classi questa classe ha un riferimeto a una coda in questo caso a una Queue di tipo LinkedList, e di conseguenza un setter per andare a impostare il reiferimento. all'interno della classe ci sono tre metodi che sono onFrame,convertRange,betweenExcluded quello che andremo a vedere nel dettagio é il primo.
+
+
+#### onFrame
+Questo metodo é l'anima della classe, questo metodo viene invocato automaticamente ogni volta che il nostro LeapMotion registra un nuovo dato.All'interno dei di questo metodo possiamo trovare vari parti di codice interessanti da analizare.In primiss questo:
+
+
+```java
+if (frame.hands().count() > 0) {
+            Hand hand = frame.hands().get(0);
+            if (hand.isRight()) {
+                rightHand = frame.hands().rightmost();
+                rightHandMiddleFinger = rightHand.fingers().fingerType(Finger.Type.TYPE_MIDDLE).get(0);
+            } else {
+                leftHand = frame.hands().leftmost();
+                leftHandMiddleFinger = leftHand.fingers().fingerType(Finger.Type.TYPE_MIDDLE).get(0);
+            }
+            if (frame.hands().count() == 2) {
+                rightHand = frame.hands().rightmost();
+                leftHand = frame.hands().leftmost();
+                if (!rightHand.isRight()) {
+                    leftHand = frame.hands().rightmost();
+                    rightHand = frame.hands().leftmost();
+                }
+                rightHandIndexFinger = rightHand.fingers().fingerType(Finger.Type.TYPE_INDEX).get(0);
+                leftHandIndexFinger = leftHand.fingers().fingerType(Finger.Type.TYPE_INDEX).get(0);
+                rightHandMiddleFinger = rightHand.fingers().fingerType(Finger.Type.TYPE_MIDDLE).get(0);
+                leftHandMiddleFinger = leftHand.fingers().fingerType(Finger.Type.TYPE_MIDDLE).get(0);
+            }
+        }
+```
+Questo pezzo di codice fa prima un controllo se il leapmotion trova più di due mani in caso che sia cosi allora controlla se vede la mano destra in caso affermativo va a prendere le sue cordinate. Questo viene fatto anche per la mano sinistra. Una volta fatto questo. Andando avanti con il codice un po' più un basso possiamo trovare un altro paio di righe di codice interessanti.
+
+```java
+if (!rightHandIndexFinger.isExtended()) {
+            command = "takeoff";
+            commandsBufferInput.add(command);
+}
+```
+Questo pezzo di codice ci serve per verificare in che stato si trova il dito della mano destra in caso che sia piegato allora mandiamo al dorne il comando di decollare. Tutto il resto del codice che possiamo trovare serve per la conversione delle cordinate della mano a valori per il drone.
 
 
 # Test
