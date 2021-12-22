@@ -253,7 +253,12 @@ Già dalla progetztazione sappiamo che potremmo avere qualche problema con il ri
 Ma la finestra avrà comunque delle prorporzioni limitate, per garantire l'interezza delle stringhe di dati e dell'immagine a finaco.
 
 ### Schema delle classi
-//da rifare, classi aggiunte
+
+Per questo progetto ci siamo fatti uno schema delle classi iniziale, poi in base a quello abbiamo scritto il software. Tuttavia gli sviluppi, i problemi, i chiarimenti con i docenti, i cambi rispetto all'anno scorso, e altri fattori ci hanno spinto a cambiarlo leggermente in corso d'opera. A fine progettoa bbiamo quindi generato uno schema delle classi con il plugin "EasyUML" di NetBeans.
+
+![SchemaDelleClassi](Progettazione/DiagrammaClassi/DiagrammaClassiFinale.png)
+
+
 
 
 <div style="page-break-after: always;"></div>
@@ -1348,18 +1353,25 @@ Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il d
 
 # Consuntivo
 
-Ecco il nostro Gantt consuntivo
+![Gantt consuntivo](../Documenti/Gantt/GANTT_Consuntivo_Completo.jpg)
+> Gantt preventivo
+
+
 
 
 # Conclusioni
 
-
 ## Considerazioni finali
 
+Alla fine di questo progetto, che possiamo considerare un progetto di 10 mesi, ci riteniamo abbastanza soddisfatti. È vero, forse le circostanze che ci hanno permesso di lavorarci ancora e di essere quasi le stesse persone dell’anno scorso non sono le migliori, ma siamo convinti che l’avere già una certa esperienza nel lavorare in gruppo  e avere un po’ di sintonia sul modo di lavorare ci abbia dato una marcia in più. Il prodotto finale dell’anno scorso non era male, ma pensiamo che quest’anno siamo riusciti a migliorarlo di molto. Forse dall’esterno può non sembrare così, per quanto sicuramente la nuova grafica e le semplificazioni nel registrare una sequenza o nel cambiare dispositivo di input siano sicuramente utili ad “impacchettare” il tutto. Ma in realtà il cambiamento maggiore è stato fatto al codice, allo stile, alla struttura e alle convenzioni stilistiche e logiche che abbiamo avuto la possibilità di studiare in 3 anni a Trevano. Parte del merito va sicuramente ai nostri docenti, che ringraziamo per l’aiuto puntuale che ci è sempre stato messo a disposizione, per la fiducia che ci è stata data nell’assegnarci un progetto senza avere dei requisiti precisi e per i mezzi che loro e la scuola ci hanno messo a disposizione.
+Tornando al progetto; se dovessimo comparare non solo il risultato, ma anche le nostre prestazioni pensiamo di esserci migliorati. Infatti dal nostro punto di vista aspetti come la gestione del tempo, l’organizzazione e la spartizione del lavoro e la comunicazione tra di noi è migliorata rispetto alla prima versione del progetto. Un aspetto che ci aveva rallentati nel vecchio progetto è stata la gestione di GitHub; vogliamo parlare di questo aspetto citando dapprima la vecchia documentazione:
+“Una cosa che poteva andare meglio è sicuramente la gestione di GitHub e dei commit. Troppe volte non abbiamo fatto dei commit puntuali come avremmo voluto, e questo ha portato a perdita di lavoro e di codice importane, che poi abbiamo dovuto recuperare.”
+
+Questa volta non abbiamo avuto questi problemi, spesso infatti abbiamo fatto in modo di lavorare in parallelo su file diversi, notificando all’intero gruppo tutti gli eventuali commit e le modifiche, sincerandosi che non andasse persa nemmeno una line di codice. Un paio di volte abbiamo avuto qualche situazione in cui abbiamo dovuto riunirci, o almeno 2 di noi, per parlare di come modificare un file. Ma siamo sempre riusciti a preservare il lavoro di tutti. Anche quest’anno si pone l’incognita di Expo Professioni, in linea di massima quest’anno l’esposizione dovrebbe avere luogo ma con il COVID-19 tutto è ancora in bilico.
+Al nostro gruppo piacerebbe davvero mostrare quello che è stato fatto in tutto questo tempo, e ad alcuni di noi piacerebbe magari migliorare ancora questo software, ma per ora niente è deciso.
+In conclusione siamo felici di esserci cimentati nello stesso progetto dello scorso anno e  di avere la possibilità di affinare le nostre capacità in Java.
+
 ## Considerazioni personali
-
-## Sviluppi futuri
-
 
 | Michea |
 |--------|
@@ -1375,11 +1387,37 @@ Ecco il nostro Gantt consuntivo
 
 
 
+## Sviluppi futuri
+
+Gli sviluppi futuri sono rimasti pressoché quelli dell’anno scorso. Infatti per questo progetto abbiamo si aggiunto alcune funzionalità, come il pannello analytics o le esecuzioni di sequenze molto più curate,  ma è stato comunque tutto incentrato sul sistemare quello fatto in precedenza. Perciò sarebbe interessante, in futuro, implementare un meccanismo per il riconoscimento di un volto, oppure il segnare su un piano o su una mappa i movimenti del drone. Infatti grazie al pannello analytics e ai dati restituiti dal drone abbiamo lo spostamento e l’accelerazione sulle 3 assi, questo è abbastanza a livello teorico per tracciare il movimento del drone.
+
+Ci sono molte parti di questo progetto che si possono e/o andrebbero espanse, e rimaniamo comunque aperti e interessati agli sviluppi futuri che questo progetto avrà, magari anche per mano di altri studenti.
+
+
 
 ## Sitografia
 
 
-
+- https://stackoverflow.com/, *StackOverFlow*;
+- https://www.ultraleap.com/, *UltraLeap*; 
+- https://it.wikipedia.org/, *Wikipedia*;
+- https://docs.oracle.com/, *Oracle*;
+- https://www.techwalla.com/, *Techwalla*;
+- https://www.daniweb.com/, *DaniWeb*;
+- https://store.dji.com/, *DJI Store*;
+- https://www.dji.com/, *DJI*;
+- https://forum.dji.com/, *DJI Forum*;
+- https://www.youtube.com/, *Youtube*;
+- https://github.com/, *Github*;
+- https://tellopilots.com/, *TelloPilots*;
+- https://www.ryzerobotics.com/tello, *RyzerRobotics*;
+- https://dl-cdn.ryzerobotics.com/, *RyzerRobotics*;
+- https://www.w3schools.com, *w3schools*;
+- https://www.baeldung.com, *Baeldung*;
+- https://www.shellscript.sh, *Shellscript*;
+- https://www.geeksforgeeks.org, *Geeksforgeeks*;
+- https://www.codegrepper.com, *Codegrepper*;
+- 
 ## Allegati
 
 Elenco degli allegati:
