@@ -36,9 +36,8 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      *
      */
     private boolean flagRec = true;
-    
-    
-    private boolean flagInput =false;
+
+    private boolean flagInput = false;
 
     /**
      * Contiene l'istanza del leap motion.
@@ -111,7 +110,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                     refreshCommands(command);
                     sequence.add(command);
                 }
-            }else{
+            } else {
                 System.out.println("");
             }
         }
@@ -199,7 +198,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     }//GEN-LAST:event_executeButtonActionPerformed
 
     private void inputButtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputButtunActionPerformed
-        flagInput=!flagInput;
+        flagInput = !flagInput;
         if (flagInput) {
             inputButtun.setText("LEAP ON");
             leapController = new Controller();
@@ -222,7 +221,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     private javax.swing.JToggleButton recButtun;
     // End of variables declaration//GEN-END:variables
 
-    
     /**
      * Method that does the conversion from drone command to more understandable
      * commands.
@@ -232,12 +230,12 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
      */
     private String commandConversion(String command) {
         JScrollBar sb = jScrollPane1.getVerticalScrollBar();
-        sb.setValue( sb.getMaximum() );
-        
+        sb.setValue(sb.getMaximum());
+
         StringBuilder infoCommand = new StringBuilder();
         String[] str = command.split(" ");
         switch (str[0]) {
-            case "rc" -> {
+            case "rc": {
                 if (Integer.parseInt(str[1]) < 0) {
                     infoCommand.append(" Left ");
                 } else if (Integer.parseInt(str[1]) > 0) {
@@ -259,15 +257,20 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
 
                     infoCommand.append(" Spin Left ");
                 }
+                break;
+
             }
-            default ->
+            default:
                 infoCommand.append(command);
+                break;
+
         }
 
         return infoCommand.toString().trim();
     }
 
     String fileName;
+
     /**
      * Method for choosing the file to execute.
      */
@@ -285,6 +288,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
         } catch (NullPointerException e) {
         }
     }
+
     /**
      * A method of saving a file.
      */
@@ -305,7 +309,7 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
                 isMenu = false;
             }
         } catch (NullPointerException e) {
-            System.out.println("Error:" +e);
+            System.out.println("Error:" + e);
         }
     }
 }
