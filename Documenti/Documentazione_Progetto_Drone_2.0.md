@@ -28,11 +28,11 @@
 	- [Refactor e implementazione grafica](#refactor-e-implementazione-grafica)
 		- [MainPanel](#MainPanel)
 		- [Model](#Model)
-		- [SidePanel + FrontPanel](#SidePanel-+-FrontPanel)
+		- [SidePanel e FrontPanel](#SidePanel-e-FrontPanel)
 		- [UpPanel](#UpPanel)
 		- [AltimeterPanel](#AltimeterPanel)
-	- [Refactor e implementazione grafica](#refactor-e-implementazione-grafica)
-		- [Live](#ToolbarPanel)
+	- [Refactor e implementazione dei tools](#refactor-e-implementazione-dei-tools)
+		- [Live](#Live)
 		- [ToolbarPanel](#ToolbarPanel)
 		- [AnalyticsFrame](#AnalyticsFrame)
 		- [AnalyticsPanel](#AnalyticsPanel)
@@ -792,7 +792,7 @@ Ora è arrivato il momento di passare ai 4 frame dell'applicazione. Per trattare
 
 Questo perché i primi due pannelli possiedono un codice pressoché identico, è quindi possibile semplificare la spiegazione.
 
-### SidePanel + FrontPanel
+### SidePanel e FrontPanel
 
 Questi pannelli esportano essenzialmente 2 elementi, un metodo costruttore personalizzato e un metodo per gestire il movimento. Partiamo dal costruttore.
 
