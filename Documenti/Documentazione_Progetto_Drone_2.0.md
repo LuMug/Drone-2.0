@@ -1460,7 +1460,8 @@ In conclusione siamo felici di esserci cimentati nello stesso progetto dello sco
 
 | Michea |
 |--------|
-|        |
+|Quando ho saputo che mi sarei cimentato nuovamente in questo progetto, con quasi gli stessi compagni dell'anno scorso, sono stato molto felice. infatti non solo lavorare con Gianni e Alessandro mi è sempre piaciuto, ma ho avuto l'impressione che con il tempo avessimo sviluppato una certa sintonia nel modo di procedere con il progetto. E parlando di quest'ultimo sono piuttosto soddisfatto di come sia uscito. Infatti penso che dopo 10 mesi di elaborazione abbiamo finalmente confezionato un buon programma, che potrebbe magari interessare anche altre persone, fuori dal contesto della programmazione. Tuttavia non sono pienamente soddisfatto, la live è quel punto che, pur essendo presente in questa versione, non mi ha mai convinto fino in fondo. Forse se ci sarà occasione di sviluppare ancora questo progetto riusciremo ad ottenere una live natia in Java, ma per ora mi accontento di quello che c'è. 
+Sarei anche curioso di vedere questo progetto assegnato ad altri studenti, per vedere come vengono a capo dei nostri stessi problemi o come trovano soluzioni alternative.|
 
 | Alessandro |
 |------------|
