@@ -124,11 +124,4 @@ public class Status extends Thread {
             System.out.println("Error:" + ex);
         }
     }
-
-    /**
-     * Method that returns the battery value.
-     */
-    public String getbatteria() {
-        return status.get("bat").toString();
-    }
 }
