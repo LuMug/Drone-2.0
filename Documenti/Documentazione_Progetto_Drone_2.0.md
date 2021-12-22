@@ -1314,6 +1314,30 @@ Questo pezzo di codice ci serve per verificare in che stato si trova il dito del
 
 ## Protocollo di test
 
+Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il drone. Lo stesso schema di test verrà poi ripreso, assieme ai requisiti, per i test finali.
+ 
+| **01**  | Descrizione test                  | Risultato Netbeans | Risultato Jar | Note NetBeans       | Note Jar            |
+|---------|-----------------------------------|--------------------|---------------|---------------------|---------------------|
+| Test-1  | Decollo da tastiera               | Passato            | Passato       | -                   | -                   |
+| Test-2  | Atterraggio da tastiera           | Passato            | Passato       | -                   | -                   |
+| Test-3  | Movimento nelle varie direzioni   | Passato            | Passato       | -                   | -                   |
+| Test-4  | Flip da tastiera                  | Passato            | Passato       | -                   | -                   |
+| Test-5  | Emergenza da tastiera             | Passato            | Passato       | -                   | -                   |
+|         |                                   |                    |               | -                   | -                   |
+| Test-6  | Decollo con le mani               | Passato            | Fallito       | Controllare comandi | Crash Jar           |
+| Test-7  | Atterraggio con le mani           | Passato            | Fallito       | -                   | Crash Jar           |
+| Test-8  | Movimento con le mani             | Passato            | Fallito       | -                   | Crash Jar           |
+| Test-9  | Flip con le mani                  | Fallito            | Fallito       | -                   | Crash Jar           |
+| Test-10 | Emergenza con la tastiera         | Passato            | Fallito       | -                   | Crash Jar           |
+|         |                                   |                    |               | -                   | -                   |
+| Test-11 | Interfaccia grafica drone         | Fallito            | Fallito       | Nessun movimento    | Nessun movimento    |
+| Test-12 | Ridimensionamento interfaccia     | Fallito            | Fallito       | Immagini stabordanti| Immagini stabordanti|
+| Test-13 | Velocità                          | Passato            | Passato       | -                   | -                   |
+|         |                                   |                    |               | -                   | -                   |
+| Test-14 | Registrazione Sequenza di comandi | Passato            | Passato       | -                   | -                   |
+| Test-15 | Esecuzione di sequenza di comandi | Passato            | Passato       | -                   | -                   |
+| Test-16 | Live dal PC                       | Fallito            | Fallito       | File non trovati    | File non trovati    |
+
 
 ## Risultati test
 
