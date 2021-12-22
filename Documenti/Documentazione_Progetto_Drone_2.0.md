@@ -253,7 +253,10 @@ Riguardo invece la ristrutturazione delle vecchie classi, molte di esse sono sta
 
 ### Control
 
-A differenza della prima versione del progetto abbiamo deciso di avere una classe che gestisse tutti i dati dell'applicazione. Questa classe doveva smistare in modo automatico i dati, per poter fare questo abbiamo deciso di usare delle Queue che sono letteralmente delle code ci sono servite per gestire meglio input e output dei dati. Abbiamo deciso di usare una Queue generale di input che riceve da tutti i dispositivi di input quindi tastiera e leapmotion. L'unico problema che abbiamo riscontrato nell'utilizzo questo metodo è che i dati solo leggibili solo una volta con il metodo poll e noi avevamo bisogno di che più classi avessero lo stesso dato quindi abbiamo creato più Queue per dividere i dati.
+A differenza della prima versione del progetto, quest'anno abbiamo deciso di sviluppare una classe che gestisse tutti i dati dell'applicazione. Questa classe è utile a smistare in modo automatico i dati. Per poterlo fare abbiamo deciso di usare degli oggetti di tipo `Queue`, che sono letteralmente delle "code" o "buffer". Il motivo che ci ha spinto a utilizzare questo costrutto è che ci semplificano e velocizzano notevolmente la gestione dei dati attraverso il programma. Abbiamo deciso di usare una `Queue` generale di input, che riceva i dati da tutti i dispositivi esterni, quindi tastiera e Leap Motion. L'unico problema che abbiamo riscontrato nell'utilizzo di questo metodo è che i dati solo leggibili solo una volta. Infatti prelevandoli dalla coda con il metodo `.poll()`. Se perÒ pensiamo al nostro programma i dati devono essere contemporaneamnte in più parti dell'applicazione,perciò abbiamo deciso di creare anche delle `Queue` di output per smistare i dati nei vari punti del programma.
+
+##### Run
+È doverso dire che `Control` è una specializzazzione di Thread, ecco quindi il suo metodo `run()`:
 
 ```java
 public void run() {
@@ -271,37 +274,38 @@ public void run() {
     }
 }
 ```
-Questo metodo viene eseguito in contenzione dato che la classe 'Control' è una Thread. L'idea che sta alla base di questo codice è che venga preso l'ultima istruzione nella coda che ora si trova in ultima posizione quindi se avessimo dentro la nostra coda 1,2,3,4 andremo a prendere il 4 e a cancellarlo dalla nostra coda. Una volta fatto questo il dato viene salvato all'interno della variabile command e viene fatto un controllo che il valore non sia nullo. Una volta effettuato questo controllo il dato viene salvato nella coda dedicata alla grafica ma anche alla coda dei comandi da mandare al drone. Tutto questo ci fa avere un sistema di gestione dei dati perfetto senza errori e perdita dei dati.
+Questo metodo viene eseguito in continuazione, dato che il metodo run contiene in `while` che usa una variabile booleana sempre settata a `true`. 
+L'idea che sta alla base di questo codice è che venga presa l'ultima istruzione inserita nella coda: se per esempio gli elementi della nostra coda fossero | 1 | 2 | 3 | 4 |, utilizzando il già citato metodo `poll()`, estrarremo dalla sequenza il numero 4. 
+Una volta fatto questo il dato viene salvato all'interno della variabile `command` e viene eseguito un controllo in modo da escludere valori nulli che andrebberò a causare problemi più avanti. Se il controllo viene passato, il dato viene salvato nella due code di outbut: quella dedicata alla grafica, di cui parleremo anche nel capitolo della grafica stesso, ma anche e soprattutto nella coda dei comandi da mandare al drone. Tutto questo ci permette di avere un sistema di gestione dei dati ottimale, evitando perdita di dati e rallentamenti inutili.
 
 
-#### Control- Main
+#### Main
+
 All'interno della classe Control c'è anche il main della nostra applicazione da dove parte tutto.
-Come prima istruzione abbiamo quella per la gestione della grafica che dice al nostro programma di usare la grafica del sistema operativo.
+Come prima istruzione abbiamo quella per la gestione della grafica che impone al nostro programma di usare la grafica del sistema operativo.
 
 ```java
 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
 ```
 
-andando avanti possiamo trovare tutta la parte di codice dedicata come scritto alla creazione delle Queue.
+Andando avanti possiamo trovare tutta la parte di codice dedicata alla creazione delle Queue.
 
 ```java
-
   LinkedList<String> commandsBufferInput = new LinkedList<>();
   LinkedList<String> commandsBufferOutputDrone = new LinkedList<>();
   LinkedList<String> commandsBufferOutputGraphics = new LinkedList<>();
   LinkedList<String> statusBufferData = new LinkedList<>();
   LinkedList<String> analyticsBufferData = new LinkedList<>();
-
 ```
-Subito sotto possiamo trovare tutte le dichiarazioni delle classi.Scendendo ancora possiamo trovare tutta la gestione degli Iput queue che sono usa sequenza di setter delle classi, dopo la gestione degli input abbiamo la stessa cosa per gli output. Infine trovia tutti i vari start per le Thread.
+
+Subito sotto possiamo trovare tutte le dichiarazioni delle classi. Scendendo ancora possiamo trovare tutta la gestione delle `Queue` di input. Quest'ultima non p altro che una di setter delle classi, dopo la gestione degli input abbiamo la stessa cosa per gli output. Infine troviamo tutti le istanziazioni e gli avvii delle Thread.
 
 
 ### DroneAction
-Nella classe Drone sono state rimosse parecchie ridondanze e spostati altrettanti metodi, cercando di rendere la classe il più generica possibile per suddividere le funzionalità in altre classi apposite. Proprio a questo scopo questa classe è stata rinominata DroneAction. Questa classe ha lo scopo di rappresentare il del drone ed è la classe che interagisce direttamente con esso, all'interno di essa sono salvate le sue caratteristiche come ad esempio l'indirizzo ip e le porte d'ascolto, inoltre si occupa della realizzazione dei socket e dell'invio dei messaggi. Infomrazioni come ip e porta sono salvate come costanti, visto che la porta di ascolto e l'ip del drone restano sempre uguali, almeno per quanto riguarda l'invio e la ricezione dei comandi.
+Nella classe Drone sono state rimosse parecchie ridondanze e spostati altrettanti metodi, abbiamo cercato di rendere la classe il più generica possibile per suddividere le funzionalità in altre classi apposite. Proprio a questo scopo questa classe è stata rinominata in `DroneAction`. Essa ha lo scopo di rappresentare i movimenti del drone, si occupa inoltre di interagire direttamente con esso. Al suo interno sono salvate le caratteristiche principali della comunicazione; come ad esempio l'indirizzo IP e le porte d'ascolto o d'invio. Inoltre essa si occupa della realizzazione dei `socket` e dell'invio dei messaggi. Infomrazioni come IP e porta sono salvate come costanti, visto che entrmabi sono dettati dall'SDK del drone stesso.
 
-Per quanto riguarda l'invio dei dati verso il drone è stato creato un metodo apposito, per prima cosa esso verifica se è la prima volta che viene mandato un comando tramite il flag firstSend, se è così il flag diventa false e viene istanziata e inviata una stringa contenente il comando "command", comando che serve per abilitare il drone a rispondere alle richieste UDP.
-Successivamente viene istanziato un array di byte che tramite il metodo getBytes() salva al suo interno i byte della stringa inserita come parametro. Viene poi creato anche un oggetto DatagramPacket che, ricevendo come parametro i byte del comando da inviare, la lunghezza dei dati, l'ip a cui mandare i dati e la relativa porta, invia il pacchetto finale al drone tramite il metodo send(). Infine viene creato un altro oggetto DatagramPacket, stavolta usando dei parametri hardcoded.
+Per quanto riguarda l'invio dei dati verso il drone è stato creato un metodo apposito, chiamato `sendCommand`. Per prima cosa esso verifica se è la prima volta che viene mandato un comando tramite il flag `firstSend`, se è così il flag assume valore `false` e viene istanziata e inviata una stringa contenente il comando `command`. Questîstruzione è fondamentale se si vuole abilitare l'SDK del drone per la comunicazione e il controllo wireless.
+Successivamente viene istanziato un array di byte che tramite il metodo `getBytes()` salva all'intenrno dell'array stesso i byte della stringa inserita come parametro. Viene poi creato un oggetto `DatagramPacket` che, ricevendo come parametro l'array di byte appena citato, la lunghezza dello stesso, l'IP a e la porta di comunicazione, invia il pacchetto al drone tramite il metodo `send()`. Infine viene creato un altro oggetto DatagramPacket, stavolta usando dei parametri hardcoded, volto a ricevere i dati che il drone restituisce.
 
 ```java
 public void sendCommand(String command) {
@@ -334,8 +338,9 @@ public void sendCommand(String command) {
 }
 ```
 
-Il metodo sendCommand() è quindi fondamentale per la comunicazione tra client e drone, ma per funzionare correttamente ha bisogno di essere eseguito in loop in modo tale da poter inviare dati continuamente, motivo per il quale è stata fatta estendere la classe Thread a questa classe.
-Nel metodo run() che rappresenta la Thread della classe DroneAction viene eseguito un ciclo infinito dove ogni 50 millisecondi viene ridefinito l'attributo command (che rappresenta la stringa da inviare di volta inn volta), salvando al suo interno l'ultimo elemento di una coda che viene usata per salvare la sequenza di comandi da eseguire. Infine, come menzionato prima, viene invocato il metodo sendCommand() passando come parametro l'attributo command appena ridefinito, per poter finalmente inviare il pacchetto al drone.
+Il metodo `sendCommand()` è quindi fondamentale per la comunicazione tra controller e drone; ma per funzionare correttamente ha bisogno di essere eseguito in loop, in modo tale da poter inviare i dati continuamente. Soprattutto per questo motivo anche questa classe è una specializzazzione di Thread.
+
+Nel metodo `run()` che rappresenta la Thread viene eseguito un ciclo infinito dove ogni 50 millisecondi viene ridefinito l'attributo command, che rappresenta la stringa da inviare di volta in volta, salvando al suo interno l'ultimo elemento della coda che viene usata per salvare la sequenza di comandi da eseguire. Infine, come menzionato prima, viene invocato il metodo sendCommand() passando come parametro l'attributo command appena ridefinito, per poter finalmente inviare il pacchetto al drone.
 
 ```java
 public void run() {
@@ -421,6 +426,7 @@ if (evt.getID() == KeyEvent.KEY_PRESSED) {
     ++dummyCounter;
 }
 ```
+
 ## CommandPanel
 
 La classe CommandPanel si occupa di mostrare a schermo tutti i comandi eseguiti e traditti in modo tale che l'utente finale possa capire cosa il dorne ha fatto. I comandi mostrati nella parte dedicata non sono gli stessi che il dorne ha ricevuto ma come detto sono stati tradotti per renderli comprensibili a un utente anche non esperto. C'é un metodo che si occupa in fatti di fare questo che é il seguente:
