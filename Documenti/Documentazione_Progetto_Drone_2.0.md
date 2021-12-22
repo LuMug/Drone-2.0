@@ -80,8 +80,7 @@ Our project will be even more secure, we will enable and create some safety feat
 # Analisi
 ### Analisi del dominio
 
-È stato richiesto di correggere e migliorare l'interfaccia di controllo drone da noi creata un anno fa. Il programma da noi creato presentava infatti molte imperfezioni ed elementi che non funzionavano. Per questo approfitteremo della presenza di 3 membri del gruppo su 4 per riprendere il progetto, correggerlo, e magari aggiungere nuove funzionalità.
-Alla fine verrà prodotta un interfaccia di controllo per un drone DJI tello, fortemente basata sulla nostra prima versione ma migliorata nell'aspetto grafico, nelle dinamiche di controllo, nella struttura del codice e anche, in maniera minore, negli obbiettivi.
+È stato richiesto di correggere e migliorare l'interfaccia di controllo drone da noi creata un anno fa. Il programma che avevamo fatto presentava infatti molte imperfezioni ed elementi che non funzionavano. Per questo approfitteremo della presenza di 3 membri del gruppo su 4 per riprendere il progetto, correggerlo, e magari aggiungere nuove funzionalità. Alla fine verrà prodotta un interfaccia di controllo per un drone DJI tello, fortemente basata sulla nostra prima versione, ma migliorata: nell'aspetto grafico, nelle dinamiche di controllo, nella struttura del codice e anche in maniera minore, negli obbiettivi.
 
 
 ### Analisi e specifica dei requisiti
@@ -323,6 +322,92 @@ Andando avanti possiamo trovare tutta la parte di codice dedicata alla creazione
 ```
 
 Subito sotto possiamo trovare tutte le dichiarazioni delle classi. Scendendo ancora possiamo trovare tutta la gestione delle `Queue` di input. Quest'ultima non p altro che una di setter delle classi, dopo la gestione degli input abbiamo la stessa cosa per gli output. Infine troviamo tutti le istanziazioni e gli avvii delle Thread.
+
+
+### Status
+
+Status è una classe che si occupa di scrivere il log dell'applicazione ma non solo, serve anche per gestire tutta la parte grafica. Essenzialmente `Status` è la classe responsabile si gestire e smistare tutto il traffico dei dati. Come anche molte altre classi `Status` ha un setter per le solite code che usiamo per gestire i dati, in questo caso specifico però abbiamo due setter
+
+```java 
+    public void setStatusBufferData(Queue<String> statusBufferData) {
+        this.statusBufferData = statusBufferData;
+    }
+    
+   public void setAnalyticsBufferData(Queue<String> analyticsBufferData) {
+        this.analyticsBufferData = analyticsBufferData;
+    }
+```
+Il primo setter serve per la parte grafica mentre il secondo viene usato per il pop-up dei dati. 
+
+Andando avanti troviamo il metodo `run`, infatti `Status`, come molte altre classi è una Thread. 
+Nel metodo run avvengono molte cose; come primis viene creato un file in cui saranno salvati tutti i dati di volo del drone. 
+Poi, tramite il codice sottostante, i pacchetti del drone vengono ricevuti, salvati in una stringa ed in seguito inseriti in un oggetto di tipo `HashMap`:
+
+Ecco quindi la dichiarazione di quest'ultima:
+
+```java
+Map<String, Double> status = new HashMap<>();
+```
+Questo oggetto è fatto per contenere una stringa, idealmente l'etichetta del dato, e un double per il dato.
+
+A questo punto è opportuno indicare che il drone non restituisce una stringa, per così dire, "pulita". Infatti assomiglierà a qualcosa di simile: 
+
+```
+pitch.%d,roll"%d.yaw.%d.vax-%d.voy%d.vgz-%d:templ-%d;
+temph-%d/tof.%d;h%d-bat%d;baro.%2f;time:%d;agx:%.2f;
+agy:%.2f;agz:%.2f;\r\n
+```
+
+Come si può vedere ogni dato ha una sua etichetta e poi segue il valore, rappresentato da `%d` o `%&2f`. I vari dati sono divisi dal segno `;`, mentre l'etichetta e il dato corrispondente sono suddivisi da `:`. Il nostro metodo non si limita quindi a copiare la stringa in dei dati, ma distingue cosa sia cosa e copia l'etichetta e il dato corrispondente nell'`HashMap` citata in precedenza.
+
+```java
+//Recezione dei dati
+DatagramPacket packet = new DatagramPacket(buf, buf.length);
+socket.receive(packet);
+InetAddress address = packet.getAddress();
+int port = packet.getPort();
+packet = new DatagramPacket(buf, buf.length, address, port);
+String received = new String(packet.getData(), 0, packet.getLength());
+socket.receive(packet);
+
+//Formattazione e inserimento.
+if (!(received.equals(""))) {
+	try {
+		String[] values = received.split(";");
+		for (String value : values) {
+			String[] pair = value.split(":");
+			status.put(pair[0], Double.parseDouble(pair[1]));
+		}
+	} catch (Exception ex) {		
+	}
+}
+
+```
+
+Dopo aver formattato la stringa possiamo quindi inserire i dati nelle varie code, per quanto riguarda il Pop-up. Vengono aggiunti alla coda tutti i valori restituiti dal drone, ma questo aspetto è spiegato nel capitolo dedicato al Pop up.
+
+
+Per quanto riguarda la grafica il discorso è completamente diverso perché all'interno della coda vengo aggiunti i dati ma con un etichetta davanti, ma quest'etichetta non è quella presa dalla `HashTable`, ma una stringa di 3 caratteri volta all'identificazione del pacchetto. Infatti avere sempre lo stesso formato ci semplifica di molto la vita quando si arriverà a parlare dell'implementazione della grafica.
+
+```java 
+statusBufferData.add("pit:" + status.get("pitch").toString());
+statusBufferData.add("rol:" + status.get("roll").toString());
+statusBufferData.add("yaw:" + status.get("yaw").toString());
+statusBufferData.add("alt:" + status.get("h").toString());
+```
+
+
+Infine arriva il la parte per scrivere il log, questo codice ci permette di prendere tutto il messaggio ricevuto e salvarlo all'interno del file che abbiamo creato prima. Inoltre il file non viene sovrascritto ma viene fatta un aggiunta del testo alla fine, in gergo tecnico un `append`.
+
+```java 
+String info = received.substring(0, received.length()-4);
+String finale = dateFormat.format(data) + " " + info;
+try {
+	log.scritturaFile(finale);
+} catch (Exception ex) {
+	System.out.println("Error:" + ex);
+}
+```
 
 
 ### DroneAction
@@ -1379,7 +1464,7 @@ In conclusione siamo felici di esserci cimentati nello stesso progetto dello sco
 
 | Alessandro |
 |------------|
-|            |
+|Il progetto su qui abbiamo lavorato ha ampliato le mie conoscenze sopratutto per quanto riguarda il funzionamento del Leap Motion, dato che l'anno scroso non ho avuto occasione di metterci mano, dato che se ne occupava Samuele. Penso che abbiamo lavorato molto bene e che siamo riusciti a triare fuori un ottimo prodotto, con qualche chicca in più e molte migliorire rispetto all'anno scorso. Devo essere sicnero mi sono trovato molto bene con Gianni e Michea perché ci troviamo secondo me sulla stessa linea di penseiro, quindi non ci siamo quasi mai scontrati. Il programma non è ancora perfetto ma posso dire che ci ho messo tutto me stesso per riuscire a arrivare dove siamo arrivati con il progetto.|
 
 | Gianni |
 |--------|
