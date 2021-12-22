@@ -4,14 +4,17 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
+ * This panel is the second component of the main interface where the drone'
+ * state is shown: This panel shows the drone seen from the side. 
+ * The image tilts according to its roll.
  *
  * @author Michea Colautti
- * @version 07.10.2021
+ * @version 22.12.2021
  */
 public class SidePanel extends Model {
 
     /**
-     * Costruttore della classe. Permette di istanziare l'immagine.
+     * Constructor of the class. Allows to instantiate the image.
      */
     public SidePanel() {
         //aggiunto riferimento a bin in class path e path di libreria

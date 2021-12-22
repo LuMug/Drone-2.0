@@ -1428,6 +1428,9 @@ Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il d
 | Test-15 | Esecuzione di sequenza di comandi | Passato            | Passato       | -                   | -                   |
 | Test-16 | Live dal PC                       | Fallito            | Fallito       | File non trovati    | File non trovati    |
 
+----
+
+
 
 ## Risultati test
 

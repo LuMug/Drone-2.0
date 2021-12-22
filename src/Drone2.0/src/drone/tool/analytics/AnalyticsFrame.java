@@ -1,14 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package drone.tool.analytics;
 
 import java.awt.Dimension;
 
 /**
  *
- * @author micheacolautti
+ * This frame contains the panel responsable for all the analytics.
+ * @author Michea Colautti
+ * @version 22.12.2021
  */
 public class AnalyticsFrame extends javax.swing.JFrame implements Runnable {
 
@@ -87,6 +85,9 @@ public class AnalyticsFrame extends javax.swing.JFrame implements Runnable {
     private drone.tool.analytics.AnalyticsPanel analyticsPanel1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * This method start the Thread in AnalyticsPanel
+     */
     @Override
     public void run() {
         new Thread(analyticsPanel1).start();

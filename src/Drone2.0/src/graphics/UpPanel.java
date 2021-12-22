@@ -6,10 +6,12 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
- * This panel is the fourth component of the main interface where the drone'
- * state is shown: In this panel it's rappresented the altitude of the drone
+ * This panel is the third component of the main interface where the drone'
+ * state is shown: This panel shows the drone seen from above. 
+ * The image tilts according to its roll.
+ *
  * @author Michea Colautti
- * @version 07.10.2021
+ * @version 22.12.2021
  */
 public class UpPanel extends Model {
 

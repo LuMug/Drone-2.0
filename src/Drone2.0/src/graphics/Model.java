@@ -10,56 +10,57 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 /**
+ * This class represents the model of a panel. It also contains methods for
+ * managing and modifying BufferdImages.
  *
  * @author Michea Colautti
- * @version 07.10.2021
+ * @version 22.12.2021
  */
 public class Model extends JPanel {
 
     /**
-     * L'immagine originale, quindi grande.
+     * The original image, therefore large
      */
     public BufferedImage imageBig;
 
     /**
-     * L'immagine ruotata.
+     * The rotated image.
      */
     public BufferedImage rotatedImage;
 
     /**
-     * L'immagine originale ridimensionata.
+     * Original image resized.
      */
     public BufferedImage image;
 
     /**
-     * Valore fisso dell'altezza del pannello.
+     * Fixed value for panel height
      */
     public int panelH;
 
     /**
-     * Valore fisso della la argezza del pannello.
+     * Fixed value for panel width
      */
     public int panelW;
 
     /**
-     * I gradi di rotazione delle immagini.
+     * The image rotated
      */
     public int rotDeg;
 
-
     /**
-     * Costruttore vuoto, ogni casse figlia avrà il suo personalizzato.
+     * Empty constructor, all the class will have their contrucotr.
      */
     public Model() {
     }
 
     /**
-     * Questo metodo mi peremtte di ridimensionare una BufferdImage.
+     * This method allows to resize a BufferdImage.
      *
-     * @param img è l'immagine che va ridimensionata.
-     * @param newW è la nuova larghezza dell'immagine.
-     * @param newH è la nuova altezza dell'immagine.
-     * @return l'immagine ridimensionata.
+     * @param img is the image to be resized.
+     * @param newW is the new width of the image.
+     * @param newH is the new height of the image.
+     * @return the resized image.
      */
     public static BufferedImage resizeImage(BufferedImage img, int newW, int newH) {
         if (img == null) {
@@ -85,11 +86,11 @@ public class Model extends JPanel {
     }
 
     /**
-     * Questo metodo mi permette di ruotare una BuffeerdImage.
+     * This method allows to rotate a BuffeerdImage.
      *
-     * @param img è l'immagine da ruotare.
-     * @param angle è l'angolo di rotazione.
-     * @return l'immagine ruotata.
+     * @param img is the image to be rotated.
+     * @param angle is the angle of rotation.
+     * @return the rotated image.
      */
     public BufferedImage rotate(BufferedImage img, double angle) {
 
@@ -116,11 +117,10 @@ public class Model extends JPanel {
     }
 
     /**
-     * Metodo utile per convertire un immagine di tipo Image in una
-     * BufferedImage.
+     * Method useful for converting an image of type Image into a BufferedImage.
      *
-     * @param img l'immagine di tipo Image
-     * @return l'immagine di tipo BufferedImage
+     * @param img the Image image.
+     * @return the image of type BufferedImage.
      */
     public static BufferedImage toBufferedImage(Image img) {
         if (img instanceof BufferedImage) {
@@ -136,11 +136,10 @@ public class Model extends JPanel {
     }
 
     /**
-     * Metodo per disegnare le componenti sul frame. Si adatta sia per
-     * 'ImagePanelFront' che per 'ImagePanelLat'. Permette quindi di
-     * ridimensionare le immagini e di ruotarle.
+     * Method for drawing components on the frame. Fits both 'ImagePanelFront'
+     * and 'ImagePanelLat'. It allows to resize images and rotate them.
      *
-     * @param g è il parametro di default per la grafica.
+     * @param g is the default parameter for graphics.
      */
     @Override
     public void paintComponent(Graphics g) {

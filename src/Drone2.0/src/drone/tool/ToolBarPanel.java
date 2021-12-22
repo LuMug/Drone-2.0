@@ -4,11 +4,13 @@ import drone.tool.analytics.AnalyticsFrame;
 import java.io.IOException;
 
 /**
+ * This panel is the ToolBar at the bottom of the application, it contains the
+ * buttons to start the live broadcast and the analytics panel.
  *
  * @author Michea Colautti
- * @version 2/12/2021
+ * @version 22.12.2021
  */
-public class ToolBarPanel extends javax.swing.JPanel{
+public class ToolBarPanel extends javax.swing.JPanel {
 
     Browser browser;
 
@@ -17,7 +19,7 @@ public class ToolBarPanel extends javax.swing.JPanel{
      */
     public ToolBarPanel() {
         initComponents();
-        browser=new Browser();
+        browser = new Browser();
     }
 
     /**
@@ -59,6 +61,10 @@ public class ToolBarPanel extends javax.swing.JPanel{
         add(jLabel1);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Button for opening live
+     * @param evt the catched event, in this case click
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             browser.script();
@@ -71,11 +77,15 @@ public class ToolBarPanel extends javax.swing.JPanel{
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Button for opening the analytics
+     * @param evt the catched event, in this case click
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        AnalyticsFrame anayltics=new AnalyticsFrame();
+        AnalyticsFrame anayltics = new AnalyticsFrame();
         new Thread(anayltics).start();
         anayltics.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

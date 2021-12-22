@@ -17,7 +17,7 @@ import javax.swing.JLabel;
  * with an hand and a written value.
  *
  * @author Michea Colautti
- * @version 26.11.2021
+ * @version 22.12.2021
  */
 public class AltimeterPanel extends Model {
 

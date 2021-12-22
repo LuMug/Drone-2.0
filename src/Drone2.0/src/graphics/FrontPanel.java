@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  * The image tilts according to its roll.
  *
  * @author Michea Colautti
- * @version 07.10.2021
+ * @version 22.12.2021
  */
 public class FrontPanel extends Model{
 

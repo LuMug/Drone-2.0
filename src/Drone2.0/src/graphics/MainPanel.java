@@ -5,6 +5,7 @@ import java.util.Queue;
 import javax.swing.JPanel;
 
 /**
+ * Main panel of the application, collects or the 4 panel.
  *
  * @author Michea Colautti
  * @version 07.10.2021
@@ -12,22 +13,22 @@ import javax.swing.JPanel;
 public class MainPanel extends JPanel implements Runnable {
 
     /**
-     * Il riferimento al pannello "imagePanelFront".
+     * Reference to "imagePanelFront".
      */
     private FrontPanel frontPanel;
 
     /**
-     * Il riferimento al pannello "imagePanelLat".
+     * Reference to "imagePanelLat".
      */
     private SidePanel sidePanel;
 
     /**
-     * Il riferimento al pannello "imagePanelUp".
+     * Reference to "imagePanelUp".
      */
     private UpPanel upPanel;
 
     /**
-     * Il riferimento al pannello "imagePanelAlt".
+     * Reference to "imagePanelAlt".
      */
     private AltimeterPanel altimeterPanel;
 
@@ -36,12 +37,17 @@ public class MainPanel extends JPanel implements Runnable {
      */
     private static volatile Queue<String> statusBufferData;
 
+    /**
+     * Setter of the queue
+     *
+     * @param statusBufferData the queue
+     */
     public void setStatusBufferData(Queue<String> statusBufferData) {
         this.statusBufferData = statusBufferData;
     }
 
     /**
-     * Metodo costruttore.
+     * Class contructor, allows to istanciate all four panel and the layout.
      */
     public MainPanel() {
         GridLayout MainPanelLayout = new GridLayout(2, 2);
@@ -57,9 +63,9 @@ public class MainPanel extends JPanel implements Runnable {
     }
 
     /**
-     * Questo metodo, o Thread, permette di aggiornare i vari pannelli presenti
-     * nel frame. Dopo aver ottenuto i valori dai setter, esegue i metodi
-     * predisposti per il movimento passando il valore adeguato.
+     * This method, or Thread, allows you to update the various panels in the
+     * frame. in the frame. After getting the values from the setters, it
+     * executes all the right methods, passing the appropriate value.
      */
     public void run() {
         boolean in = true;

@@ -16,10 +16,11 @@ import javax.swing.border.EmptyBorder;
 
 /**
  *
+ * This panel is where all the analytics are shown. 
  * @author Michea Colautti
- * @version 25/11/2021
- *
+ * @version 22.12.2021
  */
+
 public class AnalyticsPanel extends JPanel implements Runnable {
 
     /**
@@ -52,6 +53,9 @@ public class AnalyticsPanel extends JPanel implements Runnable {
 
     }
 
+    /**
+     * Constructor, it allows to define the layout, image, and the label.
+     */
     public AnalyticsPanel() {
         this.setLayout(new GridLayout(1, 1));
         this.setSize(200, 200);
@@ -63,6 +67,9 @@ public class AnalyticsPanel extends JPanel implements Runnable {
         buffImg = toBufferedImage(img);
     }
 
+    /**
+     * Run method, update the analytics string and therefor the label content.
+     */
     @Override
     public void run() {
 
@@ -76,6 +83,10 @@ public class AnalyticsPanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Paint method, it resize and display the image and the label.
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g) {
         int panelW = getWidth();
