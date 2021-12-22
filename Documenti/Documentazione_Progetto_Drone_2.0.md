@@ -1,23 +1,42 @@
 1. [Introduzione](#introduzione)
-  - [Informazioni sul progetto](#informazioni-sul-progetto)
-  - [Abstract](#abstract)
-  - [Scopo](#scopo)
+	- [Informazioni sul progetto](#informazioni-sul-progetto)
+	- [Abstract](#abstract)
+	- [Scopo](#scopo)
 
 2. [Analisi](#analisi)
-  - [Analisi del dominio](#analisi-del-dominio)
-  - [Analisi e specifica dei requisiti](#analisi-e-specifica-dei-requisiti)
-  - [Use case](#use-case)
-  - [Pianificazione](#pianificazione)
-  - [Analisi dei mezzi](#analisi-dei-mezzi)
+	- [Analisi del dominio](#analisi-del-dominio)
+	- [Analisi e specifica dei requisiti](#analisi-e-specifica-dei-requisiti)
+	- [Use case](#use-case)
+	- [Pianificazione](#pianificazione)
+	- [Analisi dei mezzi](#analisi-dei-mezzi)
 
 3. [Progettazione](#progettazione)
-  - [Design delle interfacce](#design-delle-interfacce)
-  	- [Interfaccia principale](#interfaccia-principale)
-	- [Interfaccia vista drone](#interfaccia-vista-drone)
-  - [Design procedurale](#design-procedurale)
-  - [Design di architettura del sistema](#design-di-architettura-del-sistema)
+	- [Design delle interfacce](#design-delle-interfacce)
+		- [Interfaccia principale](#interfaccia-principale)
+	- [Pop-up informazioni](#pop-up-informazioni)
+	- [Schema della classi](#schema-delle-classi)
 
 4. [Implementazione](#implementazione)
+	- [Introduzione](#introduzione)
+	- [Refactor generale](#refactor-generale)
+		- [Control](#control)
+		- [DroneAction](#droneAction)
+		- [Status](#status)
+		- [Key Dispatcher](#keyDispatcher)
+		- [CommandPanel](#commandPanel)
+		- [Sequence](#sequence)
+	- [Refactor e implementazione grafica](#refactor-e-implementazione-grafica)
+		- [MainPanel](#MainPanel)
+		- [Model](#Model)
+		- [SidePanel + FrontPanel](#SidePanel-+-FrontPanel)
+		- [UpPanel](#UpPanel)
+		- [AltimeterPanel](#AltimeterPanel)
+	- [Refactor e implementazione grafica](#refactor-e-implementazione-grafica)
+		- [Live](#ToolbarPanel)
+		- [ToolbarPanel](#ToolbarPanel)
+		- [AnalyticsFrame](#AnalyticsFrame)
+		- [AnalyticsPanel](#AnalyticsPanel)
+	- [Leap Motion](#leap-motion)
 
 5. [Test](#test)
   - [Protocollo di test](#protocollo-di-test)
@@ -27,9 +46,9 @@
 6. [Consuntivo](#consuntivo)
 
 7. [Conclusioni](#conclusioni)
-
-  - [Sviluppi futuri](#sviluppi-futuri)
+  - [Considerazioni finali](#considerazioni-finali)
   - [Considerazioni personali](#considerazioni-personali)
+  - [Sviluppi futuri](#sviluppi-futuri)
 
 8. [Sitografia](#sitografia)
 
@@ -427,7 +446,7 @@ if (evt.getID() == KeyEvent.KEY_PRESSED) {
 }
 ```
 
-## CommandPanel
+### CommandPanel
 
 La classe CommandPanel si occupa di mostrare a schermo tutti i comandi eseguiti e traditti in modo tale che l'utente finale possa capire cosa il dorne ha fatto. I comandi mostrati nella parte dedicata non sono gli stessi che il dorne ha ricevuto ma come detto sono stati tradotti per renderli comprensibili a un utente anche non esperto. C'é un metodo che si occupa in fatti di fare questo che é il seguente:
 
@@ -1040,11 +1059,13 @@ public void script() throws IOException, InterruptedException {
 	if (os.contains("os")) {
 		ProcessBuilder pb = new ProcessBuilder();
 		pb.redirectErrorStream(true);
-		String usrPath = System.getProperty("user.dir") + "/Live/Script/RunLiveMac.sh";
+		String usrPath = System.getProperty("user.dir") + 
+			"/Live/Script/RunLiveMac.sh";
 		pb.command("sh", "-c", usrPath);
 		Process process = pb.start();
 	} else {
-		String usrPath = System.getProperty("user.dir") + "\\Live\\Script\\";
+		String usrPath = System.getProperty("user.dir") + 
+			"\\Live\\Script\\";
 		String path = "cmd /c start" + usrPath + "RunLiveWin.bat";
 		Runtime rn = Runtime.getRuntime();
 		Process pr = rn.exec(path);
@@ -1245,27 +1266,37 @@ Questo metodo é l'anima della classe, questo metodo viene invocato automaticame
 
 ```java
 if (frame.hands().count() > 0) {
-            Hand hand = frame.hands().get(0);
-            if (hand.isRight()) {
-                rightHand = frame.hands().rightmost();
-                rightHandMiddleFinger = rightHand.fingers().fingerType(Finger.Type.TYPE_MIDDLE).get(0);
-            } else {
-                leftHand = frame.hands().leftmost();
-                leftHandMiddleFinger = leftHand.fingers().fingerType(Finger.Type.TYPE_MIDDLE).get(0);
-            }
-            if (frame.hands().count() == 2) {
-                rightHand = frame.hands().rightmost();
-                leftHand = frame.hands().leftmost();
-                if (!rightHand.isRight()) {
-                    leftHand = frame.hands().rightmost();
-                    rightHand = frame.hands().leftmost();
-                }
-                rightHandIndexFinger = rightHand.fingers().fingerType(Finger.Type.TYPE_INDEX).get(0);
-                leftHandIndexFinger = leftHand.fingers().fingerType(Finger.Type.TYPE_INDEX).get(0);
-                rightHandMiddleFinger = rightHand.fingers().fingerType(Finger.Type.TYPE_MIDDLE).get(0);
-                leftHandMiddleFinger = leftHand.fingers().fingerType(Finger.Type.TYPE_MIDDLE).get(0);
-            }
-        }
+	Hand hand = frame.hands().get(0);
+	if (hand.isRight()) {
+		rightHand = frame.hands().rightmost();
+			rightHandMiddleFinger = rightHand.fingers()
+				.fingerType(Finger.Type.TYPE_MIDDLE).get(0);
+		} else {
+			leftHand = frame.hands().leftmost();
+			leftHandMiddleFinger = leftHand.fingers()
+				.fingerType(Finger.Type.TYPE_MIDDLE).get(0);
+		}
+			
+		if (frame.hands().count() == 2) {
+			rightHand = frame.hands().rightmost();
+			leftHand = frame.hands().leftmost();
+			if (!rightHand.isRight()) {
+				leftHand = frame.hands().rightmost();
+				rightHand = frame.hands().leftmost();
+			}
+			rightHandIndexFinger = rightHand.fingers()
+				.fingerType(Finger.Type.TYPE_INDEX).get(0);			
+			leftHandIndexFinger = leftHand.fingers()
+				.fingerType(Finger.Type.TYPE_INDEX).get(0);
+				
+			rightHandMiddleFinger = rightHand.fingers()
+				.fingerType(Finger.Type.TYPE_MIDDLE).get(0);
+				
+			leftHandMiddleFinger = leftHand.fingers()
+				.fingerType(Finger.Type.TYPE_MIDDLE).get(0);
+		}
+	}
+}
 ```
 Questo pezzo di codice fa prima un controllo se il leapmotion trova più di due mani in caso che sia cosi allora controlla se vede la mano destra in caso affermativo va a prendere le sue cordinate. Questo viene fatto anche per la mano sinistra. Una volta fatto questo. Andando avanti con il codice un po' più un basso possiamo trovare un altro paio di righe di codice interessanti.
 
@@ -1281,9 +1312,10 @@ Questo pezzo di codice ci serve per verificare in che stato si trova il dito del
 # Test
 
 
-## Test-case
+## Protocollo di test
 
-## Risultati
+
+## Risultati test
 
 
 ## Mancanze e limitazioni conosciute
@@ -1298,8 +1330,11 @@ Ecco il nostro Gantt consuntivo
 # Conclusioni
 
 
+## Considerazioni finali
 
-## Conclusioni personali
+## Considerazioni personali
+
+## Sviluppi futuri
 
 
 | Michea |
