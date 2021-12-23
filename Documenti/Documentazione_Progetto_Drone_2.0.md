@@ -66,7 +66,7 @@
 
 ### Abstract
 
-  > *Drones are more and  more common in our society. Today we see drone operating everywhere, in every sector. We see drone used in the military, in construction site, Amazon and other companies use drone to ship packet of merch to the people, in some cases drone even deliver the post. For this reason, we want to improve our drone control system, we will make a radical refactor of our old structure, adding new graphics, improving communications, and so on. Thanks to this project piloting a DJI Tello drone will become easy and fun. As the od project we will use, in addition to our drone, a Leap Motion sensor to track movements, the drone will be fully controllable with this sensor and even with the keyboard.
+  > *Drones are more and  more common in our society. Today we see drone operating everywhere, in every sector. We see drone used in the military, in construction site, Amazon and other companies use drone to ship packet of merch to the people, in some cases drone even deliver the post. For this reason, we want to improve our drone control system, we will make a radical refactor of our old structure, adding new graphics, improving communications, and so on. Thanks to this project piloting a DJI Tello drone will become easy and fun. As the old project we will use, in addition to our drone, a Leap Motion sensor to track movements, the drone will be fully controllable with this sensor and even with the keyboard.
 Our project will be even more secure, we will enable and create some safety feature so that anyone can use our product without hurting someone or themselves.*
 
 
@@ -81,7 +81,7 @@ Our project will be even more secure, we will enable and create some safety feat
 # Analisi
 ### Analisi del dominio
 
-È stato richiesto di correggere e migliorare l'interfaccia di controllo drone da noi creata un anno fa. Il programma che avevamo fatto presentava infatti molte imperfezioni ed elementi che non funzionavano. Per questo approfitteremo della presenza di 3 membri del gruppo su 4 per riprendere il progetto, correggerlo, e magari aggiungere nuove funzionalità. Alla fine verrà prodotta un interfaccia di controllo per un drone DJI tello, fortemente basata sulla nostra prima versione, ma migliorata: nell'aspetto grafico, nelle dinamiche di controllo, nella struttura del codice e anche in maniera minore, negli obbiettivi.
+È stato richiesto di correggere e migliorare l'interfaccia di controllo drone da noi creata un anno fa. Il programma che avevamo fatto presentava infatti molte imperfezioni ed elementi che non funzionavano. Per questo approfitteremo della presenza di 3 membri del gruppo su 4 per riprendere il progetto, correggerlo, e magari aggiungere nuove funzionalità. Alla fine verrà prodotta un interfaccia di controllo per un drone DJI Tello, fortemente basata sulla nostra prima versione, ma migliorata: nell'aspetto grafico, nelle dinamiche di controllo, nella struttura del codice e anche in maniera minore, negli obbiettivi.
 
 
 ### Analisi e specifica dei requisiti
@@ -108,15 +108,15 @@ Our project will be even more secure, we will enable and create some safety feat
 |**Nome**      | Sistema di Log deve essere sistemato |
 |**Priorità**  | 1              |
 |**Versione**  | 1.1            |
-|**Note**      | La main thread non viene fatta partire|
+|**Note**      | La main Thread non viene fatta partire|
 
 
 |               |**ID: Req-004**|
 |--------------|----------------|
-|**Nome**      | Fix crash jar |
+|**Nome**      | Fix crash Jar |
 |**Priorità**  | 1              |
 |**Versione**  | 1.1            |
-|**Note**      | Il JAR crasha alla selezione del leap.|
+|**Note**      | Il JAR crasha alla selezione del Leap.|
 
 
 |               |**ID: Req-005**|
@@ -137,7 +137,7 @@ Our project will be even more secure, we will enable and create some safety feat
 
 |               |**ID: Req-007**|
 |--------------|----------------|
-|**Nome**      |Rivedere sistema di Live strem|
+|**Nome**      |Rivedere sistema di Live stream|
 |**Priorità**  | 1              |
 |**Versione**  | 1.1            |
 |**Note**      | Durante fase di test: file non trovato|
@@ -155,12 +155,12 @@ Our project will be even more secure, we will enable and create some safety feat
 |**Nome**      | Sistema di sicurezza esterno|
 |**Priorità**  | 1              |
 |**Versione**  | 1.1            |
-|**Note**      | Sistema di backup di emercency|
+|**Note**      | Sistema di backup di Emergency|
 
 
 |               |**ID: Req-010**|
 |--------------|----------------|
-|**Nome**      | Pulsante esterno fisico per emergency |
+|**Nome**      | Pulsante esterno fisico per Emergency |
 |**Priorità**  | 3              |
 |**Versione**  | 1.1            |
 |**Note**      | |
@@ -168,7 +168,7 @@ Our project will be even more secure, we will enable and create some safety feat
 
 |               |**ID: Req-011**|
 |--------------|----------------|
-|**Nome**      | Frame Pop-Up per dispay infomrazioni |
+|**Nome**      | Frame Pop-Up per display infomrazioni |
 |**Priorità**  | 2              |
 |**Versione**  | 1.1            |
 |**Note**      | |
@@ -195,7 +195,7 @@ Per la pianificazione alleghiamo il Gantt preventivo da noi stabilito:
  - Java JDK 16.0.2
  - Leap Motion SDK 3.2.1
  - Tello SDK 2.0
- - Apache Netbeans IDE 12.0
+ - Apache NetBeans IDE 12.0
 
  **Hardware**
 - Laptop personali
@@ -217,14 +217,14 @@ Abbiamo preso la vecchia interfaccia e abbiamo cambiato tutto quello che non ci 
 ![Progettazione](Progettazione/GUI/Interfaccia/Drone2.0_GUI.png)
 > Interfaccia drone
 
-Come si può vedere rispetto alla prima versione del progetto l'interfaccia é cambiata: sulla sinistra troviamo, come del resto era nella versionep recedente, la lista dei comandi eseguiti. La novità è che al posto di essere una lunga sequenza di istruzioni incomprensibili, stampiamo una traduzione in modo tale che l'utente possa capire meglio cosa sta succedendo. Altre modifiche sostanziali sono:
-* Abbiamo cambiato il riquadro in basso a destra; dove prima c'era un valore numerico con l'altitudine ora rappresentiamo lo stesso valore in 2 modi. Il primo è tramite una lancetta rossa, non visibile nella progettazione, che percorre l'altimetro in base all'altezza. Il secondo sarà invece il valore dell'altitudine numerico, convertito in metri, e inserito nello spazion nero apposito.
+Come si può vedere rispetto alla prima versione del progetto l'interfaccia è cambiata: sulla sinistra troviamo, come del resto era nella versione recedente, la lista dei comandi eseguiti. La novità è che al posto di essere una lunga sequenza di istruzioni incomprensibili, stampiamo una traduzione in modo tale che l'utente possa capire meglio cosa sta succedendo. Altre modifiche sostanziali sono:
+* Abbiamo cambiato il riquadro in basso a destra; dove prima c'era un valore numerico con l'altitudine ora rappresentiamo lo stesso valore in 2 modi. Il primo è tramite una lancetta rossa, non visibile nella progettazione, che percorre l'altimetro in base all'altezza. Il secondo sarà invece il valore dell'altitudine numerico, convertito in metri, e inserito nello spazio nero apposito.
 * Inoltre abbiamo cambiato completamente la gestione della barra inferiore in modo tale che sia più pulita e ordinata
 
 
 ### Pop-up informazioni.
 
-In questa versione del progetto abbiamo progettato anche un Pop-up che ci permettera di stampare a schermo le informazioni che il drone colleziona durante il volo. Non è stato fatto nel progetto veccchio poichè con il primo done in nostro possesso non riusicivamo ad ottenre queste infomrazioni, ma ora dato che ci è sato fornito un drone nuovo, siamo in grado di collezionarle tutte. Nello specifico queste infomrazioni sono:
+In questa versione del progetto abbiamo progettato anche un Pop-up che ci permetterà di stampare a schermo le informazioni che il drone colleziona durante il volo. Non è stato fatto nel progetto vecchio poiché con il primo drone in nostro possesso non riuscivamo ad ottenre queste informazioni, ma ora dato che ci è stato fornito un drone nuovo, siamo in grado di collezionarle tutte. Nello specifico queste informazioni sono:
 
 * Beccheggio
 * Rollio
@@ -233,9 +233,9 @@ In questa versione del progetto abbiamo progettato anche un Pop-up che ci permet
 * Spostamento sull'asse x
 * Spostamento sull'asse y
 * Spostamento sull'asse z
-* Accellerazione sull'asse x
-* Accellerazione sull'asse y
-* Accellerazione sull'asse z
+* Accelerazione sull'asse x
+* Accelerazione sull'asse y
+* Accelerazione sull'asse z
 * Temperatura più bassa
 * Temperatura più alta
 * Tempo di volo
@@ -243,7 +243,7 @@ In questa versione del progetto abbiamo progettato anche un Pop-up che ci permet
 * Pressione in cm
 * Tempo d'uso dei motori
 
-Tutte queste informazioni devono essere costantemente aggiornate e devono apparire in maniera fluida all'intenro del nostro programma. Abbiamo quindi pensato ad un frame che apparisse sotto forma di pop-up. Come si può evincere dalla GUI principale il tasto "analytics" sarà quello responsabile dell'apparizione di questo frame.
+Tutte queste informazioni devono essere costantemente aggiornate e devono apparire in maniera fluida all'interno del nostro programma. Abbiamo quindi pensato ad un frame che apparisse sotto forma di pop-up. Come si può evincere dalla GUI principale il tasto "analytics" sarà quello responsabile dell'apparizione di questo frame.
 
 Abbiamo pensato di implementare questa nuova funzione in maniera molto semplice: un frame diviso a metà, dove nella parte sinistra apparisse la lista di informazioni, mentre in quella sinistra un'immagine che abbellisca il frame e allo stesso tempo dia un senso di continuità al programma.
 
@@ -251,12 +251,12 @@ Ecco quindi la nostra idea:
 ![FrameStatistiche](Progettazione/GUI/Interfaccia/AnalyticsFrame.png)
 >Interfaccia pop-up dati di volo
 
-Già dalla progetztazione sappiamo che potremmo avere qualche problema con il ridimensionamento della finestra. Infatti rischiamo che l'immagine vada a coprire i dati se non gestita in maniera appropriata, quindi la nostra idea è di dare un po' di gioco alla finestra, spostanado e ridimensionando l'immagine e ingrandento e rimpicciolendo il font.
-Ma la finestra avrà comunque delle prorporzioni limitate, per garantire l'interezza delle stringhe di dati e dell'immagine a finaco.
+Già dalla progettazione sappiamo che potremmo avere qualche problema con il ridimensionamento della finestra. Infatti rischiamo che l'immagine vada a coprire i dati se non gestita in maniera appropriata, quindi la nostra idea è di dare un po' di gioco alla finestra, spostando e ridimensionando l'immagine e ingrandimento e rimpicciolendo il font.
+Ma la finestra avrà comunque delle proporzioni limitate, per garantire l'interezza delle stringhe di dati e dell'immagine a fianco.
 
 ### Schema delle classi
 
-Per questo progetto ci siamo fatti uno schema delle classi iniziale, poi in base a quello abbiamo scritto il software. Tuttavia gli sviluppi, i problemi, i chiarimenti con i docenti, i cambi rispetto all'anno scorso, e altri fattori ci hanno spinto a cambiarlo leggermente in corso d'opera. A fine progettoa bbiamo quindi generato uno schema delle classi con il plugin "EasyUML" di NetBeans.
+Per questo progetto ci siamo fatti uno schema delle classi iniziale, poi in base a quello abbiamo scritto il software. Tuttavia gli sviluppi, i problemi, i chiarimenti con i docenti, i cambi rispetto all'anno scorso, e altri fattori ci hanno spinto a cambiarlo leggermente in corso d'opera. A fine progetto abbiamo quindi generato uno schema delle classi con il plugin "EasyUML" di NetBeans.
 
 ![SchemaDelleClassi](Progettazione/DiagrammaClassi/DiagrammaClassiFinale.png)
 
@@ -269,7 +269,7 @@ Per questo progetto ci siamo fatti uno schema delle classi iniziale, poi in base
 NOTA BENE: DOVE SONO PRESENTI LE IMMAGINI OCCORRE COMUNQUE ANCORA SPIEGARE IN MODO DETTAGLIATO IL CODICE IN MODO PRATICO.
 
 ## Introduzione implementazione
-Durante la realizzazione del progetto sono state ridefinite molte cose rispetto alla prima versione, innanzitutto è stato fatto un refactor del codice precedente, andando a cambiare e ottimizzare i files dell'intero progetto. Una volta ottimizato e pulito il codice è stato adottato un cambiamento piuttosto rilevante riguardante la struttura dei package e delle classi, in modo da rendere il resto dell'implementazione più semplice, ordinata e migliorare un minimo le prestazioi del programma. Sono poi stati corrette tutte le imperfezioni e i bug trovati inerenti le vecchie funzionalità e infine apportate alcune aggiunte e accorgimenti.
+Durante la realizzazione del progetto sono state ridefinite molte cose rispetto alla prima versione, innanzitutto è stato fatto un refactor del codice precedente, andando a cambiare e ottimizzare i files dell'intero progetto. Una volta ottimizzato e pulito il codice è stato adottato un cambiamento piuttosto rilevante riguardante la struttura dei package e delle classi, in modo da rendere il resto dell'implementazione più semplice, ordinata e migliorare un minimo le prestazioni del programma. Sono poi stati corrette tutte le imperfezioni e i bug trovati inerenti alle vecchie funzionalità e infine apportate alcune aggiunte e accorgimenti.
 
 ## Refactor generale
 Per la definizione della nuova struttura del progetto è stato deciso di dividere i package in base alle funzionalità che offre il software, in modo da poter suddividere il lavoro in modo semplice e non creare conflitti e relazioni non necessarie tra classi non interessate:
@@ -279,10 +279,10 @@ Riguardo invece la ristrutturazione delle vecchie classi, molte di esse sono sta
 
 ### Control
 
-A differenza della prima versione del progetto, quest'anno abbiamo deciso di sviluppare una classe che gestisse tutti i dati dell'applicazione. Questa classe è utile a smistare in modo automatico i dati. Per poterlo fare abbiamo deciso di usare degli oggetti di tipo `Queue`, che sono letteralmente delle "code" o "buffer". Il motivo che ci ha spinto a utilizzare questo costrutto è che ci semplificano e velocizzano notevolmente la gestione dei dati attraverso il programma. Abbiamo deciso di usare una `Queue` generale di input, che riceva i dati da tutti i dispositivi esterni, quindi tastiera e Leap Motion. L'unico problema che abbiamo riscontrato nell'utilizzo di questo metodo è che i dati solo leggibili solo una volta. Infatti prelevandoli dalla coda con il metodo `.poll()`. Se perÒ pensiamo al nostro programma i dati devono essere contemporaneamnte in più parti dell'applicazione,perciò abbiamo deciso di creare anche delle `Queue` di output per smistare i dati nei vari punti del programma.
+A differenza della prima versione del progetto, quest'anno abbiamo deciso di sviluppare una classe che gestisse tutti i dati dell'applicazione. Questa classe è utile a smistare in modo automatico i dati. Per poterlo fare abbiamo deciso di usare degli oggetti di tipo `Queue`, che sono letteralmente delle "code" o "buffer". Il motivo che ci ha spinto a utilizzare questo costrutto è che ci semplificano e velocizzano notevolmente la gestione dei dati attraverso il programma. Abbiamo deciso di usare una `Queue` generale di input, che riceva i dati da tutti i dispositivi esterni, quindi tastiera e Leap Motion. L'unico problema che abbiamo riscontrato nell'utilizzo di questo metodo è che i dati solo leggibili solo una volta. Infatti prelevandoli dalla coda con il metodo `.poll()`. Se però pensiamo al nostro programma i dati devono essere contemporaneamente in più parti dell'applicazione, perciò abbiamo deciso di creare anche delle `Queue` di output per smistare i dati nei vari punti del programma.
 
 ##### Run
-È doverso dire che `Control` è una specializzazzione di Thread, ecco quindi il suo metodo `run()`:
+È doveroso dire che `Control` è una specializzazione di Thread, ecco quindi il suo metodo `run()`:
 
 ```java
 public void run() {
@@ -302,7 +302,7 @@ public void run() {
 ```
 Questo metodo viene eseguito in continuazione, dato che il metodo run contiene in `while` che usa una variabile booleana sempre settata a `true`. 
 L'idea che sta alla base di questo codice è che venga presa l'ultima istruzione inserita nella coda: se per esempio gli elementi della nostra coda fossero | 1 | 2 | 3 | 4 |, utilizzando il già citato metodo `poll()`, estrarremo dalla sequenza il numero 4. 
-Una volta fatto questo il dato viene salvato all'interno della variabile `command` e viene eseguito un controllo in modo da escludere valori nulli che andrebberò a causare problemi più avanti. Se il controllo viene passato, il dato viene salvato nella due code di outbut: quella dedicata alla grafica, di cui parleremo anche nel capitolo della grafica stesso, ma anche e soprattutto nella coda dei comandi da mandare al drone. Tutto questo ci permette di avere un sistema di gestione dei dati ottimale, evitando perdita di dati e rallentamenti inutili.
+Una volta fatto questo il dato viene salvato all'interno della variabile `command` e viene eseguito un controllo in modo da escludere valori nulli che andrebbero a causare problemi più avanti. Se il controllo viene passato, il dato viene salvato nella due code di output: quella dedicata alla grafica, di cui parleremo anche nel capitolo della grafica stesso, ma anche e soprattutto nella coda dei comandi da mandare al drone. Tutto questo ci permette di avere un sistema di gestione dei dati ottimale, evitando perdita di dati e rallentamenti inutili.
 
 
 #### Main
@@ -414,10 +414,10 @@ try {
 
 
 ### DroneAction
-Nella classe Drone sono state rimosse parecchie ridondanze e spostati altrettanti metodi, abbiamo cercato di rendere la classe il più generica possibile per suddividere le funzionalità in altre classi apposite. Proprio a questo scopo questa classe è stata rinominata in `DroneAction`. Essa ha lo scopo di rappresentare i movimenti del drone, si occupa inoltre di interagire direttamente con esso. Al suo interno sono salvate le caratteristiche principali della comunicazione; come ad esempio l'indirizzo IP e le porte d'ascolto o d'invio. Inoltre essa si occupa della realizzazione dei `socket` e dell'invio dei messaggi. Infomrazioni come IP e porta sono salvate come costanti, visto che entrmabi sono dettati dall'SDK del drone stesso.
+Nella classe Drone sono state rimosse parecchie ridondanze e spostati altrettanti metodi, abbiamo cercato di rendere la classe il più generica possibile per suddividere le funzionalità in altre classi apposite. Proprio a questo scopo questa classe è stata rinominata in `DroneAction`. Essa ha lo scopo di rappresentare i movimenti del drone, si occupa inoltre di interagire direttamente con esso. Al suo interno sono salvate le caratteristiche principali della comunicazione; come ad esempio l'indirizzo IP e le porte d'ascolto o d'invio. Inoltre essa si occupa della realizzazione dei `socket` e dell'invio dei messaggi. Informazioni come IP e porta sono salvate come costanti, visto che entrambi sono dettati dall'SDK del drone stesso.
 
-Per quanto riguarda l'invio dei dati verso il drone è stato creato un metodo apposito, chiamato `sendCommand`. Per prima cosa esso verifica se è la prima volta che viene mandato un comando tramite il flag `firstSend`, se è così il flag assume valore `false` e viene istanziata e inviata una stringa contenente il comando `command`. Questîstruzione è fondamentale se si vuole abilitare l'SDK del drone per la comunicazione e il controllo wireless.
-Successivamente viene istanziato un array di byte che tramite il metodo `getBytes()` salva all'intenrno dell'array stesso i byte della stringa inserita come parametro. Viene poi creato un oggetto `DatagramPacket` che, ricevendo come parametro l'array di byte appena citato, la lunghezza dello stesso, l'IP a e la porta di comunicazione, invia il pacchetto al drone tramite il metodo `send()`. Infine viene creato un altro oggetto DatagramPacket, stavolta usando dei parametri hardcoded, volto a ricevere i dati che il drone restituisce.
+Per quanto riguarda l'invio dei dati verso il drone è stato creato un metodo apposito, chiamato `sendCommand`. Per prima cosa esso verifica se è la prima volta che viene mandato un comando tramite il flag `firstSend`, se è così il flag assume valore `false` e viene istanziata e inviata una stringa contenente il comando `command`. Quest’istruzione è fondamentale se si vuole abilitare l'SDK del drone per la comunicazione e il controllo wireless.
+Successivamente viene istanziato un array di byte che tramite il metodo `getBytes()` salva all'interno dell'array stesso i byte della stringa inserita come parametro. Viene poi creato un oggetto `DatagramPacket` che, ricevendo come parametro l'array di byte appena citato, la lunghezza dello stesso, l'IP a e la porta di comunicazione, invia il pacchetto al drone tramite il metodo `send()`. Infine viene creato un altro oggetto DatagramPacket, stavolta usando dei parametri hardcoded, volto a ricevere i dati che il drone restituisce.
 
 ```java
 public void sendCommand(String command) {
@@ -450,7 +450,7 @@ public void sendCommand(String command) {
 }
 ```
 
-Il metodo `sendCommand()` è quindi fondamentale per la comunicazione tra controller e drone; ma per funzionare correttamente ha bisogno di essere eseguito in loop, in modo tale da poter inviare i dati continuamente. Soprattutto per questo motivo anche questa classe è una specializzazzione di Thread.
+Il metodo `sendCommand()` è quindi fondamentale per la comunicazione tra controller e drone; ma per funzionare correttamente ha bisogno di essere eseguito in loop, in modo tale da poter inviare i dati continuamente. Soprattutto per questo motivo anche questa classe è una specializzazione di Thread.
 
 Nel metodo `run()` che rappresenta la Thread viene eseguito un ciclo infinito dove ogni 50 millisecondi viene ridefinito l'attributo command, che rappresenta la stringa da inviare di volta in volta, salvando al suo interno l'ultimo elemento della coda che viene usata per salvare la sequenza di comandi da eseguire. Infine, come menzionato prima, viene invocato il metodo sendCommand() passando come parametro l'attributo command appena ridefinito, per poter finalmente inviare il pacchetto al drone.
 
@@ -470,9 +470,9 @@ public void run() {
 
 
 ### KeyDispatcher
-Il KeyListener è stato sostituito da un KeyDispatcher, al fine di rimuovere un fastidioso problema riguardante il focus dell'applicazione, così facendo il focus della tastiera è diventato dinamico e l'utente non ha problemi nel passare da un tool all'altro continuando a guidare il drone con la modalità Keyboard. A livello di codice il KeyDispatcher è molto simile a un classico keyListener, tuttavia è stato dovuto fare un accorgimento per poter adattare meglio i controlli da tastiera al drone, ciò che è stato fatto è la riduzione di lettura di comandi da parte del drone, in pratica nel keyDispatcher vengono mandati soltanto la metà dei pacchetti di richiesta di movimento al drone, filtrando queste richieste il drone risulta più reattivo durante la guida e anche più fluido nei movimenti.
+Il KeyListener è stato sostituito da un KeyDispatcher, al fine di rimuovere un fastidioso problema riguardante il focus dell'applicazione, così facendo il focus della tastiera è diventato dinamico e l'utente non ha problemi nel passare da un tool all'altro continuando a guidare il drone con la modalità Keyboard. A livello di codice il KeyDispatcher è molto simile a un classico KeyListener; tuttavia è stato dovuto fare un accorgimento per poter adattare meglio i controlli da tastiera al drone, ciò che è stato fatto è la riduzione di lettura di comandi da parte del drone, in pratica nel KeyDispatcher vengono mandati soltanto la metà dei pacchetti di richiesta di movimento al drone, filtrando queste richieste il drone risulta più reattivo durante la guida e anche più fluido nei movimenti.
 
-Questa classe è molto breve, contiene due attributi, un flag booleano chiamato pressing e un numero intero chiamato dummyCounter, entrambi vengono utilizati nell'unico metodo usato per il funzionamento del programma, ovvero dispatchedKeyEvent, un metodo che contiene tre grosse sezioni divise tramite degli if, l'unico di essi che è stato utilizzato frequentemente è la sezione keyPressed. Questa porzione di codice viene eseguito ogni volta che l'utente preme un tasto sulla tastiera e in base al codice del tasto premuto manda dei comandi al drone, filtrando però la frequenza massima di tasti premuti tramite i due attributi descritti
+Questa classe è molto breve, contiene due attributi, un flag booleano chiamato pressing e un numero intero chiamato dummyCounter, entrambi vengono utilizzati nell'unico metodo usato per il funzionamento del programma, ovvero dispatchedKeyEvent, un metodo che contiene tre grosse sezioni divise tramite degli if, l'unico di essi che è stato utilizzato frequentemente è la sezione keyPressed. Questa porzione di codice viene eseguito ogni volta che l'utente preme un tasto sulla tastiera e in base al codice del tasto premuto manda dei comandi al drone, filtrando però la frequenza massima di tasti premuti tramite i due attributi descritti
 prima (pressing e dummyCounter).
 
 ```java
@@ -541,7 +541,7 @@ if (evt.getID() == KeyEvent.KEY_PRESSED) {
 
 ### CommandPanel
 
-La classe CommandPanel si occupa di mostrare a schermo tutti i comandi eseguiti e traditti in modo tale che l'utente finale possa capire cosa il dorne ha fatto. I comandi mostrati nella parte dedicata non sono gli stessi che il dorne ha ricevuto ma come detto sono stati tradotti per renderli comprensibili a un utente anche non esperto. C'é un metodo che si occupa in fatti di fare questo che é il seguente:
+La classe CommandPanel si occupa di mostrare a schermo tutti i comandi eseguiti e tradotti in modo tale che l'utente finale possa capire cosa il drone ha fatto. I comandi mostrati nella parte dedicata non sono gli stessi che il drone ha ricevuto ma come detto sono stati tradotti per renderli comprensibili a un utente anche non esperto. C'è un metodo che si occupa in fatti di fare questo che è il seguente:
 
 ```java
 private String commandConversion(String command) {
@@ -581,9 +581,9 @@ private String commandConversion(String command) {
        return infoCommand.toString().trim();
    }
 ```
-Questo metodo riceve il comando da convertire e ritorna il comando convertito, funziona nel seguente modo.La stringa ricevuta dal metodo assomiglierà molto a questa "rc 10 10 0 0". La stringa viene divisa utilizando gli spazi e viene salvata all'interno di un array. Una volta fatto questo viene controlato che la strina inizi per "rc" in caso contrario viene imediatamente ritornata senza fare altri controlli.In caso che invece la stringa iniziasse per "rc" allora l'array passa in una serie di controlli e i vari valori che c'erano all'interno della stringa vengono comutati in parole e salvate in un altra variabile. Alla fine del metodo viene ritornata la stringa convertita.
+Questo metodo riceve il comando da convertire e ritorna il comando convertito, funziona nel seguente modo. La stringa ricevuta dal metodo assomiglierà molto a questa "rc 10 10 0 0". La stringa viene divisa utilizzando gli spazi e viene salvata all'interno di un array. Una volta fatto questo viene controllato che la strina inizi per "rc" in caso contrario viene immediatamente ritornata senza fare altri controlli. In caso che invece la stringa iniziasse per "rc" allora l'array passa in una serie di controlli e i vari valori che c'erano all'interno della stringa vengono commutati in parole e salvate in un altra variabile. Alla fine del metodo viene ritornata la stringa convertita.
 
-Il metodo apena descrito viene invocato solo dopo che il metodo run verifichi che ci sono nuovi dati all'interno della sua coda e per fare questa operazione l'abbiamo scritto il seguente codice:
+Il metodo appena descritto viene invocato solo dopo che il metodo run verifichi che ci sono nuovi dati all'interno della sua coda e per fare questa operazione l'abbiamo scritto il seguente codice:
 
 ```java
 public void run() {
@@ -605,10 +605,10 @@ public void run() {
     }
 
 ```
-Questo codice come quello un po' di control fa prima una verifica che l'ultimo elemento sia valido e che non sia nullo e una volta fatto questo richiama il metodo refreshCommands che al suo interno fa un piccolo controllo che il messaggio passato non sia "rc 0 0 0 0" perché in caso che sia quella l'istruzione passata allora non viene neanche richiamato il metodo commandConversion perché non deve essere visualizato nulla a schermo. In caso contario viene invece invocato.
+Questo codice come quello un po' di control fa prima una verifica che l'ultimo elemento sia valido e che non sia nullo e una volta fatto questo richiama il metodo refreshCommands che al suo interno fa un piccolo controllo che il messaggio passato non sia "rc 0 0 0 0" perché in caso che sia quella l'istruzione passata allora non viene neanche richiamato il metodo commandConversion perché non deve essere visualizzato nulla a schermo. In caso contrario viene invece invocato.
 
 ### Sequence
-Il sistema di sequenze è stato rivisto, non solo sono stati risolti i problemi relativi all'esecuzione e al salvataggio di esse ma è stato ricalibrato l'intero sistema per fare in modo che la velocità di esecuzione sia adatta, visto che la sensibilità di base risultava troppo elevata. Una volta cliccato sul bottone per avviare la registrazione la classe Sequence si occupa della creazione del file e della scrittura dei comandi registrati al suo interno e, successivamente, se si decide di salvare la registrazione viene rinominato il file. Anche l'esecuzione delle sequenze sono compito di questa classe, che ha una sua coda dedicata all'interno della quale inserisce tutti i comandi precedentemente letti dal file scelto dell'utente, comandi che vengono poi passati dalla coda di classe alla coda principale di input della classe Control. Per quanto riguarda la registrazione e il salvataggio delle sequenze ci sono due metodi principali, createFile e writeFile, che servono rispettivamente per la creazione e la scrittura dei files.
+Il sistema di sequenze è stato rivisto, non solo sono stati risolti i problemi relativi all'esecuzione e al salvataggio di esse ma è stato ricalibrato l'intero sistema per fare in modo che la velocità di esecuzione sia adatta, visto che la sensibilità di base risultava troppo elevata. Una volta cliccato sul bottone per avviare la registrazione la classe Sequence si occupa della creazione del file e della scrittura dei comandi registrati al suo interno e, successivamente, se si decide di salvare la registrazione viene rinominato il file. Anche l'esecuzione delle sequenze è compita di questa classe, che ha una sua coda dedicata all'interno della quale inserisce tutti i comandi precedentemente letti dal file scelto dell'utente, comandi che vengono poi passati dalla coda di classe alla coda principale di input della classe Control. Per quanto riguarda la registrazione e il salvataggio delle sequenze ci sono due metodi principali, createFile e writeFile, che servono rispettivamente per la creazione e la scrittura dei files.
 
 Nel metodo createFile() che riceve come parametro una stringa (il nome del file), viene creato un oggetto file usando come parametro la stringa ricevuta anche dal metodo stesso. Successivamente viene fatto un controllo per verificare che il file appena istanziato non esista già, in tal caso viene stampata a terminale una stringa di conferma, in caso contrario viene segnalato che il file esiste già e non viene quindi creato.
 
@@ -651,7 +651,7 @@ public void writeFile(String fileName) {
 }
 ```
 
-Per la lettura delle sequenze invece è stato sviluppato un solo metodo, ovvero readFile(), che crea un oggetto BufferedReader ricevendo come parametro una stringa che sarà il nome del file (la stessa che viene passata come parametro allo stesso metodo). Successviamente viene istanziata una stringa chiamata line contenente il contenuto della prima riga del file, tramite un ciclo che termina quando non ci sono più righe leggibile nel file viene aggiunta la linea corrente all'oggetto BufferedReader e la variabile line viene ridefinita passando alla prossima riga.
+Per la lettura delle sequenze invece è stato sviluppato un solo metodo, ovvero readFile(), che crea un oggetto BufferedReader ricevendo come parametro una stringa che sarà il nome del file (la stessa che viene passata come parametro allo stesso metodo). Successivamente viene istanziata una stringa chiamata line contenente il contenuto della prima riga del file, tramite un ciclo che termina quando non ci sono più righe leggibile nel file viene aggiunta la linea corrente all'oggetto BufferedReader e la variabile line viene ridefinita passando alla prossima riga.
 
 ```java
 public void readFile(String fileName) throws 
@@ -1084,15 +1084,15 @@ double angle = altitude / 1.58 + MIN_ANGLE;
 
 ## Refactor e implementazione dei tools
 
-Come per lo scroso progetto il nostro applicativo non si limita a permettere la guida del drone, ma ci permette anche di effettuare altre operazioni. Oltre alla live, già presente nel vecchio progetto, e alla posibilità di registrare ed eseguire sequenze, già citata in precedenza, in questa versione del progetto abbiamo implemntato anche un nuovo pannello pop up, che mostrasse tutte le statistiche collezionate dal drone. Infatti oltre a restituire i dati sulla posizione già citati in precedenza, il drone collezziona altre infromazioni, come dati sulla temperautra, il tempo di volo, la batteria, e molto altro.
+Come per lo scroso progetto il nostro applicativo non si limita a permettere la guida del drone, ma ci permette anche di effettuare altre operazioni. Oltre alla live, già presente nel vecchio progetto, e alla possibilità di registrare ed eseguire sequenze, già citata in precedenza, in questa versione del progetto abbiamo implementato anche un nuovo pannello pop up, che mostrasse tutte le statistiche collezionate dal drone. Infatti oltre a restituire i dati sulla posizione già citati in precedenza, il drone colleziona altre informazioni, come dati sulla temperatura, il tempo di volo, la batteria, e molto altro.
 
-Per questo capitolo paritremo però dallo sviluppo della live:
+Per questo capitolo partiremo però dallo sviluppo della live:
 
 ### Live
-Lo sviluppo della live ha complicato abbastanza il nostro progetto, infatti abbiamo dovuto modifcare un po' sia il codice della classe responsabile di chiamare gli script, sia il codice degli script stessi. Il primo passo è stato creare la classe per la barra inferiore, poi abbiamo modificato la classe `Browser` e i suoi script, e in seguito abbiamo fatto il pannello delle informazioni.
+Lo sviluppo della live ha complicato abbastanza il nostro progetto, infatti abbiamo dovuto modificare un po' sia il codice della classe responsabile di chiamare gli script, sia il codice degli script stessi. Il primo passo è stato creare la classe per la barra inferiore, poi abbiamo modificato la classe `Browser` e i suoi script, e in seguito abbiamo fatto il pannello delle informazioni.
 
 #### ToolBarPanel
-Questa è una classe molto semplice, rappresenta la barra inferiore della nostra applicazione, e contiente 2 pulsanti. Abbiamo deciso di rimuovere l'indicazione della batteria, in quanto già presente nel pannello dei dati di volo.
+Questa è una classe molto semplice, rappresenta la barra inferiore della nostra applicazione, e contiene 2 pulsanti. Abbiamo deciso di rimuovere l'indicazione della batteria, in quanto già presente nel pannello dei dati di volo.
 Il codice della toolbar è quindi molto semplice. Al suo interno c'è un istanza della classe `Browser` e una della classe `AnalyticsFrame`, e due metodi: il primo per l'attivazione della live, e il secondo per l'attivazione del frame Analytics.
 
 ```java
@@ -1118,26 +1118,26 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
 
 ```
 
-Come possiamo vedere nel primo metodo, quello dedicato alla live, vengono chiamati i 2 metodi per l'avvio dello script e per l'aperutra del browser, ma ne parleremo meglio nel prossimo capitolo.
+Come possiamo vedere nel primo metodo, quello dedicato alla live, vengono chiamati i 2 metodi per l'avvio dello script e per l'apertura del browser, ma ne parleremo meglio nel prossimo capitolo.
 
-Nel secondo metodo invece viene creato un riferiemnto ad AnalyticsFrame, poi viene istanziata una thread con questo riferimento e viene fatto partire il tutto.
+Nel secondo metodo invece viene creato un riferimento ad AnalyticsFrame, poi viene istanziata una Thread con questo riferimento e viene fatto partire il tutto.
 
 #### Browser
 
 -----
 
-Una premessa importante per quanto concerne la live, se si vuole che essa funzioni bisogna aver installato `nodeJs` e `ffmpeg`.
+Una premessa importante per quanto concerne la live, se si vuole che essa funzioni bisogna aver installato `NodeJs` e `ffmpeg`.
 Essi devono essere poi posizionati nelle loro locazioni di default:
 
-Per MacOs:
+Per MacOS:
 
-NodeJS: `/usr/local/bin/`
-FFmpeg: `/usr/local/bin/ffmpeg`
+NodeJs: `/usr/local/bin/`
+Ffmpeg: `/usr/local/bin/ffmpeg`
 
-Per windows:
+Per Windows:
 
-NodeJS: `C:\Program Files\nodejs`
-FFmpeg: `C:\FFmpeg\`
+NodeJs: `C:\Program Files\nodejs`
+Ffmpeg: `C:\FFmpeg\`
 
 -------
 
@@ -1220,7 +1220,7 @@ node indexWin.js
 
 #### AnalyticsFrame
 
-Per lo sviluppo del frame con i dati di volo abbiamo, inizialmente, creato un JFrame che veniva fatto partire quando il puslante apposito veniva premuto. Tuttavia ci siamo accorti, nell'aggiunta dell'immagine, che questo approccio non avrebbe funzionato. Infatti abbiamo avuto la necessita di utilizzare il metodo `paintComponent` di Siwng, ma esso non può essere sovrascritto in un JFrame. Abbiamo quidi dovuto atturare un piccolo workaround: al posto che far partire un unico JFrame, che è anche una Thread, abbiamo deciso di creare un JPanel da inserire all'interno del JFrame. Quando il pulsante viene premuto, viene fatta partire la Thread del JFrame, che a sua volta fa partire la Thread del JPanel. In questo modo possiamo sovrascrivere il metodo `paintComponent` nel JPanel e ottenere la grafica da noi desiderata.
+Per lo sviluppo del frame con i dati di volo abbiamo, inizialmente, creato un JFrame che veniva fatto partire quando il pulsante apposito veniva premuto. Tuttavia ci siamo accorti, nell'aggiunta dell'immagine, che questo approccio non avrebbe funzionato. Infatti abbiamo avuto la necessita di utilizzare il metodo `paintComponent` di Swing, ma esso non può essere sovrascritto in un JFrame. Abbiamo quindi dovuto atturare un piccolo workaround: al posto che far partire un unico JFrame, che è anche una Thread, abbiamo deciso di creare un JPanel da inserire all'interno del JFrame. Quando il pulsante viene premuto, viene fatta partire la Thread del JFrame, che a sua volta fa partire la Thread del JPanel. In questo modo possiamo sovrascrivere il metodo `paintComponent` nel JPanel e ottenere la grafica da noi desiderata.
 
 Qui il JFrame fa partire il JPanel:
 
@@ -1231,7 +1231,7 @@ public void run() {
 }
 ```
 
-Come abbiamo detto nella progettazione questo pannello non deve potersi ingrandire e rimpiccilire troppo, per questo ne abbiamo dovuto forzare le dimensioni nel cotruttore.
+Come abbiamo detto nella progettazione questo pannello non deve potersi ingrandire e rimpicciolire troppo, per questo ne abbiamo dovuto forzare le dimensioni nel costruttore.
 
 ```java
 this.setMinimumSize(new Dimension(650, 450));
@@ -1272,7 +1272,7 @@ analyticsBufferData.add("<html>"+
 	+"<br>"+"Time of engine use : " + status.get("time")
 		.toString()+"</html>");
 ```
-Si noti che non aggiungiamo ad ogni elemento della lista un dato, ma inseriamo sempre i dati nella loro interezza. Questo perchè poi, quando arriveremo a stampre, non dobbiamo fare lunghi cicli per concatenare gli elementi e mostralri tutti, ma basta un unica istruzione per fare tutto.
+Si noti che non aggiungiamo ad ogni elemento della lista un dato, ma inseriamo sempre i dati nella loro interezza. Questo perché poi, quando arriveremo a stampare, non dobbiamo fare lunghi cicli per concatenare gli elementi e mostrarli tutti, ma basta un unica istruzione per fare tutto.
 
 Poi in AnalyticsPanel, per far sì che il nostro sistema di code funzioni, abbiamo istanziato una coda e un suo setter:
 
@@ -1284,7 +1284,7 @@ public void setAnalyticsBufferData(Queue<String> analyticsBufferData) {
 }
 ```
 
-AnalyticsPanel riprende poi alcune dinamiche del pannello con l'altimetro, anche in questo caso abbiamo un JLabel che conterra tutti i dati di volo, un font che verrà modificato e adattato, ed infine una BufferdImage. Il costruttore è quindi molto semplice, l'unico accorgimento che abbiamo preso è stato quello di fare un `import` statico dei metodi `toBufferdImage` e `resizeImage`.
+AnalyticsPanel riprende poi alcune dinamiche del pannello con l'altimetro, anche in questo caso abbiamo un JLabel che conterrà tutti i dati di volo, un font che verrà modificato e adattato, ed infine una BufferdImage. Il costruttore è quindi molto semplice, l'unico accorgimento che abbiamo preso è stato quello di fare un `import` statico dei metodi `toBufferdImage` e `resizeImage`.
 
 ```java
 import static graphics.Model.resizeImage;
@@ -1319,7 +1319,7 @@ public void run() {
 }
 ```
 
-Il metodo più importante è quindi `paintComponent`: esso si occupa di disegnare la BufferdImage. Anche in questo caso abbiamo dovuto fare dei controlli sulla grandezza dell'immagine, ma siccome il pannello ha comunque relativamente poco spazio di movimento e rimane abbastanza statico, è bastato prendere la lunghezza del pannello e trovare la lunghzza dell'immagine, definita come la metà del primo valore. L'altezza dell'immagine risulta poi essere la metà della lunghezza.
+Il metodo più importante è quindi `paintComponent`: esso si occupa di disegnare la BufferdImage. Anche in questo caso abbiamo dovuto fare dei controlli sulla grandezza dell'immagine, ma siccome il pannello ha comunque relativamente poco spazio di movimento e rimane abbastanza statico, è bastato prendere la lunghezza del pannello e trovare la lunghezza dell'immagine, definita come la metà del primo valore. L'altezza dell'immagine risulta poi essere la metà della lunghezza.
 Infine l'immagine viene ridimensionata, con il metodo `resizeImage`, e disegnata. Non potendo disegnarla al centro del pannello, avrebbe infatti coperto le informazioni, abbiamo dovuto leggermente spostarla sull'asse delle x, ma con qualche test abbiamo raggiunto un risultato soddisfacente.
 
 
@@ -1348,13 +1348,13 @@ public void paintComponent(Graphics g) {
 
 ## LeapMotion
 
-Questa classe arriva dal vecchio progetto non é stata stravolta troppo ma l'anno scroso non é stata docuemtnata molto bene quindi abbiamo deciso di farlo in questa versione.
+Questa classe arriva dal vecchio progetto non è stata stravolta troppo ma l'anno scorso non é stata documentata molto bene quindi abbiamo deciso di farlo in questa versione.
 
-Come tutte le altre classi questa classe ha un riferimeto a una coda in questo caso a una Queue di tipo LinkedList, e di conseguenza un setter per andare a impostare il reiferimento. all'interno della classe ci sono tre metodi che sono onFrame,convertRange,betweenExcluded quello che andremo a vedere nel dettagio é il primo.
+Come tutte le altre classi questa classe ha un riferimento a una coda in questo caso a una Queue di tipo LinkedList, e di conseguenza un setter per andare a impostare il riferimento. all'interno della classe ci sono tre metodi che sono onFrame, convertRange, betweenExcluded quello che andremo a vedere nel dettaglio é il primo.
 
 
 #### onFrame
-Questo metodo é l'anima della classe, questo metodo viene invocato automaticamente ogni volta che il nostro LeapMotion registra un nuovo dato.All'interno dei di questo metodo possiamo trovare vari parti di codice interessanti da analizare.In primiss questo:
+Questo metodo è l'anima della classe, questo metodo viene invocato automaticamente ogni volta che il nostro LeapMotion registra un nuovo dato. All’interno dei di questo metodo possiamo trovare vari parti di codice interessanti da analizzare. In primis questo:
 
 
 ```java
@@ -1391,7 +1391,7 @@ if (frame.hands().count() > 0) {
 	}
 }
 ```
-Questo pezzo di codice fa prima un controllo se il leapmotion trova più di due mani in caso che sia cosi allora controlla se vede la mano destra in caso affermativo va a prendere le sue cordinate. Questo viene fatto anche per la mano sinistra. Una volta fatto questo. Andando avanti con il codice un po' più un basso possiamo trovare un altro paio di righe di codice interessanti.
+Questo pezzo di codice fa prima un controllo se il Leap Motion trova più di due mani in caso che sia cosi allora controlla se vede la mano destra in caso affermativo va a prendere le sue coordinate. Questo viene fatto anche per la mano sinistra. Una volta fatto questo. Andando avanti con il codice un po' più un basso possiamo trovare un altro paio di righe di codice interessanti.
 
 ```java
 if (!rightHandIndexFinger.isExtended()) {
@@ -1399,7 +1399,7 @@ if (!rightHandIndexFinger.isExtended()) {
             commandsBufferInput.add(command);
 }
 ```
-Questo pezzo di codice ci serve per verificare in che stato si trova il dito della mano destra in caso che sia piegato allora mandiamo al dorne il comando di decollare. Tutto il resto del codice che possiamo trovare serve per la conversione delle cordinate della mano a valori per il drone.
+Questo pezzo di codice ci serve per verificare in che stato si trova il dito della mano destra in caso che sia piegato allora mandiamo al drone il comando di decollare. Tutto il resto del codice che possiamo trovare serve per la conversione delle coordinate della mano a valori per il drone.
 
 
 # Test
@@ -1409,7 +1409,7 @@ Questo pezzo di codice ci serve per verificare in che stato si trova il dito del
 
 Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il drone. Lo stesso schema di test verrà poi ripreso, assieme ai requisiti, per i test finali.
  
-| **01**  | Descrizione test                  | Risultato Netbeans | Risultato Jar | Note NetBeans       | Note Jar            |
+| **01**  | Descrizione test                  | Risultato NetBeans | Risultato Jar | Note NetBeans       | Note Jar            |
 |---------|-----------------------------------|--------------------|---------------|---------------------|---------------------|
 | Test-1  | Decollo da tastiera               | Passato            | Passato       | -                   | -                   |
 | Test-2  | Atterraggio da tastiera           | Passato            | Passato       | -                   | -                   |
@@ -1424,7 +1424,7 @@ Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il d
 | Test-10 | Emergenza con la tastiera         | Passato            | Fallito       | -                   | Crash Jar           |
 |         |                                   |                    |               |                     |                     |
 | Test-11 | Interfaccia grafica drone         | Fallito            | Fallito       | Nessun movimento    | Nessun movimento    |
-| Test-12 | Ridimensionamento interfaccia     | Fallito            | Fallito       | Immagini stabordanti| Immagini stabordanti|
+| Test-12 | Ridimensionamento interfaccia     | Fallito            | Fallito       | Immagini strabordanti| Immagini strabordanti|
 | Test-13 | Velocità                          | Passato            | Passato       | -                   | -                   |
 |         |                                   |                    |               |                     |                     |
 | Test-14 | Registrazione Sequenza di comandi | Passato            | Passato       | -                   | -                   |
@@ -1435,7 +1435,7 @@ Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il d
 
 Per i test finali abbiamo quindi condotto gli stessi identici test.
 
-| **02**  | Descrizione test                  | Risultato Netbeans | Risultato Jar | Note NetBeans | Note Jar           |
+| **02**  | Descrizione test                  | Risultato NetBeans | Risultato Jar | Note NetBeans | Note Jar           |
 |---------|-----------------------------------|--------------------|---------------|---------------|--------------------|
 | Test-1  | Decollo da tastiera               | Passato            |               | -             |                    |
 | Test-2  | Atterraggio da tastiera           | Passato            |               | -             |                    |
@@ -1457,7 +1457,7 @@ Per i test finali abbiamo quindi condotto gli stessi identici test.
 | Test-15 | Esecuzione di sequenza di comandi | Passato            |               | -             |                    |
 | Test-16 | Live dal PC                       | Passato            |               | -             |                    |
 
-Abbiamo inoltre fatto i test per la nuova funizionalità da noi implementata, ovvero il pannello Analytics.
+Abbiamo inoltre fatto i test per la nuova funzionalità da noi implementata, ovvero il pannello Analytics.
 
 
 | Test Case |**03** |
@@ -1476,15 +1476,15 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 |---|---|
 | **Nome** | Utilizzo di DatagramPacket |
 | **Descrizione** | La connessione al drone deve avvenire tramite UDP |
-| **Procedura** | Connettere il PC alla rete wi-fi del drone e inviare un comando |
+| **Procedura** | Connettere il PC alla rete Wi-Fi del drone e inviare un comando |
 | **Risultati attesi** | Il comando viene interpretato |
 
 
 | Test Case | TC-002 |
 |---|---|
 | **Nome** | Interfaccia controllo Drone |
-| **Descrizione** | Panel o frame diviso in 4 con delle imagini 2d del drone per vedere come si muove. |
-| **Procedura** | Connettere il PC alla rete wi-fi del drone, successivamente fare un volo di test verificando di muovere il drone in tutte le direzioni |
+| **Descrizione** | Panel o frame diviso in 4 con delle immagini 2d del drone per vedere come si muove. |
+| **Procedura** | Connettere il PC alla rete Wi-Fi del drone, successivamente fare un volo di test verificando di muovere il drone in tutte le direzioni |
 | **Risultati attesi** | Il frame risponde e aggiorna correttamente le immagini in base alla posizione del drone |
 
 
@@ -1492,7 +1492,7 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 |---|---|
 | **Nome** | Gestione tastiera |
 | **Descrizione** | Comandare il drone con la tastiera. |
-| **Procedura** | Connettere il PC alla rete wi-fi del drone e inviare qualsiasi tipo di comando da tastiera (WASD, Frecce, UHJK, Enter, Spazio, M, N, T, L) |
+| **Procedura** | Connettere il PC alla rete Wi-Fi del drone e inviare qualsiasi tipo di comando da tastiera (WASD, Frecce, UHJK, Enter, Spazio, M, N, T, L) |
 | **Risultati attesi** | I comandi vengono interpretati |
 
 
@@ -1500,7 +1500,7 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 |---|---|
 | **Nome** | Leap Motion |
 | **Descrizione** | Testare il pilotaggio con il Leap Motion, la mano sinistra si occupa del movimento verticale, mentre la destra si occupa di tutti gli altri movimenti. |
-| **Procedura** | Connettere il PC alla rete wi-fi del drone e il LeapMotion al PC. Premere sul frame il radio button`LeapMotion` e successivamente fare un volo di test in tutte le direzioni con quest'ultimo |
+| **Procedura** | Connettere il PC alla rete Wi-Fi del drone e il LeapMotion al PC. Premere sul frame il radio button `LeapMotion` e successivamente fare un volo di test in tutte le direzioni con quest'ultimo |
 | **Risultati attesi** | Il drone interpreta correttamente i comandi |
 
 
@@ -1508,7 +1508,7 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 |---|---|
 | **Nome** | Live video |
 | **Descrizione** | Testare il frame con lo streaming del video del drone. |
-| **Procedura** | Connettere il PC alla rete wi-fi del drone e premere il tasto`Visualizza live`. Attendere che il programma faccia partire lo script in modo automatico |
+| **Procedura** | Connettere il PC alla rete Wi-Fi del drone e premere il tasto `Live`. Attendere che il programma faccia partire lo script in modo automatico |
 | **Risultati attesi** | Viene aperta una pagina web dove viene visualizzata la live in tempo reale |
 
 
@@ -1523,7 +1523,7 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 |---|---|
 | **Nome** | Tasto di emergenza |
 | **Descrizione** | Testare il tasto per le emergenze. |
-| **Procedura** | Connettere il PC alla rete wi-fi del drone e il Leap Motion al PC. Testare che quando il drone è in volo, quando si preme il tasto enter (sia quando si pilota con tastiera, sia con Leap) il drone faccia un atterraggio di emergenza |
+| **Procedura** | Connettere il PC alla rete Wi-Fi del drone e il Leap Motion al PC. Testare che quando il drone è in volo, quando si preme il tasto enter (sia quando si pilota con tastiera, sia con Leap) il drone faccia un atterraggio di emergenza |
 | **Risultati attesi** | Il comando viene interpretato |
 
 
@@ -1531,7 +1531,7 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 |---|---|
 | **Nome** | Bottoni per scelta di pilotaggio |
 | **Descrizione** | Testare lo switch tra tastiera e Leap Motion. |
-| **Procedura** | Connettere il PC alla rete wi-fi del drone e il Leap Motion al PC. Testare che il programma invia i comandi solo della tastiera o solo del leap motion a differenza di cosa si ha selezionato sul frame (`Tastiera` o `LeapMotion`) |
+| **Procedura** | Connettere il PC alla rete Wi-Fi del drone e il Leap Motion al PC. Testare che il programma invia i comandi solo della tastiera o solo del Leap motion a differenza di cosa si ha selezionato sul frame (`Tastiera` o `LeapMotion`) |
 | **Risultati attesi** | I comandi non vanno in conflitto |
 
 
@@ -1590,7 +1590,7 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 
 ## Mancanze e limitazioni conosciute
 
-Per quest anno di mancanze, vista l'assenza dei requisiti, non ne abbiamo identificate. Ci sono alcuni aspetti che potevano sicuramente essre trattati meglio, ma abbiamo preferito affrontare tutto questo discorso nelle conclusioni del progetto.,
+Per quest’anno di mancanze, vista l'assenza dei requisiti, non ne abbiamo identificate. Ci sono alcuni aspetti che potevano sicuramente essere trattati meglio, ma abbiamo preferito affrontare tutto questo discorso nelle conclusioni del progetto.,
 
 
 # Consuntivo
@@ -1608,6 +1608,7 @@ Alla fine di questo progetto, che possiamo considerare un progetto di 10 mesi, c
 Tornando al progetto; se dovessimo comparare non solo il risultato, ma anche le nostre prestazioni pensiamo di esserci migliorati. Infatti dal nostro punto di vista aspetti come la gestione del tempo, l’organizzazione e la spartizione del lavoro e la comunicazione tra di noi è migliorata rispetto alla prima versione del progetto. Un aspetto che ci aveva rallentati nel vecchio progetto è stata la gestione di GitHub; vogliamo parlare di questo aspetto citando dapprima la vecchia documentazione:
 “Una cosa che poteva andare meglio è sicuramente la gestione di GitHub e dei commit. Troppe volte non abbiamo fatto dei commit puntuali come avremmo voluto, e questo ha portato a perdita di lavoro e di codice importane, che poi abbiamo dovuto recuperare.”
 
+
 Questa volta non abbiamo avuto questi problemi, spesso infatti abbiamo fatto in modo di lavorare in parallelo su file diversi, notificando all’intero gruppo tutti gli eventuali commit e le modifiche, sincerandosi che non andasse persa nemmeno una line di codice. Un paio di volte abbiamo avuto qualche situazione in cui abbiamo dovuto riunirci, o almeno 2 di noi, per parlare di come modificare un file. Ma siamo sempre riusciti a preservare il lavoro di tutti. Anche quest’anno si pone l’incognita di Expo Professioni, in linea di massima quest’anno l’esposizione dovrebbe avere luogo ma con il COVID-19 tutto è ancora in bilico.
 Al nostro gruppo piacerebbe davvero mostrare quello che è stato fatto in tutto questo tempo, e ad alcuni di noi piacerebbe magari migliorare ancora questo software, ma per ora niente è deciso.
 In conclusione siamo felici di esserci cimentati nello stesso progetto dello scorso anno e  di avere la possibilità di affinare le nostre capacità in Java.
@@ -1622,11 +1623,11 @@ Come ho detto all'inizio sono contento anche degli altri membri del gruppo, per�
 
 | Alessandro |
 |------------|
-|Il progetto su qui abbiamo lavorato ha ampliato le mie conoscenze sopratutto per quanto riguarda il funzionamento del Leap Motion, dato che l'anno scroso non ho avuto occasione di metterci mano, dato che se ne occupava Samuele. Penso che abbiamo lavorato molto bene e che siamo riusciti a triare fuori un ottimo prodotto, con qualche chicca in più e molte migliorire rispetto all'anno scorso. Devo essere sicnero mi sono trovato molto bene con Gianni e Michea perché ci troviamo secondo me sulla stessa linea di penseiro, quindi non ci siamo quasi mai scontrati. Il programma non è ancora perfetto ma posso dire che ci ho messo tutto me stesso per riuscire a arrivare dove siamo arrivati con il progetto.|
+|Il progetto su qui abbiamo lavorato ha ampliato le mie conoscenze soprattutto per quanto riguarda il funzionamento del Leap Motion, dato che l'anno scorso non ho avuto occasione di metterci mano, dato che se ne occupava Samuele. Penso che abbiamo lavorato molto bene e che siamo riusciti a triare fuori un ottimo prodotto, con qualche chicca in più e molte migliorie rispetto all'anno scorso. Devo essere sincero mi sono trovato molto bene con Gianni e Michea perché ci troviamo secondo me sulla stessa linea di pensiero, quindi non ci siamo quasi mai scontrati. Il programma non è ancora perfetto ma posso dire che ci ho messo tutto me stesso per riuscire a arrivare dove siamo arrivati con il progetto.|
 
 | Gianni |
 |--------|
-| Tutto sommato sono piuttosto soddisfatto di come abbiamo portato avanti questo progetto: essendo qualcosa che é stato realizzato precedentemente, e che abbiamo poi ripreso in questo semestre, è stato molto interessante visto che abbiamo potuto affrontare anche attività diverse da un progetto "normale"; come ad esempio il refactor del vecchio codice e la revisione della struttura. Per quanto riguarda il come abbiamo lavorato, penso ci siano stati alti e bassi, sicuramente all'inizio del progetto tutto il gruppo nel complesso era più coinvolto e motivato, la fase di progettazione e la prima parte dell'implementazione infatti sono state svolte anche piuttosto velocemente. Tuttavia durante l'ultima fase del progetto, al momento di sistemare gli ultimi accorgimenti e rifinire i dettagli del lavoro, ho notato una certa mancanza di serietà soprattutto da un certo membro del gruppo. Sono comunque soddisfatto del lavoro che abbiamo svolto nel suo insieme e posso concludere dicendo che il prodotto finale é all'altezza di quello che ci aspettavamo. |
+| Tutto sommato sono piuttosto soddisfatto di come abbiamo portato avanti questo progetto: essendo qualcosa che è stato realizzato precedentemente, e che abbiamo poi ripreso in questo semestre, è stato molto interessante visto che abbiamo potuto affrontare anche attività diverse da un progetto "normale"; come ad esempio il refactor del vecchio codice e la revisione della struttura. Per quanto riguarda il come abbiamo lavorato, penso ci siano stati alti e bassi, sicuramente all'inizio del progetto tutto il gruppo nel complesso era più coinvolto e motivato, la fase di progettazione e la prima parte dell'implementazione infatti sono state svolte anche piuttosto velocemente. Tuttavia durante l'ultima fase del progetto, al momento di sistemare gli ultimi accorgimenti e rifinire i dettagli del lavoro, ho notato una certa mancanza di serietà soprattutto da un certo membro del gruppo. Sono comunque soddisfatto del lavoro che abbiamo svolto nel suo insieme e posso concludere dicendo che il prodotto finale è all'altezza di quello che ci aspettavamo. |
 
 
 ## Sviluppi futuri
@@ -1670,4 +1671,4 @@ Elenco degli allegati:
 -   Diari di lavoro
 -   Codice sorgente
 -   Prodotto finale
-- 	 Qdc
+-  Qdc
