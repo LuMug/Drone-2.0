@@ -39,8 +39,9 @@
 	- [Leap Motion](#leap-motion)
 
 5. [Test](#test)
-  - [Protocollo di test](#protocollo-di-test)
-  - [Risultati test](#risultati-test)
+  - [Protocollo di test e risultati](#protocollo-di-test-e-risultati)
+  - [Test case di base](#test-case-di-base)
+  - [Risultati test case di base](#risultati-test-case-di-base)
   - [Mancanze e limitazioni conosciute](#mancanze-e-limitazioni-conosciute)
 
 6. [Consuntivo](#consuntivo)
@@ -1402,7 +1403,7 @@ Questo pezzo di codice ci serve per verificare in che stato si trova il dito del
 # Test
 
 
-## Protocollo di test
+## Protocollo di test e risultati
 
 Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il drone. Lo stesso schema di test verrà poi ripreso, assieme ai requisiti, per i test finali.
  
@@ -1430,19 +1431,170 @@ Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il d
 
 ----
 
+Per i test finali abbiamo quindi condotto gli stessi identici test.
+
+| **02**  | Descrizione test                  | Risultato Netbeans | Risultato Jar | Note NetBeans | Note Jar           |
+|---------|-----------------------------------|--------------------|---------------|---------------|--------------------|
+| Test-1  | Decollo da tastiera               | Passato            |               | -             |                    |
+| Test-2  | Atterraggio da tastiera           | Passato            |               | -             |                    |
+| Test-3  | Movimento nelle varie direzioni   | Passato            |               | -             |                    |
+| Test-4  | Flip da tastiera                  | Passato            |               | -             |                    |
+| Test-5  | Emergenza da tastiera             | Passato            |               | -             |                    |
+|         |                                   |                    |               | -             |                    |
+| Test-6  | Decollo con le mani               | Passato            |               | -             |                    |
+| Test-7  | Atterraggio con le mani           | Passato            |               | -             |                    |
+| Test-8  | Movimento con le mani             | Passato            |               | -             |                    |
+| Test-9  | Flip con le mani                  | Passato            |               | -             |                    |
+| Test-10 | Emergenza con la tastiera         | Passato            |               | -             |                    |
+|         |                                   |                    |               | -             |                    |
+| Test-11 | Interfaccia grafica drone         | Passato            |               | -             |                    |
+| Test-12 | Ridimensionamento interfaccia     | Passato            |               | -             |                    |
+| Test-13 | Velocità                          | Passato            |               | -             |                    |
+|         |                                   |                    |               | -             |                    |
+| Test-14 | Registrazione Sequenza di comandi | Passato            |               | -             |                    |
+| Test-15 | Esecuzione di sequenza di comandi | Passato            |               | -             |                    |
+| Test-16 | Live dal PC                       | Passato            |               | -             |                    |
+
+Abbiamo inoltre fatto i test per la nuova funizionalità da noi implementata, ovvero il pannello Analytics.
 
 
-## Risultati test
+| Test Case |**03** |
+|---|---|
+| **Nome** | Test Analytics |
+| **Descrizione** | Testare che i dati del drone vengano ricevuti e impaginati. |
+| **Risultati attesi** |Vengono mostrati i dati di volo |
+| **Risultati ottenuti** |I dati sono vengono mostrati |
+
+Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test dello scorso anno:
+
+
+## Test case di base
+
+| Test Case | TC-001 |
+|---|---|
+| **Nome** | Utilizzo di DatagramPacket |
+| **Descrizione** | La connessione al drone deve avvenire tramite UDP |
+| **Procedura** | Connettere il PC alla rete wi-fi del drone e inviare un comando |
+| **Risultati attesi** | Il comando viene interpretato |
+
+
+| Test Case | TC-002 |
+|---|---|
+| **Nome** | Interfaccia controllo Drone |
+| **Descrizione** | Panel o frame diviso in 4 con delle imagini 2d del drone per vedere come si muove. |
+| **Procedura** | Connettere il PC alla rete wi-fi del drone, successivamente fare un volo di test verificando di muovere il drone in tutte le direzioni |
+| **Risultati attesi** | Il frame risponde e aggiorna correttamente le immagini in base alla posizione del drone |
+
+
+| Test Case | TC-003 |
+|---|---|
+| **Nome** | Gestione tastiera |
+| **Descrizione** | Comandare il drone con la tastiera. |
+| **Procedura** | Connettere il PC alla rete wi-fi del drone e inviare qualsiasi tipo di comando da tastiera (WASD, Frecce, UHJK, Enter, Spazio, M, N, T, L) |
+| **Risultati attesi** | I comandi vengono interpretati |
+
+
+| Test Case | TC-004 |
+|---|---|
+| **Nome** | Leap Motion |
+| **Descrizione** | Testare il pilotaggio con il Leap Motion, la mano sinistra si occupa del movimento verticale, mentre la destra si occupa di tutti gli altri movimenti. |
+| **Procedura** | Connettere il PC alla rete wi-fi del drone e il LeapMotion al PC. Premere sul frame il radio button`LeapMotion` e successivamente fare un volo di test in tutte le direzioni con quest'ultimo |
+| **Risultati attesi** | Il drone interpreta correttamente i comandi |
+
+
+| Test Case | TC-005 |
+|---|---|
+| **Nome** | Live video |
+| **Descrizione** | Testare il frame con lo streaming del video del drone. |
+| **Procedura** | Connettere il PC alla rete wi-fi del drone e premere il tasto`Visualizza live`. Attendere che il programma faccia partire lo script in modo automatico |
+| **Risultati attesi** | Viene aperta una pagina web dove viene visualizzata la live in tempo reale |
+
+
+| Test Case | TC-006 |
+|---|---|
+| **Nome** | Sequenza di comandi |
+| **Descrizione** | Testare la funzione di salvataggio di sequenze di comandi. Successivamente fare in modo di farle riprodurre dal drone in modo autonomo. |
+| **Risultati attesi** | Il drone salva ed esegue successivamente i comandi |
+
+
+| Test Case | TC-007 |
+|---|---|
+| **Nome** | Tasto di emergenza |
+| **Descrizione** | Testare il tasto per le emergenze. |
+| **Procedura** | Connettere il PC alla rete wi-fi del drone e il Leap Motion al PC. Testare che quando il drone è in volo, quando si preme il tasto enter (sia quando si pilota con tastiera, sia con Leap) il drone faccia un atterraggio di emergenza |
+| **Risultati attesi** | Il comando viene interpretato |
+
+
+| Test Case | TC-008 |
+|---|---|
+| **Nome** | Bottoni per scelta di pilotaggio |
+| **Descrizione** | Testare lo switch tra tastiera e Leap Motion. |
+| **Procedura** | Connettere il PC alla rete wi-fi del drone e il Leap Motion al PC. Testare che il programma invia i comandi solo della tastiera o solo del leap motion a differenza di cosa si ha selezionato sul frame (`Tastiera` o `LeapMotion`) |
+| **Risultati attesi** | I comandi non vanno in conflitto |
+
+
+## Risultati test case di base
+
+| Test Case | TC-001 |
+|---|---|
+| **Nome** | Bottoni per scelta di pilotaggio|
+| **Esito** | Positivo |
+
+
+| Test Case | TC-002 |
+|---|---|
+| **Nome** | Interfaccia controllo Drone |
+| **Esito** | Positivo |
+
+
+
+| Test Case | TC-003 |
+|---|---|
+| **Nome** | Gestione tastiera |
+| **Esito** | Positivo |
+
+
+| Test Case | TC-004 |
+|---|---|
+| **Nome** | Leap Motion |
+| **Esito** | Positivo |
+
+
+| Test Case | TC-005 |
+|---|---|
+| **Nome** | Live video |
+| **Esito** | Positivo |
+
+
+| Test Case | TC-006 |
+|---|---|
+| **Nome** | Sequenza di comandi |
+| **Esito** | Positivo |
+
+
+| Test Case | TC-007 |
+|---|---|
+| **Nome** | Tasto di emergenza |
+| **Esito** | Positivo |
+
+
+| Test Case | TC-008 |
+|---|---|
+| **Nome** | Bottoni per scelta di pilotaggio |
+| **Esito** | Positivo |
+
+
 
 
 ## Mancanze e limitazioni conosciute
 
+Per quest anno di mancanze, vista l'assenza dei requisiti, non ne abbiamo identificate. Ci sono alcuni aspetti che potevano sicuramente essre trattati meglio, ma abbiamo preferito affrontare tutto questo discorso nelle conclusioni del progetto.,
 
 
 # Consuntivo
 
 ![Gantt consuntivo](../Documenti/Gantt/GANTT_Consuntivo_Completo.jpg)
-> Gantt preventivo
+> Gantt consuntivo
 
 
 
@@ -1506,7 +1658,7 @@ Ci sono molte parti di questo progetto che si possono e/o andrebbero espanse, e 
 - https://www.shellscript.sh, *Shellscript*;
 - https://www.geeksforgeeks.org, *Geeksforgeeks*;
 - https://www.codegrepper.com, *Codegrepper*;
-- 
+
 ## Allegati
 
 Elenco degli allegati:
