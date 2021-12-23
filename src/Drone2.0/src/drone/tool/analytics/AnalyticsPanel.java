@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 /**
  *
  * This panel is where all the analytics are shown. 
+ * 
  * @author Michea Colautti
  * @version 22.12.2021
  */
@@ -85,6 +86,7 @@ public class AnalyticsPanel extends JPanel implements Runnable {
 
     /**
      * Paint method, it resize and display the image and the label.
+     * 
      * @param g 
      */
     @Override

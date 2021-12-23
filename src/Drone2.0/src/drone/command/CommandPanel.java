@@ -2,7 +2,6 @@ package drone.command;
 
 import com.leapmotion.leap.Controller;
 import drone.LeapMotion;
-import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -23,7 +22,9 @@ import javax.swing.text.DefaultCaret;
  * @version 11.11.2021
  */
 public class CommandPanel extends javax.swing.JPanel implements Runnable {
-
+    /**
+     * Flag that checks if the user is in the menu to save sequences.
+     */
     boolean isMenu = false;
 
     /**
@@ -33,19 +34,22 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     private boolean selecStatus = false;
 
     /**
-     *
+     * Flag that checks if the user is recording a sequence.
      */
     private boolean flagRec = true;
 
+    /**
+     * Flag that checks the input status.
+     */
     private boolean flagInput = false;
 
     /**
-     * Contiene l'istanza del leap motion.
+     * LeapMotion Instance.
      */
     private LeapMotion leapMotion;
 
     /**
-     * Contiene l'stanza del controller per il leapMotion.
+     * Controller Instance.
      */
     private Controller leapController;
 
@@ -185,8 +189,6 @@ public class CommandPanel extends javax.swing.JPanel implements Runnable {
     }//GEN-LAST:event_recButtunActionPerformed
 
     private void executeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeButtonActionPerformed
-        //sequence.clear();
-        //keyColor();
         chooseSequence();
         try {
             record.readFile(fileName);

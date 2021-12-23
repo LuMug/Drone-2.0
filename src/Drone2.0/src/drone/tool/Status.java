@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Queue;
 /**
- * Classe che si occupa di scrivere un file di log.
+ * Class used to write log files.
  *
  * @version 11.03.2021
  * @author Alessandro Aloise
@@ -25,16 +25,17 @@ public class Status extends Thread {
     Map<String, Double> status = new HashMap<>();
 
     /**
-     * Istanza della classe di log.
+     * Log Instance.
      */
     Log log = new Log();
+    
     /**
      * Data formatter.
      */
     DateFormat dateFormat;
 
     /**
-     * Variabile per prendere la data.
+     * Variable containing the current date.
      */
     Date data = new Date();
 
@@ -48,9 +49,6 @@ public class Status extends Thread {
 
     private boolean end = true;
 
-    /**
-     * Metodo run della thread.
-     */
     public void run() {
         dateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.ITALY);
         try {
@@ -108,7 +106,6 @@ public class Status extends Thread {
                 +"<br>"+"Time of engine use : " + status.get("time").toString()+"</html>");
                
 
-                //analytics
                 Thread.sleep(100);
                 String info = received.substring(0, received.length()-4);
                 String finale = dateFormat.format(data) + " " + info;

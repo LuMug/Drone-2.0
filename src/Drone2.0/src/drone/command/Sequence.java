@@ -7,18 +7,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * The Sequence class is used to record the movement sequences of a drone and
- write them into files.
+ * The Sequence class is used to record the movement sequences of a drone and 
+ * write them into files.
  *
  * @author Gianni Grasso
  * @version 25.11.2021
  */
 public class Sequence extends Thread {
-
+    /**
+     * Controller Instance.
+     */
+    Control controller;
+    
     /**
      * A queue containing all the rows of a file
      */
@@ -69,8 +72,12 @@ public class Sequence extends Thread {
             System.out.println("An error occurred.");
         }
     }
-    Control controller;
 
+    /**
+     * Read the file if possible.
+     *
+     * @param fileName the name of the file
+     */
     public void readFile(String fileName) throws FileNotFoundException, IOException, InterruptedException {
         BufferedReader bufReader = new BufferedReader(new FileReader(fileName));
 
@@ -88,6 +95,11 @@ public class Sequence extends Thread {
         bufReader.close();
     }
 
+    /**
+     * Queue setter.
+     * 
+     * @param commandBufferInput the queue
+     */
     public void setSequence(LinkedList<String> commandBufferInput) {
         this.commandBufferInput = commandBufferInput;
     }

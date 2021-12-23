@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 
 /**
- *
+ * The KeyDispatcher class is used to drive the drone from the keyboard.
  * 
  * @author Gianni Grasso
  */

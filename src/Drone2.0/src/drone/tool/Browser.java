@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 
 /**
  * This class allows to call the live's script and open a browser page.
+ * 
  * @author Michea Colautti
  * @version 22.12.2021
  *
@@ -15,6 +16,7 @@ public class Browser {
 
     /**
      * This method checks the OS and than it start the right scrpit.
+     * 
      * @throws IOException
      * @throws InterruptedException 
      */
