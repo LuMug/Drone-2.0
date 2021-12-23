@@ -1,0 +1,7 @@
+Per far partire l'applicazione spostarsi nella cartella disturbo ed eseguire le seguenti istruzioni:
+
+Mac: java -Djava.library.path=./lib/LeapMotionSDK_3.2.1" -jar ./Drone2.0.jar 
+
+Windows: java "-Djava.library.path=./lib/LeapMotionSDK_3.2.1" -jar .\Drone2.0.jar
+
+

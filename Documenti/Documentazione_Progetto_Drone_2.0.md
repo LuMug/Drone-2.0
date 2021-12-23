@@ -1437,25 +1437,24 @@ Per i test finali abbiamo quindi condotto gli stessi identici test.
 
 | **02**  | Descrizione test                  | Risultato NetBeans | Risultato Jar | Note NetBeans | Note Jar           |
 |---------|-----------------------------------|--------------------|---------------|---------------|--------------------|
-| Test-1  | Decollo da tastiera               | Passato            |               | -             |                    |
-| Test-2  | Atterraggio da tastiera           | Passato            |               | -             |                    |
-| Test-3  | Movimento nelle varie direzioni   | Passato            |               | -             |                    |
-| Test-4  | Flip da tastiera                  | Passato            |               | -             |                    |
-| Test-5  | Emergenza da tastiera             | Passato            |               | -             |                    |
+| Test-1  | Decollo da tastiera               | Passato            | Passato       | -             | -                  |
+| Test-2  | Atterraggio da tastiera           | Passato            | Passato       | -             | -                  |
+| Test-3  | Movimento nelle varie direzioni   | Passato            | Passato       | -             | -                  |
+| Test-4  | Flip da tastiera                  | Passato            | Passato       | -             | -                  |
+| Test-5  | Emergenza da tastiera             | Passato            |               | -             | -                  |
+|         |                                   |                    | Passato       |               |                    |
+| Test-6  | Decollo con le mani               | Passato            | Passato       | -             | -                  |
+| Test-7  | Atterraggio con le mani           | Passato            | Passato       | -             | -                  |
+| Test-8  | Movimento con le mani             | Passato            | Passato       | -             | -                  |
+| Test-9  | Flip con le mani                  | Passato            | Passato       | -             | -                  |
+| Test-10 | Emergenza con la tastiera         | Passato            | Passato       | -             | -                  |
 |         |                                   |                    |               |               |                    |
-| Test-6  | Decollo con le mani               | Passato            |               | -             |                    |
-| Test-7  | Atterraggio con le mani           | Passato            |               | -             |                    |
-| Test-8  | Movimento con le mani             | Passato            |               | -             |                    |
-| Test-9  | Flip con le mani                  | Passato            |               | -             |                    |
-| Test-10 | Emergenza con la tastiera         | Passato            |               | -             |                    |
-|         |                                   |                    |               |               |                    |
-| Test-11 | Interfaccia grafica drone         | Passato            |               | -             |                    |
-| Test-12 | Ridimensionamento interfaccia     | Passato            |               | -             |                    |
-| Test-13 | Velocità                          | Passato            |               | -             |                    |
-|         |                                   |                    |               |               |                    |
-| Test-14 | Registrazione Sequenza di comandi | Passato            |               | -             |                    |
-| Test-15 | Esecuzione di sequenza di comandi | Passato            |               | -             |                    |
-| Test-16 | Live dal PC                       | Passato            |               | -             |                    |
+| Test-11 | Interfaccia grafica drone         | Passato            | Passato       | -             | -                  |
+| Test-12 | Ridimensionamento interfaccia     | Passato            | Passato       | -             | -                  |
+|         |                                   |                    |               |               | -                  |
+| Test-13 | Registrazione Sequenza di comandi | Passato            | Passato       | -             | -                  |
+| Test-14 | Esecuzione di sequenza di comandi | Passato            | Passato       | -             | -                  |
+| Test-15 | Live dal PC                       | Passato            | Fallito       | -             | File non trovati   |
 
 Abbiamo inoltre fatto i test per la nuova funzionalità da noi implementata, ovvero il pannello Analytics.
 
@@ -1590,7 +1589,7 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 
 ## Mancanze e limitazioni conosciute
 
-Per quest’anno di mancanze, vista l'assenza dei requisiti, non ne abbiamo identificate. Ci sono alcuni aspetti che potevano sicuramente essere trattati meglio, ma abbiamo preferito affrontare tutto questo discorso nelle conclusioni del progetto.,
+Se non fosse per la live, che putroppo non siamo riusicti a far funzionare dal Jar, per un problema nei percorsi, per quest’anno di mancanze, vista l'assenza dei requisiti, non ne abbiamo identificate. Ci sono alcuni aspetti che potevano sicuramente essere trattati meglio, ma abbiamo preferito affrontare tutto questo discorso nelle conclusioni del progetto.,
 
 
 # Consuntivo
