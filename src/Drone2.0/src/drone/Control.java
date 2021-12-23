@@ -9,7 +9,8 @@ import javax.swing.UIManager;
 
 
 /**
- * Class that deals with splitting incoming and outgoing data.
+ * The Control class is the control class and is
+ * responsible for receiving and forwarding drone data.
  *
  * @author Alessandro Aloise
  */

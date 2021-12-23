@@ -2,7 +2,6 @@ package drone.tool;
 
 import java.awt.Desktop;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -28,19 +27,6 @@ public class Browser {
             String usrPath = System.getProperty("user.dir") + "/Live/Script/RunLiveMac.sh";
             pb.command("sh", "-c", usrPath);
             Process process = pb.start();
-
-
-            /*int in = -1;
-            InputStream is = process.getInputStream();
-            try {
-                while ((in = is.read()) != -1) {
-                    System.out.print((char) in);
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            int exitCode = process.waitFor();
-            System.out.println("Exited with " + exitCode);*/
         } else {
             String usrPath = System.getProperty("user.dir") + "\\Live\\Script\\";
             String path = "cmd /c start " + usrPath + "RunLiveWin.bat";
