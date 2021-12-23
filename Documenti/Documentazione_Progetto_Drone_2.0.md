@@ -1425,11 +1425,10 @@ Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il d
 |         |                                   |                    |               |                     |                     |
 | Test-11 | Interfaccia grafica drone         | Fallito            | Fallito       | Nessun movimento    | Nessun movimento    |
 | Test-12 | Ridimensionamento interfaccia     | Fallito            | Fallito       | Immagini strabordanti| Immagini strabordanti|
-| Test-13 | Velocità                          | Passato            | Passato       | -                   | -                   |
 |         |                                   |                    |               |                     |                     |
-| Test-14 | Registrazione Sequenza di comandi | Passato            | Passato       | -                   | -                   |
-| Test-15 | Esecuzione di sequenza di comandi | Passato            | Passato       | -                   | -                   |
-| Test-16 | Live dal PC                       | Fallito            | Fallito       | File non trovati    | File non trovati    |
+| Test-13 | Registrazione Sequenza di comandi | Passato            | Passato       | -                   | -                   |
+| Test-14 | Esecuzione di sequenza di comandi | Passato            | Passato       | -                   | -                   |
+| Test-15 | Live dal PC                       | Fallito            | Fallito       | File non trovati    | File non trovati    |
 
 ----
 
