@@ -116,7 +116,9 @@ setTimeout(function() {
 
   // Spawn an ffmpeg instance
   // '/usr/local/bin/ffmpeg'
-  var streamer = spawn('C:\FFmpeg\bin', args);
+  //let text = String.fromCharCode(92);
+  var path = "C:/FFmpeg/bin/ffmpeg.exe";
+  var streamer = spawn(path, args);
   // Uncomment if you want to see ffmpeg stream info
   //streamer.stderr.pipe(process.stderr);
   streamer.on("exit", function(code){
