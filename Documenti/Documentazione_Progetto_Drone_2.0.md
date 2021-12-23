@@ -1624,7 +1624,7 @@ Sarei anche curioso di vedere questo progetto assegnato ad altri studenti, per v
 
 | Gianni |
 |--------|
-|        |
+| Tutto sommato sono piuttosto soddisfatto di come abbiamo portato avanti questo progetto, essendo qualcosa che é stato realizzato precedentemente e che abbiamo poi ripreso in questo semestre é stato anche molto interessante visto che abbiamo potuto affrontare anche attività diverse da un progetto "normale", come ad esempio il refactor del vecchio codice e la revisione della struttura. Per quanto riguarda il come abbiamo lavorato, penso ci siano stati alti e bassi, sicuramente all'inizio del progetto tutto il gruppo nel complesso era più coinvolto e motivato, la fase di progettazione e la prima parte dell'implementazione infatti sono stare svolte anche piuttosto velocemente. Tuttavia durante l'ultima fase del progetto, al momento di sistemare gli ultimi accorgimenti e rifinire i dettagli del progetto, ho notato una certa mancanza di serietà soprattutto da un certo membro del gruppo. Sono comunque soddisfatto del lavoro che abbiamo svolto nel suo insieme e posso concludere dicendo che il prodotto finale é all'altezza di quello che ci aspettavamo       |
 
 
 
