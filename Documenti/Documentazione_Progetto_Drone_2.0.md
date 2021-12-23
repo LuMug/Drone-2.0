@@ -17,7 +17,7 @@
 	- [Schema della classi](#schema-delle-classi)
 
 4. [Implementazione](#implementazione)
-	- [Introduzione](#introduzione-all'-implementazione)
+	- [Introduzione implementazione](#introduzione-implementazione)
 	- [Refactor generale](#refactor-generale)
 		- [Control](#control)
 		- [DroneAction](#droneAction)
@@ -268,7 +268,7 @@ Per questo progetto ci siamo fatti uno schema delle classi iniziale, poi in base
 # Implementazione
 NOTA BENE: DOVE SONO PRESENTI LE IMMAGINI OCCORRE COMUNQUE ANCORA SPIEGARE IN MODO DETTAGLIATO IL CODICE IN MODO PRATICO.
 
-## Introduzione all'implementazione
+## Introduzione implementazione
 Durante la realizzazione del progetto sono state ridefinite molte cose rispetto alla prima versione, innanzitutto è stato fatto un refactor del codice precedente, andando a cambiare e ottimizzare i files dell'intero progetto. Una volta ottimizato e pulito il codice è stato adottato un cambiamento piuttosto rilevante riguardante la struttura dei package e delle classi, in modo da rendere il resto dell'implementazione più semplice, ordinata e migliorare un minimo le prestazioi del programma. Sono poi stati corrette tutte le imperfezioni e i bug trovati inerenti le vecchie funzionalità e infine apportate alcune aggiunte e accorgimenti.
 
 ## Refactor generale
