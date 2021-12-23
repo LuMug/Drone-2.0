@@ -190,7 +190,9 @@ Per la pianificazione alleghiamo il Gantt preventivo da noi stabilito:
 ### Analisi dei mezzi
 
  **Software**
+ - Java JDK 12.0.2
  - Java JDK 14.0.2
+ - Java JDK 16.0.2
  - Leap Motion SDK 3.2.1
  - Tello SDK 2.0
  - Apache Netbeans IDE 12.0
