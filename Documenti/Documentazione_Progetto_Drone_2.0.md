@@ -1504,20 +1504,12 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 
 | Test Case | TC-005 |
 |---|---|
-| **Nome** | Live video |
-| **Descrizione** | Testare il frame con lo streaming del video del drone. |
-| **Procedura** | Connettere il PC alla rete Wi-Fi del drone e premere il tasto `Live`. Attendere che il programma faccia partire lo script in modo automatico |
-| **Risultati attesi** | Viene aperta una pagina web dove viene visualizzata la live in tempo reale |
-
-
-| Test Case | TC-006 |
-|---|---|
 | **Nome** | Sequenza di comandi |
 | **Descrizione** | Testare la funzione di salvataggio di sequenze di comandi. Successivamente fare in modo di farle riprodurre dal drone in modo autonomo. |
 | **Risultati attesi** | Il drone salva ed esegue successivamente i comandi |
 
 
-| Test Case | TC-007 |
+| Test Case | TC-006 |
 |---|---|
 | **Nome** | Tasto di emergenza |
 | **Descrizione** | Testare il tasto per le emergenze. |
@@ -1525,7 +1517,7 @@ Inoltre per avere una maggiore sicurezza abbiamo deciso anche di ripetere i test
 | **Risultati attesi** | Il comando viene interpretato |
 
 
-| Test Case | TC-008 |
+| Test Case | TC-007 |
 |---|---|
 | **Nome** | Bottoni per scelta di pilotaggio |
 | **Descrizione** | Testare lo switch tra tastiera e Leap Motion. |
