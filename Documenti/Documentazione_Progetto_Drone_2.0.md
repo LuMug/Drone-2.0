@@ -273,7 +273,7 @@ Durante la realizzazione del progetto sono state ridefinite molte cose rispetto 
 
 ## Refactor generale
 Per la definizione della nuova struttura del progetto è stato deciso di dividere i package in base alle funzionalità che offre il software, in modo da poter suddividere il lavoro in modo semplice e non creare conflitti e relazioni non necessarie tra classi non interessate:
-![Struttura]()
+
 
 Riguardo invece la ristrutturazione delle vecchie classi, molte di esse sono state definitivamente eliminate, anche a causa del cambio di struttura. È stata invece creata una classe principale per poter gestire tutte le varie parti e funzioni che compongono l'applicativo, ovvero la classe Control. Essa ha lo scopo di gestire tutti i tool che offre l'applicativo, all'interno di questa classe sono state create delle code alla quale vengono poi passati i dati e comunicati alle varie classi.
 
@@ -1416,17 +1416,17 @@ Inizialmente, per capire a che punto eravamo, abbiamo condotto dei test con il d
 | Test-3  | Movimento nelle varie direzioni   | Passato            | Passato       | -                   | -                   |
 | Test-4  | Flip da tastiera                  | Passato            | Passato       | -                   | -                   |
 | Test-5  | Emergenza da tastiera             | Passato            | Passato       | -                   | -                   |
-|         |                                   |                    |               | -                   | -                   |
+|         |                                   |                    |               |                     |                     |
 | Test-6  | Decollo con le mani               | Passato            | Fallito       | Controllare comandi | Crash Jar           |
 | Test-7  | Atterraggio con le mani           | Passato            | Fallito       | -                   | Crash Jar           |
 | Test-8  | Movimento con le mani             | Passato            | Fallito       | -                   | Crash Jar           |
 | Test-9  | Flip con le mani                  | Fallito            | Fallito       | -                   | Crash Jar           |
 | Test-10 | Emergenza con la tastiera         | Passato            | Fallito       | -                   | Crash Jar           |
-|         |                                   |                    |               | -                   | -                   |
+|         |                                   |                    |               |                     |                     |
 | Test-11 | Interfaccia grafica drone         | Fallito            | Fallito       | Nessun movimento    | Nessun movimento    |
 | Test-12 | Ridimensionamento interfaccia     | Fallito            | Fallito       | Immagini stabordanti| Immagini stabordanti|
 | Test-13 | Velocità                          | Passato            | Passato       | -                   | -                   |
-|         |                                   |                    |               | -                   | -                   |
+|         |                                   |                    |               |                     |                     |
 | Test-14 | Registrazione Sequenza di comandi | Passato            | Passato       | -                   | -                   |
 | Test-15 | Esecuzione di sequenza di comandi | Passato            | Passato       | -                   | -                   |
 | Test-16 | Live dal PC                       | Fallito            | Fallito       | File non trovati    | File non trovati    |
@@ -1442,17 +1442,17 @@ Per i test finali abbiamo quindi condotto gli stessi identici test.
 | Test-3  | Movimento nelle varie direzioni   | Passato            |               | -             |                    |
 | Test-4  | Flip da tastiera                  | Passato            |               | -             |                    |
 | Test-5  | Emergenza da tastiera             | Passato            |               | -             |                    |
-|         |                                   |                    |               | -             |                    |
+|         |                                   |                    |               |               |                    |
 | Test-6  | Decollo con le mani               | Passato            |               | -             |                    |
 | Test-7  | Atterraggio con le mani           | Passato            |               | -             |                    |
 | Test-8  | Movimento con le mani             | Passato            |               | -             |                    |
 | Test-9  | Flip con le mani                  | Passato            |               | -             |                    |
 | Test-10 | Emergenza con la tastiera         | Passato            |               | -             |                    |
-|         |                                   |                    |               | -             |                    |
+|         |                                   |                    |               |               |                    |
 | Test-11 | Interfaccia grafica drone         | Passato            |               | -             |                    |
 | Test-12 | Ridimensionamento interfaccia     | Passato            |               | -             |                    |
 | Test-13 | Velocità                          | Passato            |               | -             |                    |
-|         |                                   |                    |               | -             |                    |
+|         |                                   |                    |               |               |                    |
 | Test-14 | Registrazione Sequenza di comandi | Passato            |               | -             |                    |
 | Test-15 | Esecuzione di sequenza di comandi | Passato            |               | -             |                    |
 | Test-16 | Live dal PC                       | Passato            |               | -             |                    |
@@ -1600,7 +1600,6 @@ Per quest anno di mancanze, vista l'assenza dei requisiti, non ne abbiamo identi
 
 
 
-
 # Conclusioni
 
 ## Considerazioni finali
@@ -1618,7 +1617,8 @@ In conclusione siamo felici di esserci cimentati nello stesso progetto dello sco
 | Michea |
 |--------|
 |Quando ho saputo che mi sarei cimentato nuovamente in questo progetto, con quasi gli stessi compagni dell'anno scorso, sono stato molto felice. infatti non solo lavorare con Gianni e Alessandro mi è sempre piaciuto, ma ho avuto l'impressione che con il tempo avessimo sviluppato una certa sintonia nel modo di procedere con il progetto. E parlando di quest'ultimo sono piuttosto soddisfatto di come sia uscito. Infatti penso che dopo 10 mesi di elaborazione abbiamo finalmente confezionato un buon programma, che potrebbe magari interessare anche altre persone, fuori dal contesto della programmazione. Tuttavia non sono pienamente soddisfatto, la live è quel punto che, pur essendo presente in questa versione, non mi ha mai convinto fino in fondo. Forse se ci sarà occasione di sviluppare ancora questo progetto riusciremo ad ottenere una live natia in Java, ma per ora mi accontento di quello che c'è. 
-Sarei anche curioso di vedere questo progetto assegnato ad altri studenti, per vedere come vengono a capo dei nostri stessi problemi o come trovano soluzioni alternative.|
+Sarei anche curioso di vedere questo progetto assegnato ad altri studenti, per vedere come vengono a capo dei nostri stessi problemi o come trovano soluzioni alternative. 
+Come ho detto all'inizio sono contento anche degli altri membri del gruppo, però avrei preferito che in alcune fasi e per alcuni compiti ci fosse più impegno. |
 
 | Alessandro |
 |------------|
@@ -1626,8 +1626,7 @@ Sarei anche curioso di vedere questo progetto assegnato ad altri studenti, per v
 
 | Gianni |
 |--------|
-|        |
-
+| Tutto sommato sono piuttosto soddisfatto di come abbiamo portato avanti questo progetto: essendo qualcosa che é stato realizzato precedentemente, e che abbiamo poi ripreso in questo semestre, è stato molto interessante visto che abbiamo potuto affrontare anche attività diverse da un progetto "normale"; come ad esempio il refactor del vecchio codice e la revisione della struttura. Per quanto riguarda il come abbiamo lavorato, penso ci siano stati alti e bassi, sicuramente all'inizio del progetto tutto il gruppo nel complesso era più coinvolto e motivato, la fase di progettazione e la prima parte dell'implementazione infatti sono state svolte anche piuttosto velocemente. Tuttavia durante l'ultima fase del progetto, al momento di sistemare gli ultimi accorgimenti e rifinire i dettagli del lavoro, ho notato una certa mancanza di serietà soprattutto da un certo membro del gruppo. Sono comunque soddisfatto del lavoro che abbiamo svolto nel suo insieme e posso concludere dicendo che il prodotto finale é all'altezza di quello che ci aspettavamo. |
 
 
 ## Sviluppi futuri
