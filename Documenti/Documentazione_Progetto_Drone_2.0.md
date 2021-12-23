@@ -17,7 +17,7 @@
 	- [Schema della classi](#schema-delle-classi)
 
 4. [Implementazione](#implementazione)
-	- [Introduzione](#introduzione)
+	- [Introduzione](#introduzione-all'-implementazione)
 	- [Refactor generale](#refactor-generale)
 		- [Control](#control)
 		- [DroneAction](#droneAction)
@@ -87,7 +87,7 @@ Our project will be even more secure, we will enable and create some safety feat
 ### Analisi e specifica dei requisiti
 
 
-|               |**ID: Req-001**|
+|              |**ID: Req-001**|
 |--------------|----------------|
 |**Nome**      | Rappresentazioni drone seguono movimenti |
 |**Priorità**  | 1              |
@@ -124,7 +124,7 @@ Our project will be even more secure, we will enable and create some safety feat
 |**Nome**      | Gestione dimensioni interfaccia |
 |**Priorità**  | 1              |
 |**Versione**  | 1.1            |
-|**Note**      ||
+|**Note**      |                |
 
 
 |               |**ID: Req-006**|
@@ -233,9 +233,9 @@ In questa versione del progetto abbiamo progettato anche un Pop-up che ci permet
 * Spostamento sull'asse x
 * Spostamento sull'asse y
 * Spostamento sull'asse z
-* Accellerazione sull'asse z
-* Accellerazione sull'asse y
 * Accellerazione sull'asse x
+* Accellerazione sull'asse y
+* Accellerazione sull'asse z
 * Temperatura più bassa
 * Temperatura più alta
 * Tempo di volo
@@ -268,7 +268,7 @@ Per questo progetto ci siamo fatti uno schema delle classi iniziale, poi in base
 # Implementazione
 NOTA BENE: DOVE SONO PRESENTI LE IMMAGINI OCCORRE COMUNQUE ANCORA SPIEGARE IN MODO DETTAGLIATO IL CODICE IN MODO PRATICO.
 
-## Introduzione
+## Introduzione all'implementazione
 Durante la realizzazione del progetto sono state ridefinite molte cose rispetto alla prima versione, innanzitutto è stato fatto un refactor del codice precedente, andando a cambiare e ottimizzare i files dell'intero progetto. Una volta ottimizato e pulito il codice è stato adottato un cambiamento piuttosto rilevante riguardante la struttura dei package e delle classi, in modo da rendere il resto dell'implementazione più semplice, ordinata e migliorare un minimo le prestazioi del programma. Sono poi stati corrette tutte le imperfezioni e i bug trovati inerenti le vecchie funzionalità e infine apportate alcune aggiunte e accorgimenti.
 
 ## Refactor generale
