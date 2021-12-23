@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 
 /**
- *
+ * Main frame where the graphical interface is displayed.
  * 
  * @author gianni.grasso
  */
@@ -13,7 +13,7 @@ public class MainFrame extends javax.swing.JFrame {
     private KeyDispatcher kd;
     
     /**
-     * Creates new form MainFrame
+     * Creates new form MainFrame.
      */
     public MainFrame() {
         initComponents();
@@ -21,6 +21,9 @@ public class MainFrame extends javax.swing.JFrame {
         initKeyListener();
     }
 
+    /**
+     * The KeyDispatcher is initialized.
+     */
     private void initKeyListener() {
         kd = new KeyDispatcher();
 

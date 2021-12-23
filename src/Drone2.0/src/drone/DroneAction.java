@@ -84,8 +84,6 @@ public class DroneAction extends Thread {
             socket.send(packet);
 
             DatagramPacket receivePacket = new DatagramPacket(new byte[256], new byte[256].length);
-            //socket.receive(receivePacket);
-            //String responseSentence = new String(receivePacket.getData());
         } catch (SocketException ex) {
             System.out.println("ERRORE: " + ex.getMessage());
         } catch (IOException ex) {

@@ -15,7 +15,7 @@ public class ToolBarPanel extends javax.swing.JPanel {
     Browser browser;
 
     /**
-     * Creates new form ToolBarPanel
+     * Creates new form ToolBarPanel.
      */
     public ToolBarPanel() {
         initComponents();
@@ -62,7 +62,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Button for opening live
+     * Button for opening live.
+     * 
      * @param evt the catched event, in this case click
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -78,7 +79,8 @@ public class ToolBarPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-     * Button for opening the analytics
+     * Button for opening the analytics.
+     * 
      * @param evt the catched event, in this case click
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

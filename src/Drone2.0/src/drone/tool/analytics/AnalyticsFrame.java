@@ -5,13 +5,14 @@ import java.awt.Dimension;
 /**
  *
  * This frame contains the panel responsable for all the analytics.
+ * 
  * @author Michea Colautti
  * @version 22.12.2021
  */
 public class AnalyticsFrame extends javax.swing.JFrame implements Runnable {
 
     /**
-     * Creates new form AnalyticsFrame
+     * Creates new form AnalyticsFrame.
      */
     public AnalyticsFrame() {
         initComponents();
@@ -46,9 +47,6 @@ public class AnalyticsFrame extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -86,7 +84,7 @@ public class AnalyticsFrame extends javax.swing.JFrame implements Runnable {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * This method start the Thread in AnalyticsPanel
+     * This method start the Thread in AnalyticsPanel.
      */
     @Override
     public void run() {

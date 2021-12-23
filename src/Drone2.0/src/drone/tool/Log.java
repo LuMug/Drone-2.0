@@ -9,7 +9,7 @@ import java.util.Locale;
 
 
 /**
- * Classe che si occupa di log.
+ * Class that deals with log management.
  *
  * @author Alessandro Aloise
  * @version 11.03.2021
@@ -17,23 +17,22 @@ import java.util.Locale;
 public class Log {
 
     /**
-     * Variabile per scrivere sul file.
+     * Variable for writing files.
      */
     public static FileWriter fw;
 
     /**
-     * Variabile per creare il file.
+     * Variable for creating files.
      */
     public static File file;
     
     /**
-     * Nome della cartella
+     * The path to the file.
      */
     private File theDir = new File("Log");
 
     /**
-     * Metodo che si occupa di creare il file di log. File di log nome file:
-     * Log_data.text
+     * Create the log file according to the following structure: Log_[data].text
      */
     public void creazioneFile() {
         try {
@@ -50,9 +49,9 @@ public class Log {
     }
 
     /**
-     * Metodo che si ocucpa di scrivere dentro il file.
+     * Method that performs file writing.
      *
-     * @param testo da scrivere
+     * @param testo the text to be written
      */
     public void scritturaFile(String testo) {
         try {
@@ -65,7 +64,7 @@ public class Log {
     }
 
     /**
-     * Metodo che si occupa di chiudere il file dopo averci scritto.
+     * Method that closes the file after writing in it.
      */
     public void chiusuraFile() {
         try {
